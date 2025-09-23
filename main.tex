@@ -1,0 +1,245 @@
+\documentclass{article}
+
+\usepackage{graphicx}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{stmaryrd}
+\usepackage{enumitem}
+\usepackage{todonotes}
+\usepackage{cleveref}
+\usepackage{parskip}
+
+\crefname{section}{\S}{\S\S}
+\crefname{table}{Tab.}{}
+\crefname{figure}{Fig.}{}
+\crefname{algorithm}{Alg.}{}
+\crefname{equation}{Eq.}{}
+\crefname{appendix}{App.}{}
+\crefname{theorem}{Thm.}{}
+\crefname{lemma}{Lem.}{}
+\crefformat{section}{\S#2#1#3} 
+\crefname{proposition}{Prop.}{}
+\crefname{definition}{Def.}{}
+\crefname{conjectiure}{Con.}{}
+
+\title{Algebra I - HS 2025}
+\author{Franz Nowak}
+\date{\today}
+
+\theoremstyle{plain}
+\newtheorem{definition}{Definition}
+\newtheorem{lemma}{Lemma}
+\newtheorem{theorem}{Satz}
+\newtheorem{proposition}{Proposition}
+\newtheorem{corollary}{Korollar}
+\newtheorem{beispiel}{Beispiel}
+\newtheorem{mytransform}{Transform}
+\newtheorem{claim}{Claim}
+\newtheorem{bemerkung}{Bemerkung}
+\renewcommand{\proofname}{Beweis:}
+
+\renewcommand{\ker}{\mathop{\text{Kern}}}
+\newcommand{\bild}{\mathop{\text{Bild}}}
+\newcommand{\defn}[1]{\textbf{#1}}
+\newcommand{\defeq}{:=}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\norm}[1]{||#1||}
+\newcommand{\vu}{\boldsymbol{u}}
+\newcommand{\vv}{\boldsymbol{v}}
+\newcommand{\vx}{\boldsymbol{x}}
+\newcommand{\innerprod}[1]{\langle{#1}\rangle}
+\newcommand{\Tr}{\mathop{\text{Tr}}}
+\newcommand{\rank}{\mathop{\text{rank}}}
+\newcommand{\N}{\mathcal{N}}
+\newcommand{\I}{\text{I}}
+\newcommand{\E}{\mathop{\mathbb{E}}}
+\newcommand{\rv}[1]{\underline{\underline{#1}}}
+\newcommand{\argmin}{\mathop{\text{argmin}}}
+\newcommand{\argmax}{\mathop{\text{argmax}}}
+\newcommand{\mlow}{\mathbf{M}^\text{low}}
+\newcommand{\bigo}[1]{\mathcal{O}\left(#1\right)}
+\newcommand{\noise}{\boldsymbol{w}}
+\newcommand{\noiset}{\boldsymbol{\tilde{w}}}
+\newcommand{\betahat}{\boldsymbol{\hat\beta}}
+\newcommand{\xmax}{\tilde{x}}
+\newcommand{\ug}{\leq}
+\newcommand{\normal}{\trianglelefteq}
+\newcommand{\sgn}{\mathrm{sgn}}
+\newcommand{\ord}{\mathop{\text{ord}}}
+\newcommand{\teilt}{\big{|}}
+\newcommand{\zykl}[1]{{<}{#1}{>}}
+
+\begin{document}
+
+\maketitle
+\section*{Vorlesung 3}
+\paragraph{Erinnerung:}
+Eine Untergruppe $N\ug G$ ist ein Normalteiler, falls:
+$$\forall a\in N, \forall b \in G: bab^{-1}\in N $$.
+Clicker Frage zu Normalteilern $\normal$:
+\begin{enumerate}
+    \item $B_n(K) \ug GL_n(K)$ ist kein Normalteiler.
+    \item $Z^+ \normal R^+$ ist Normalteiler (weil $R^+$ abelsch)
+    \item $SL_n(K) \normal GL_n(K)$, weil $\det(ABA^{-1}) = \det(A)\det(B)\det(A)^{-1}=\det(B)$, oder bemerke, dass $SL_n(K)=\ker \det$
+    \item $A_n\normal S_n$ weil $A_n=\ker\sgn$.
+\end{enumerate}
+
+\subsection*{Partitionen}
+
+Sei $\phi\colon G\to G'$ ein Homomorphismus. Für jedes Element $h\in H$ betrachte die \defn{Faser} $\phi^{-1}(h)=\{g\in G\mid\phi(g)=h\}$ (Urbild von G in H).
+Die Fasern bilden eine Partition von G.
+
+\begin{beispiel} Sei $\phi\colon \C^*\to\R^*_{>0},\qquad \phi(z)\mapsto |z|$.\qquad
+Allgemein: $\phi^{-1} = \ker \phi$.
+\end{beispiel}
+
+\begin{theorem}
+    Sei $U: G\to G'$ ein Homomorphismus mit Kern $N$. Für $a,b\in G$ gilt $\phi(a)=\phi(b) \Leftrightarrow \exists n'\in N$ s.d. $b=an$, d.h. $a^{-1}b\in N$.\looseness=-1
+\end{theorem}
+\begin{proof}
+    ``$\Rightarrow$": Falls $\phi(a)=\phi(b)$, dann it $U(a)^{-1}\phi(b)=\phi(a^{-1}b)=1$, d.h. $\exists n\in N$, s.d. $a^{-1}b=n \implies b=an$.\looseness=-1
+    
+    ``$\Leftarrow$" Falls $b=an$ für $n\in N$, dann ist $\phi(b)=\phi(a)\phi(n)=\phi(a)$.
+\end{proof}
+Aus dem Satz folgt, dass die Fasern von $\phi$ alle von der folgenden Form sind: $$aN=\{g\in G\mid g=an \text{ für ein } n\in N\}$$
+
+\pagebreak
+\begin{corollary}
+    Ein Homomorphismus $\phi\colon G\to G'$ ist injektiv $\Leftrightarrow \ker\phi = \{1\}$.
+\end{corollary}
+\begin{proof}
+    ``$\Rightarrow$" klar.
+
+    ``$\Leftarrow$" Man nehme an, dass Kern $\phi= \{1\}$. $\phi(a)=\phi(b)\Leftrightarrow a^{-1}b\in\ker\phi$, d.h. $a^{-1}+b=1\implies a=b$.
+\end{proof}
+\subsection*{Nebenklassen}
+\paragraph{Erinnerung:} Sei $X$ eine Menge. Eine \defn{Äquivalenzrelation} auf $X$ ist eine binäre  Relation $\sim$ so dass: 
+\begin{enumerate}[label=\roman*)]
+    \item (Transitivität) falls $a\sim b$ und $b\sim c$, dann ist $a\sim c$.
+    \item (Symmetrie) falls $a\sim b$, so ist $b\sim a$.
+    \item (Reflexivität) $a\sim a$ für alle $a\in X$.
+\end{enumerate}
+\paragraph{Gesehen:} Jede Äquivalenzrelation definiert eine Partition von $X$. Diese besteht aus den \defn{Äquivalenzklassen}, d.h. Teilmengen von der Form $[a]\defeq\{b\in X\mid b\sim a\}$.\looseness=-1
+
+Sei $\overline{X}$ die Menge der Äquivalenzklassen. Dann  erhalten wir eine surjektive Abbildung $\pi\colon X\to \overline{X}, \qquad \pi(a) \defeq [a]$.
+Dann ist $\pi^{-1}([a])=\{b\in X\mid b\sim a\}$.
+
+\paragraph{Gesehen:} ``Rechnen modulo $m$".
+$\Z$ mit Äquivalenzrelation $\equiv$, wobei $a\equiv b$ falls $a-b\in m\Z$.
+
+Menge der Äquivalenzklassen: $\Z/m\Z.\qquad \Z/m\Z = \{[0],[1],\ldots,[m-1]\}$.
+
+Ausserdem können wir die Klassen in $\Z/m\Z$ miteinander addieren, so dass $[a+b]=[a]+[b]$.\looseness=-1
+
+$\Z/m\Z$ mit Addition ist somit eine Gruppe, und die Quotientenabbildung $\pi\colon \Z\to\Z/m\Z,\quad \pi(n)\defeq[n]$ ist ein Homomorphismus.
+
+\begin{definition}
+    Sei $H\ug G$ eine Untergruppe. Eine \defn{Linksnebenklasse} von $H$ ist eine Teilmenge von der Form $aH=\{ah\mid h\in H\}$ für ein $a\in G$.
+\end{definition}
+
+\begin{beispiel}
+    $m\Z^+\ug\Z^+$. Dann sind die Linksnebenklassen $m\Z$ die Teilmengen von der Form $0+m\Z, 1+m\Z,\ldots,(m-1)+m\Z$.
+\end{beispiel}
+
+Wir schreiben $a\equiv b$, falls ein $h\in H$ existiert, so dass $b=ah$, d.h. falls $b\in aH$.
+
+\begin{theorem}
+    Die Relation ``$\equiv$" ist eine Äquivalenzrelation.
+\end{theorem}
+\begin{proof}
+    \begin{enumerate}
+        \item Falls $a\equiv b$ und $b\equiv a \implies \exists h,h'\in H$, so dass $b=ah$ und $c=bh' \implies c=a\underbrace{hh'}_{\in H}\implies c\equiv a.$
+        \item falls $a\equiv b$, so $\exists h\in H$ s.d. $b=ah \implies a=b\underbrace{h^{-1}}_{\in H}\implies b\equiv a$.
+        \item $a=a\cdot 1$ und $1\in H\implies a\equiv a$.
+    \end{enumerate}
+    $\phi\colon X\to Y$ Abbildung $\phi^{-1}(y) = \{x\in X\mid \phi(x)=y\}$ für $y\in Y$.
+\end{proof}
+
+\begin{corollary}
+    Die Linksnebenklassen bilden eine Partition von G.
+\end{corollary}
+\begin{proof}
+    $aH=bH\Leftrightarrow a\equiv b$.    
+\end{proof}
+
+\begin{definition}
+    Die Anzahl der Linksnebenklassen von $H$ in $G$ ist der sogenannte \defn{Index von $H$ in $G$}. Wir schreiben $[G:H]$ für den Index. ($[G\text{ in }H]$ kann $\infty$ sein).\looseness=-1
+\end{definition}
+
+\begin{beispiel}
+    $m\geq 1,\qquad [\Z:m\Z]=m$.
+\end{beispiel}
+
+\begin{theorem}
+    Sei $G$ eine endliche Gruppe und $H\ug G$. Dann ist $|G|=|H|[G:H]$.
+\end{theorem}
+\begin{proof}
+    Die Abbildung $\phi\colon H\to aH, \qquad \phi(h)=ah$. 
+    
+    $\phi$ ist eine Bijektion. $\implies |H|=|aH|$.
+
+    Die Linksnebenklassen bilden eine Partition von $G$. $\implies |G|=|H|[G:H]$
+\end{proof}
+Daraus folgt direkt:
+\begin{corollary}[Satz von Lagrange]
+    Sei $G$ eine Gruppe und $H\ug G$ eine Untergruppe. Dann ist $|H|$ ein Teiler von $|G|$.
+\end{corollary}
+\begin{bemerkung}
+    Falls $a\in G$, dann folgt mit Lagrange, dass $|\zykl{a}|\ \teilt\ |G|$, d.h. $Ord(a)$ teilt die Ordnung von $G$.
+\end{bemerkung}
+\begin{corollary}
+    Sei $G$ eine Gruppe, s.d. $|G|$ prim ist. Sei $a\in G, a\neq 1$, dann ist $G=\zykl{a}$. 
+\end{corollary}
+\begin{proof}
+    $\ord a \teilt p$ da $\ord a > 1$ ist $\ord a =p$, d.h. $|\zykl{a}|=p \implies \zykl{a}=G.$
+\end{proof}
+
+\begin{corollary}
+    $G, G'$ endliche Gruppen und $\phi\colon G\to G'$ ein Homomorphismus. Dann gilt:
+    $$|G|=|\ker \phi|\cdot|\bild \phi|$$
+\end{corollary}
+\begin{proof}
+    Gesehen: die Linksnebenklassen von $\ker \phi$ sind die Fasern von $\phi$. 
+    
+    $\implies |\bild\phi|=[G:\ker\phi]$
+    
+    $\implies |G| = |\ker\phi|\cdot[G:\ker\phi]$
+    
+    \qquad $=|\ker\phi|\cdot|\bild\phi|$
+\end{proof}
+
+\begin{definition}
+    Sei $G$ eine Gruppe und $H\ug G$. Die \defn{Rechtsnebenklassen} von $H$ in $G$ sind die Mengen $Ha\defeq\{ha\mid h\in H\}$.
+\end{definition}
+
+Definiere $a\equiv_R b$ falls es ein $h\in H$ gibt, so dass $b=ha$.
+
+Dies definiert eine Äquivalenzrelation auf $G$ und die Rechtsnebenklassen sind die Äquivalenzklassen bezüglich dieser Relation. $\leadsto$  Partition von G.
+
+\begin{theorem}
+    Eine Untergruppe $H\ug G$ ist ein Normalteiler $\Leftrightarrow$ jede Linksnebenklasse ist auch eine Rechtsnebenklasse. In diesem Fall ist $aH=Ha$.
+\end{theorem}
+\begin{proof}
+    ``$\Rightarrow$" $H$ Normalteiler. Sei $h\in H$ und $a\in G$.
+    \begin{align*}
+        &\implies ah=\underbrace{(aha^{-1})}_{=:k\in H}a = ka\\
+        &\implies aH\subset Ha
+    \end{align*}
+    Analog zeigt man $Ha\subset aH$. $\implies aH=Ha$.
+
+    ``$\Leftarrow$" Man nehme an, $H$ ist kein Normalteiler. 
+    
+    $\implies \exists h\in H, g\in G$ s.d. $aha^{-1}\notin H$, d.h. es gibt kein $h'\in H$ s.d. $ah=h'a$.
+    
+    $\implies ah\in aH$, aber $ah\notin Ha$, d.h. $aH\neq Ha$.
+
+    Gleichzeitig ist $a\in aH\cap Ha\neq \emptyset$
+
+    $\implies aH$ ist in keiner anderen Rechtsnebenklasse enthalten. D.h. Rechts- und Linksnebenklassen definieren zwei verschiedene Partitionen.
+\end{proof}
+
+\end{document}

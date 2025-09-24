@@ -5,6 +5,7 @@
 \usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage{amsthm}
+\usepackage{mathtools}
 \usepackage{stmaryrd}
 \usepackage{enumitem}
 \usepackage{todonotes}
@@ -17,12 +18,14 @@
 \crefname{algorithm}{Alg.}{}
 \crefname{equation}{Eq.}{}
 \crefname{appendix}{App.}{}
-\crefname{theorem}{Thm.}{}
+\crefname{satz}{Satz}{}
 \crefname{lemma}{Lem.}{}
+\crefname{corollary}{Kor.}{}
 \crefformat{section}{\S#2#1#3} 
 \crefname{proposition}{Prop.}{}
 \crefname{definition}{Def.}{}
 \crefname{conjectiure}{Con.}{}
+\crefname{bemerkung}{Bem.}{}
 
 \title{Algebra I - HS 2025}
 \author{Franz Nowak}
@@ -68,14 +71,285 @@
 \newcommand{\xmax}{\tilde{x}}
 \newcommand{\ug}{\leq}
 \newcommand{\normal}{\trianglelefteq}
-\newcommand{\sgn}{\mathrm{sgn}}
+\newcommand{\sgn}{\mathrm{sign}}
 \newcommand{\ord}{\mathop{\text{ord}}}
 \newcommand{\teilt}{\big{|}}
 \newcommand{\zykl}[1]{{<}{#1}{>}}
+\newcommand{\sym}{\mathop{\text{Sym}}}
+\newcommand{\id}{\mathrm{id}}
 
 \begin{document}
 
 \maketitle
+
+\section*{Vorlesung 1}
+\begin{definition}
+    Eine \defn{Gruppe} ist eine Menge $G$ zusammen mit einer Verknüpfung $*\colon G\to G, \qquad (g, h) \to g * h$, sodass:
+    \begin{enumerate}[label=(\arabic*)]
+        \item (Assoziativität) $\forall g,h,k\in G\colon (g*h)*k=g*(h*k)$
+        \item (Neutrales Element) $\exists e\in G\colon g*e=e*g=g \quad \forall g\in G$
+        \item (Inverses Element) $\forall g\in G \exists g^{-1}\in G$ s.d. $g*g^{-1}=g^{-1}*g=e$
+    \end{enumerate}
+    Eine Gruppe ist \defn{abelsch} (kommutativ), wenn $\forall g, h\in G, g*h=h*g$.
+\end{definition}
+Wir schreiben oft $1$ oder $1_G$ für $e$ und $gg'$ für $g*g'$ mit $g,g'\in G$. Wenn $G$ kommutativ ist, dann schreiben wir $e=0$ und $a + b$ für $a * b$. Des Weiteren ist $a^n := \overbrace{a \cdots a}^{\text{n-mal}}$ und $a^0:=1$.
+
+\begin{bemerkung}
+    Wenn $G$ assoziativ ist, dann ist $g_1g_2\cdots g_n$ eindeutig definiert (für $g_1,g_2,\ldots,g_n\in G$).
+\end{bemerkung}
+\begin{theorem}
+    \begin{enumerate}[label=(\alph*)]
+        \item Das neutrale Element ist eindeutig.
+        \item Das Inverse von jedem Element ist eindeutig.
+    \end{enumerate}
+\end{theorem}
+\begin{proof}
+    \begin{enumerate}[label=(\alph*)]
+        \item Seien $e, e'\in G$ neutrale Elemente. Dann ist $e=ee'=e'$.
+        \item Seien $\overline{g}, g^{-1}$ Inverse von $g\in G$. Dann ist $\overline{g}=\overline{g}e=\overline{g}gg^{-1}=eg^{-1}=g^{-1}$.\looseness=-1
+    \end{enumerate}
+\end{proof}
+
+\begin{theorem}
+    Seien $G$ eine Gruppe und $a,b,c\in G$, sodass $ab=ac$. Dann ist $b=c$.
+\end{theorem}
+\begin{proof}
+    $$ab=ac\implies \underbrace{a^{-1}a}_{e}b = \underbrace{a^{-1}a}_{e}c\implies b=c$$
+\end{proof}
+
+\subsubsection*{Beispiele}
+\begin{itemize}
+    \item Ganze Zahlen mit Addition, $(\Z, +)$ oder $\Z^+$
+    \item Reelle Zahlen mit Addition, $(\R, +)$ oder $\R^+$
+    \item Körper $K$ mit Addition, $(K, +)$ oder $K^+$. (Bemerkung: Keine Gruppe mit Multiplikation, wenn 0 enthalten ist.)
+    \item Vektorraum $V$ mit Addition, $(V, +)$ oder $V^+$.
+    \item Allgemeine lineare Gruppe, $GL_n(K)$
+    \item Spezielle lineare Gruppe, $SL_n(K) \defeq \{A\in GL_n(K)\mid \det A=1\}$
+    \item Orthogonale Gruppe, $O_n$
+    \item Unitäre Gruppe, $U_n$
+\end{itemize}
+
+\subsubsection*{Permutationsgruppen}
+Sei $\sym(M)$ die Menge der Bijektionen von einer Menge $M$ zu sich selbst, zusammen mit der Verknüpfung von Abbildungen.
+Die \defn{symmetrische Gruppe} $S_n\defeq \sym(\{1,2,\ldots,n\})$ ist eine Gruppe mit $n!$ Elementen.
+\begin{bemerkung}
+    Jedes Element in $S_n$ ist ein Produkt von Transpositionen.
+\end{bemerkung}
+\paragraph{Erinnerung:} Eine \defn{Transposition} ist eine Permutation, die genau zwei Elemente vertauscht und die übrigen gleich lässt.
+
+\begin{beispiel}
+    $S_3$, die Gruppe der Permutationen von $\{1,2,3\}$.
+    Seien $\sigma, \tau\in S_3$,
+    $$
+        \sigma\colon\begin{cases}
+            1\to 2\\
+            2\to 1\\
+            3\to 3
+        \end{cases}
+        \qquad \tau\colon\begin{cases}
+            1\to 2\\
+            2\to 3\\
+            3\to 1
+        \end{cases}
+    $$
+    Dann sind $\sigma^2 = \id$ und $\tau^3 = \id$.
+    $$\begin{rcases}
+        \sigma\tau(1) = 1\\
+        \tau\sigma(1) = 3
+    \end{rcases} \xrightarrow{} \sigma\tau \neq \tau\sigma $$
+    D.h. $S_3$ ist nicht abelsch.
+\end{beispiel}
+
+\subsection*{Untergruppen}
+\begin{definition}
+    Sei $G$ eine Gruppe. Eine \defn{Untergruppe} $H\leq G$ ist eine Teilmenge $H\subseteq G$ sodass 
+    \begin{enumerate}[label=(\alph*)]
+        \item $\forall a,b \in H, ab\in H$
+        \item $1_G \in H$
+        \item $\forall a\in H, a^{-1}\in H$
+    \end{enumerate}
+\end{definition}
+\begin{bemerkung}
+    Jede Untergruppe ist eine Gruppe $(H, *_H)$. $*_G$ induziert $*_H$.
+\end{bemerkung}
+\begin{bemerkung}
+    $H \subseteq G$ mit $H\neq \{\emptyset\}$ ist eine Untergruppe von $G$ genau wenn $\forall a,b\in H,\ ab^{-1}\in H$.
+\end{bemerkung}
+\begin{proof}
+    ``$\Rightarrow$'': klar.
+    
+    ``$\Leftarrow$'': Bedingung: Seien $a,b\in H$.
+    \begin{enumerate}[label=(\alph*)]
+            \item $\implies b^{-1}\in H\\\implies ab=a(b^{-1})^{-1}\in H$
+            \item $\implies aa^{-1}\in H, d.h. 1_G\in H$
+            \item $\implies 1_G a^{-1}\in H$ d.h. $a^{-1}\in H$
+    \end{enumerate}    
+\end{proof}
+\vspace{-6pt}
+\begin{bemerkung}
+    Jede Gruppe $G$ hat als Untergruppen immer $\{1\}$ (die triviale Untergruppe) und $G$ selbst. Andere Untergruppen heissen \defn{echte} Untergruppen.
+\end{bemerkung}
+\subsubsection*{Beispiele}
+\begin{itemize}
+    \item $SL_n(K) \leq GL_n(K)$
+    \item $n\Z\leq \Z\quad \forall n\in\Z$
+    \item Sei $S^1 \defeq \{c\in\C^*\mid |C|=1\}$. $S^1\leq \C^*$. ($\C^*\defeq (\C\backslash\{0\}, \cdot$)
+    \item $B_n(K) \defeq \{A\in GL_n(K)\mid A \text{obere Dreiecksmatrix}\}$. $B_n\leq GL_n(K)$.
+    \item $O_n\leq GL_n(\R)$
+    \item Die alternierende Gruppe $A_n\leq S_n$ ist die Untergruppe aller Permutationen, die das Produkt einer geraden Anzahl von Transpositionen sind.
+\end{itemize}
+\begin{bemerkung}
+    Seien $G$ eine Gruppe und $a\in G$. Dann ist $$\zykl{a}\defeq\{\ldots, a^{-2}, a^{-1}, a^0, a, a^2,\ldots\}$$ eine Untergruppe von $G$, genannt die von $a$ erzeugte \defn{zyklische Gruppe}.
+\end{bemerkung}
+
+\begin{bemerkung}
+    $\zykl{a}$ ist abelsch: $a^ma^n=a^{m+n}=a^{n+m}=a^na^m$
+\end{bemerkung}
+
+\begin{lemma}
+    Sei $X\subseteq\Z$ die Menge der Zahlen $n$, sodass $a^n=1$. Dann ist $X=m\Z$ für ein $m\in\Z$.
+\end{lemma}
+\begin{proof}
+    $X$ ist eine Untergruppe von $\Z$:
+    \begin{enumerate}[label=(\alph*)]
+        \item Seien $m,n\in X$, dann ist $a^{m+n}=a^ma^n=1_G\implies m+n\in X$
+        \item $a^0=1_G\implies 0\in X$
+        \item $n\in X\implies a^{-n}=a^na^{-n}=1_G\implies -n\in X$
+    \end{enumerate}
+    Gemäss Übung ist $X$ von der Form $m\Z$ für ein $m\in\Z$.
+\end{proof}
+
+Falls $m\neq 0$:
+
+Für $n\in\Z$, schreibe $n=km+r$ für ein $k\in\Z$ s.d. $0\leq r <m$. Dann ist $a^n=a^{km+r}=a^{km}a^r=a^r$.
+$\implies \zykl{a}=\{1,a,\ldots,a^{m-1}\}$ und all diese Elemente sind verschieden. (Falls $a^r=a^{r'} \implies a^{r-r'}=1\implies r-r'\in m\Z\implies r=r'\quad 0\leq r,r'<m)$
+
+Falls $m=0$:
+
+Dann ist $\zykl{a}=\{\ldots, a^{-2},a^{-1},1, a, a^2,\ldots\}$ und alle Partitionen sind verschieden.
+
+\section*{Vorlesung 2}
+
+\begin{definition}
+    Die \defn{Ordnung} $|G|$ einer Gruppe $G$ ist die Anzahl der ELemente in $G$ (kann $\infty$ sein).
+    Die \defn{Ordnung des Elements} $a\in G$ ist $|\zykl{a}|$, wobei $\zykl{a}=\{1,a,\ldots,a^{m-1}\}$ mit $m>0$ die kleinste Zahl s.d. $a^m=1$.
+\end{definition}
+
+\subsubsection*{Beispiele}
+    \begin{itemize}
+        \item $A=\begin{pmatrix}
+            1&1\\-1&0
+            \end{pmatrix}\in GL_2(\R)$ hat Ordnung 6.
+        \item $B=\begin{pmatrix}
+            1&1\\1&0
+        \end{pmatrix} \in GL_2(\R)$ hat Ordnung $\infty$.
+    \end{itemize}
+
+\subsection*{Homomorphismen}
+\begin{definition}
+    Seien $G,G'$ zwei Gruppen. Ein \defn{Homomorphismus} ist eine Abbildung $\phi\colon G\to G'$ s.d. $\phi(ab)=\phi(a)\phi(b)\quad \forall a,b\in G$.
+\end{definition}
+\begin{definition}
+    Ein \defn{Isomorphismus} ist ein bijektiver Homomorphismus.
+\end{definition}
+\subsubsection*{Beispiele}
+\begin{itemize}
+    \item $\det\colon GL_n(K)\to K^*$
+    \item signum - $\sgn\colon S_n\to\Z/2\Z,\\ \quad \sgn(x) = \begin{cases}
+        0: & \text{gerade Anzahl von Transpositionen} \\
+        1: & \text{ungerade Anzahl von Transpositionen}
+    \end{cases}$
+    \item Fixiere $a\in G$. $\phi\colon \Z\to G$, $\phi(n) = a^n$. $\phi$ ist injektiv $\Leftrightarrow$ Ord($a$) $=\infty$.
+    \item $H\leq G$, die Inklusion $\iota \colon H\to G,\quad \iota(x)=x$.
+\end{itemize}
+\begin{theorem}
+    \quad
+    \begin{enumerate}[label=(\arabic*)]
+        \item Falls $\phi\colon G\to G'$ und $\psi\colon G'\to G''$ Homomorphismen sind, so auch $\psi\circ\phi\colon G\to G''$.
+        \item Falls $\phi\colon G\to G'$ ein Isomorphismus ist, so auch $\phi^{-1}\colon G'\to G$.
+    \end{enumerate}
+\end{theorem}
+\begin{proof}
+    \begin{enumerate}[label=(\arabic*)]
+        \item $\psi\circ\phi(ab)=\psi(\phi(a)\phi(b))=\psi\circ\phi(a) \psi\circ\phi(b)$
+        \item zu zeigen: $\phi^{-1}$ ist ein Homomorphismus.
+        
+        Seien $a',b'\in G'$. Dann gibt es $a,b\in G$ s.d. $\phi(a)=a', \phi(b)=b'$
+
+        Es gilt $\phi(ab)=\phi(a)\phi(b)=a'b' \implies \phi^{-1}(a'b')=\phi^{-1}(a')\phi^{-1}(b')$
+    \end{enumerate}
+\end{proof}
+
+\begin{bemerkung}
+    Zwei zuklische Gruppen gleicher Ordnung sind immer isomorph.
+\end{bemerkung}
+\begin{proof}
+    Seien $G=\zykl{a}, G'=\zykl{b}$ und $\phi \colon G\to G', \quad \phi(a^n)\mapsto b^n$.
+    
+    Falls  $|G|=|G'|$ endlich ist, so ist $G=\{1,a,\ldots,a^{m-1}\}$, $G'=\{1,b,\ldots,b^{m-1}\}$.
+    Somit ist $\phi$ wohldefiniert, bijektiv und ein Homomorphismus.
+
+    Falls $|G|=|G'|=\infty$, so ist $\phi$ wohldefiniert, bijektiv und ein Homomorphismus.\looseness=-1
+\end{proof}
+
+Wir schreiben $C_n$ für die zyklische Gruppe der Ordnung $n$.
+
+\begin{theorem}
+    Sei $\phi\colon G\to G'$ ein Homomorphismus. Dann sind $\phi(1_G)=1_{G'}$ und $\phi(a^{-1})=\phi(a)^{-1}\ \forall a\in G$
+\end{theorem}
+\begin{proof}
+\begin{align*}
+    1_G&=1_G1_G\\
+    &\implies \phi(1_G)=\phi(1_G1_G)=\phi(1_G)\phi(1_G)\\
+    &\underset{\text{kürzen}}{\implies}1_{G'}=\phi(1_G)
+\end{align*}
+Ausserdem: 
+\begin{align*}
+    \phi(a^{-1}\phi(a) &= \phi(a^{-1}a)=\phi(1_G)=1_{G'}\\
+    &\implies \phi(a^{-1}=\phi(a)^{-1}
+\end{align*}
+\end{proof}
+
+\begin{definition}
+    Ein \defn{Automorphismus} ist ein Isomorphismus $\phi\colon G\to G$ von einer Gruppe $G$ zu sich selbst.
+\end{definition}
+
+\begin{beispiel}
+    Für $f\in G$ definiere $\phi\colon G\to G,\quad \phi(g)\defeq fgf^{-1}$ ($fgf^{-1}$ ist das Konjugierte von $g$ unter $f$).
+    $\phi$ ist ein Automorphismus.
+\end{beispiel}
+\begin{proof}
+    Homomorphismus: $\phi(gh)=fghf^{-1}=fg(f^{-1}f)hf^{-1}=\phi(g)\phi(h)$.
+    Bijektiv: $\phi^{-1}(g)=f^{-1}gf$
+\end{proof}
+
+\begin{definition}
+    Für einen Homomorphismus $\phi\colon G\to G'$ definiere:
+
+    $\bild\phi\defeq \{x\in G'\mid x=\phi(a) \text{ für ein } a\in G\}$
+
+    $\ker\phi\defeq \{a\in G\mid \phi(a)=1\}$
+\end{definition}
+Übung: Zeige, dass beides Untergruppen von G' bzw. G sind.
+\subsubsection*{Beispiele}
+\begin{itemize}
+    \item $\det\colon GL_n(K)\to K^*,\quad \ker\det=SL_n(K)$
+    \item $\sgn S_N\to C_2,\quad \ker\sgn=A_n$
+\end{itemize}
+\begin{bemerkung}\label{bem:ker}
+    Seien $\phi\colon G\to G'$ ein Homomorphismus und $a\in \ker\phi$ und $b\in G$. 
+    Dann ist 
+    \begin{align*}
+        \phi(bab^{-1})&=\phi(b)\phi(a)\phi(b)^{-1}=1\\
+        &\implies bab^{-1}\in\ker\phi
+    \end{align*}
+\end{bemerkung}
+\begin{definition}
+    Eine Untergruppe $N\leq G$ heisst \defn{Normalteiler}, falls $a\in N$ und $\forall b\in G$ $bab^{-1}\in N$.
+\end{definition}
+$\overset{\text{\cref{bem:ker}}}{\implies}\ker\phi$ ist immer ein Normalteiler.
+
+\newpage
 \section*{Vorlesung 3}
 \paragraph{Erinnerung:}
 Eine Untergruppe $N\ug G$ ist ein Normalteiler, falls:
@@ -101,9 +375,9 @@ Allgemein: $\phi^{-1} = \ker \phi$.
     Sei $U: G\to G'$ ein Homomorphismus mit Kern $N$. Für $a,b\in G$ gilt $\phi(a)=\phi(b) \Leftrightarrow \exists n'\in N$ s.d. $b=an$, d.h. $a^{-1}b\in N$.\looseness=-1
 \end{theorem}
 \begin{proof}
-    ``$\Rightarrow$": Falls $\phi(a)=\phi(b)$, dann it $U(a)^{-1}\phi(b)=\phi(a^{-1}b)=1$, d.h. $\exists n\in N$, s.d. $a^{-1}b=n \implies b=an$.\looseness=-1
+    ``$\Rightarrow$'': Falls $\phi(a)=\phi(b)$, dann it $U(a)^{-1}\phi(b)=\phi(a^{-1}b)=1$, d.h. $\exists n\in N$, s.d. $a^{-1}b=n \implies b=an$.\looseness=-1
     
-    ``$\Leftarrow$" Falls $b=an$ für $n\in N$, dann ist $\phi(b)=\phi(a)\phi(n)=\phi(a)$.
+    ``$\Leftarrow$'' Falls $b=an$ für $n\in N$, dann ist $\phi(b)=\phi(a)\phi(n)=\phi(a)$.
 \end{proof}
 Aus dem Satz folgt, dass die Fasern von $\phi$ alle von der folgenden Form sind: $$aN=\{g\in G\mid g=an \text{ für ein } n\in N\}$$
 
@@ -112,15 +386,15 @@ Aus dem Satz folgt, dass die Fasern von $\phi$ alle von der folgenden Form sind:
     Ein Homomorphismus $\phi\colon G\to G'$ ist injektiv $\Leftrightarrow \ker\phi = \{1\}$.
 \end{corollary}
 \begin{proof}
-    ``$\Rightarrow$" klar.
+    ``$\Rightarrow$'' klar.
 
-    ``$\Leftarrow$" Man nehme an, dass Kern $\phi= \{1\}$. $\phi(a)=\phi(b)\Leftrightarrow a^{-1}b\in\ker\phi$, d.h. $a^{-1}+b=1\implies a=b$.
+    ``$\Leftarrow$'' Man nehme an, dass der Kern $\phi= \{1\}$. $\phi(a)=\phi(b)\Leftrightarrow a^{-1}b\in\ker\phi$, d.h. $a^{-1}+b=1\implies a=b$.
 \end{proof}
 \subsection*{Nebenklassen}
 \paragraph{Erinnerung:} Sei $X$ eine Menge. Eine \defn{Äquivalenzrelation} auf $X$ ist eine binäre  Relation $\sim$ so dass: 
 \begin{enumerate}[label=\roman*)]
-    \item (Transitivität) falls $a\sim b$ und $b\sim c$, dann ist $a\sim c$.
-    \item (Symmetrie) falls $a\sim b$, so ist $b\sim a$.
+    \item (Transitivität) Falls $a\sim b$ und $b\sim c$, dann ist $a\sim c$.
+    \item (Symmetrie) Falls $a\sim b$, so ist $b\sim a$.
     \item (Reflexivität) $a\sim a$ für alle $a\in X$.
 \end{enumerate}
 \paragraph{Gesehen:} Jede Äquivalenzrelation definiert eine Partition von $X$. Diese besteht aus den \defn{Äquivalenzklassen}, d.h. Teilmengen von der Form $[a]\defeq\{b\in X\mid b\sim a\}$.\looseness=-1
@@ -128,10 +402,10 @@ Aus dem Satz folgt, dass die Fasern von $\phi$ alle von der folgenden Form sind:
 Sei $\overline{X}$ die Menge der Äquivalenzklassen. Dann  erhalten wir eine surjektive Abbildung $\pi\colon X\to \overline{X}, \qquad \pi(a) \defeq [a]$.
 Dann ist $\pi^{-1}([a])=\{b\in X\mid b\sim a\}$.
 
-\paragraph{Gesehen:} ``Rechnen modulo $m$".
+\paragraph{Gesehen:} ``Rechnen modulo $m$''.
 $\Z$ mit Äquivalenzrelation $\equiv$, wobei $a\equiv b$ falls $a-b\in m\Z$.
 
-Menge der Äquivalenzklassen: $\Z/m\Z.\qquad \Z/m\Z = \{[0],[1],\ldots,[m-1]\}$.
+Menge der Äquivalenzklassen: $\Z/m\Z$.$\qquad \Z/m\Z = \{[0],[1],\ldots,[m-1]\}$.
 
 Ausserdem können wir die Klassen in $\Z/m\Z$ miteinander addieren, so dass $[a+b]=[a]+[b]$.\looseness=-1
 
@@ -148,7 +422,7 @@ $\Z/m\Z$ mit Addition ist somit eine Gruppe, und die Quotientenabbildung $\pi\co
 Wir schreiben $a\equiv b$, falls ein $h\in H$ existiert, so dass $b=ah$, d.h. falls $b\in aH$.
 
 \begin{theorem}
-    Die Relation ``$\equiv$" ist eine Äquivalenzrelation.
+    Die Relation ``$\equiv$'' ist eine Äquivalenzrelation.
 \end{theorem}
 \begin{proof}
     \begin{enumerate}
@@ -167,7 +441,7 @@ Wir schreiben $a\equiv b$, falls ein $h\in H$ existiert, so dass $b=ah$, d.h. fa
 \end{proof}
 
 \begin{definition}
-    Die Anzahl der Linksnebenklassen von $H$ in $G$ ist der sogenannte \defn{Index von $H$ in $G$}. Wir schreiben $[G:H]$ für den Index. ($[G\text{ in }H]$ kann $\infty$ sein).\looseness=-1
+    Die Anzahl der Linksnebenklassen von $H$ in $G$ ist der sogenannte \defn{Index von $H$ in $G$}. Wir schreiben $[G:H]$ für den Index. ($[G\text{ in }H]$ kann $\infty$ sein.)\looseness=-1
 \end{definition}
 
 \begin{beispiel}
@@ -186,7 +460,7 @@ Wir schreiben $a\equiv b$, falls ein $h\in H$ existiert, so dass $b=ah$, d.h. fa
 \end{proof}
 Daraus folgt direkt:
 \begin{corollary}[Satz von Lagrange]
-    Sei $G$ eine Gruppe und $H\ug G$ eine Untergruppe. Dann ist $|H|$ ein Teiler von $|G|$.
+    Seien $G$ eine Gruppe und $H\ug G$ eine Untergruppe. Dann ist $|H|$ ein Teiler von $|G|$.
 \end{corollary}
 \begin{bemerkung}
     Falls $a\in G$, dann folgt mit Lagrange, dass $|\zykl{a}|\ \teilt\ |G|$, d.h. $Ord(a)$ teilt die Ordnung von $G$.
@@ -195,15 +469,15 @@ Daraus folgt direkt:
     Sei $G$ eine Gruppe, s.d. $|G|$ prim ist. Sei $a\in G, a\neq 1$, dann ist $G=\zykl{a}$. 
 \end{corollary}
 \begin{proof}
-    $\ord a \teilt p$ da $\ord a > 1$ ist $\ord a =p$, d.h. $|\zykl{a}|=p \implies \zykl{a}=G.$
+    $\ord a \teilt p$, da $\ord a > 1$ ist, $\ord a =p$, d.h. $|\zykl{a}|=p \implies \zykl{a}=G.$
 \end{proof}
 
 \begin{corollary}
-    $G, G'$ endliche Gruppen und $\phi\colon G\to G'$ ein Homomorphismus. Dann gilt:
+    Seien $G, G'$ endliche Gruppen und $\phi\colon G\to G'$ ein Homomorphismus. Dann gilt:
     $$|G|=|\ker \phi|\cdot|\bild \phi|$$
 \end{corollary}
 \begin{proof}
-    Gesehen: die Linksnebenklassen von $\ker \phi$ sind die Fasern von $\phi$. 
+    Gesehen: Die Linksnebenklassen von $\ker \phi$ sind die Fasern von $\phi$. 
     
     $\implies |\bild\phi|=[G:\ker\phi]$
     
@@ -216,7 +490,7 @@ Daraus folgt direkt:
     Sei $G$ eine Gruppe und $H\ug G$. Die \defn{Rechtsnebenklassen} von $H$ in $G$ sind die Mengen $Ha\defeq\{ha\mid h\in H\}$.
 \end{definition}
 
-Definiere $a\equiv_R b$ falls es ein $h\in H$ gibt, so dass $b=ha$.
+Definiere $a\equiv_R b$, falls es ein $h\in H$ gibt, so dass $b=ha$.
 
 Dies definiert eine Äquivalenzrelation auf $G$ und die Rechtsnebenklassen sind die Äquivalenzklassen bezüglich dieser Relation. $\leadsto$  Partition von G.
 
@@ -224,14 +498,14 @@ Dies definiert eine Äquivalenzrelation auf $G$ und die Rechtsnebenklassen sind 
     Eine Untergruppe $H\ug G$ ist ein Normalteiler $\Leftrightarrow$ jede Linksnebenklasse ist auch eine Rechtsnebenklasse. In diesem Fall ist $aH=Ha$.
 \end{theorem}
 \begin{proof}
-    ``$\Rightarrow$" $H$ Normalteiler. Sei $h\in H$ und $a\in G$.
+    ``$\Rightarrow$'' $H$ Normalteiler. Sei $h\in H$ und $a\in G$.
     \begin{align*}
         &\implies ah=\underbrace{(aha^{-1})}_{=:k\in H}a = ka\\
         &\implies aH\subset Ha
     \end{align*}
     Analog zeigt man $Ha\subset aH$. $\implies aH=Ha$.
 
-    ``$\Leftarrow$" Man nehme an, $H$ ist kein Normalteiler. 
+    ``$\Leftarrow$'' Man nehme an, $H$ ist kein Normalteiler. 
     
     $\implies \exists h\in H, g\in G$ s.d. $aha^{-1}\notin H$, d.h. es gibt kein $h'\in H$ s.d. $ah=h'a$.
     

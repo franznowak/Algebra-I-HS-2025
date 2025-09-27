@@ -27,10 +27,6 @@
 \crefname{conjectiure}{Con.}{}
 \crefname{bemerkung}{Bem.}{}
 
-\title{Algebra I -- {Prof. Christian Urech}}
-\author{Mitschrift: Franz Nowak}
-\date{Herbstsemester 2025}
-
 \theoremstyle{plain}
 \newtheorem{definition}{Definition}
 \newtheorem{lemma}{Lemma}
@@ -78,6 +74,10 @@
 \newcommand{\sym}{\mathop{\text{Sym}}}
 \newcommand{\id}{\mathrm{id}}
 
+\title{Algebra I -- {Prof. Christian Urech}}
+\author{Mitschrift: Franz Nowak}
+\date{Herbstsemester 2025}
+
 \begin{document}
 
 \maketitle
@@ -92,7 +92,7 @@
     \end{enumerate}
     Eine Gruppe ist \defn{abelsch} (kommutativ), wenn $\forall g, h\in G, g*h=h*g$.
 \end{definition}
-Wir schreiben oft $1$ oder $1_G$ für $e$ und $gg'$ für $g*g'$ mit $g,g'\in G$. Wenn $G$ kommutativ ist, dann schreiben wir $e=0$ und $a + b$ für $a * b$. Des Weiteren ist $a^n := \overbrace{a \cdots a}^{\text{n-mal}}$ und $a^0:=1$.
+Wir schreiben oft $1$ oder $1_G$ für $e$ und $gg'$ für $g*g'$ mit $g,g'\in G$. Wenn $G$ kommutativ ist, dann schreiben wir $e=0$ und $a + b$ für $a * b$. Des Weiteren sind $a^n := \overbrace{a \cdots a}^{\text{n-mal}}$ und $a^0:=1$.
 
 \begin{bemerkung}
     Wenn $G$ assoziativ ist, dann ist $g_1g_2\cdots g_n$ eindeutig definiert (für $g_1,g_2,\ldots,g_n\in G$).
@@ -185,7 +185,7 @@ Die \defn{symmetrische Gruppe} $S_n\defeq \sym(\{1,2,\ldots,n\})$ ist eine Grupp
             \item $\implies 1_G a^{-1}\in H$ d.h. $a^{-1}\in H$
     \end{enumerate}    
 \end{proof}
-\vspace{-6pt}
+
 \begin{bemerkung}
     Jede Gruppe $G$ hat als Untergruppen immer $\{1\}$ (die triviale Untergruppe) und $G$ selbst. Andere Untergruppen heissen \defn{echte} Untergruppen.
 \end{bemerkung}
@@ -221,7 +221,7 @@ Die \defn{symmetrische Gruppe} $S_n\defeq \sym(\{1,2,\ldots,n\})$ ist eine Grupp
 
 Falls $m\neq 0$:
 
-Für $n\in\Z$, schreibe $n=km+r$ für ein $k\in\Z$ s.d. $0\leq r <m$. Dann ist $a^n=a^{km+r}=a^{km}a^r=a^r$.
+Für $n\in\Z$ schreibe $n=km+r$ für ein $k\in\Z$ s.d. $0\leq r <m$. Dann ist $a^n=a^{km+r}=a^{km}a^r=a^r$.
 $\implies \zykl{a}=\{1,a,\ldots,a^{m-1}\}$ und all diese Elemente sind verschieden. (Falls $a^r=a^{r'} \implies a^{r-r'}=1\implies r-r'\in m\Z\implies r=r'\quad 0\leq r,r'<m)$
 
 Falls $m=0$:
@@ -349,7 +349,6 @@ Ausserdem:
 \end{definition}
 $\overset{\text{\cref{bem:ker}}}{\implies}\ker\phi$ ist immer ein Normalteiler.
 
-\newpage
 \section*{Vorlesung 3}
 \paragraph{Erinnerung:}
 Eine Untergruppe $N\ug G$ ist ein Normalteiler, falls:
@@ -457,7 +456,7 @@ Wir schreiben $a\equiv b$, falls ein $h\in H$ existiert, so dass $b=ah$, d.h. fa
     Die Linksnebenklassen bilden eine Partition von $G$. $\implies |G|=|H|[G:H]$
 \end{proof}
 Daraus folgt direkt:
-\begin{corollary}[Satz von Lagrange]
+\begin{corollary}[Satz von Lagrange]\label{stz:lagrange}
     Seien $G$ eine Gruppe und $H\ug G$ eine Untergruppe. Dann ist $|H|$ ein Teiler von $|G|$.
 \end{corollary}
 \begin{bemerkung}
@@ -470,7 +469,7 @@ Daraus folgt direkt:
     $\ord a \teilt p$, da $\ord a > 1$ ist, $\ord a =p$, d.h. $|\zykl{a}|=p \implies \zykl{a}=G.$
 \end{proof}
 
-\begin{corollary}
+\begin{corollary}\label{cor:ordnung}
     Seien $G, G'$ endliche Gruppen und $\phi\colon G\to G'$ ein Homomorphismus. Dann gilt:
     $$|G|=|\ker \phi|\cdot|\bild \phi|$$
 \end{corollary}
@@ -499,9 +498,9 @@ Dies definiert eine Äquivalenzrelation auf $G$ und die Rechtsnebenklassen sind 
     ``$\Rightarrow$'' $H$ Normalteiler. Sei $h\in H$ und $a\in G$.
     \begin{align*}
         &\implies ah=\underbrace{(aha^{-1})}_{=:k\in H}a = ka\\
-        &\implies aH\subset Ha
+        &\implies aH\subseteq Ha
     \end{align*}
-    Analog zeigt man $Ha\subset aH$. $\implies aH=Ha$.
+    Analog zeigt man $Ha\subseteq aH$. $\implies aH=Ha$.
 
     ``$\Leftarrow$'' Man nehme an, $H$ ist kein Normalteiler. 
     
@@ -513,5 +512,93 @@ Dies definiert eine Äquivalenzrelation auf $G$ und die Rechtsnebenklassen sind 
 
     $\implies aH$ ist in keiner anderen Rechtsnebenklasse enthalten. D.h. Rechts- und Linksnebenklassen definieren zwei verschiedene Partitionen.
 \end{proof}
+
+\section*{Vorlesung 4}
+Clicker Frage zu Homomorphismen $\phi\colon G\to G'$:
+\begin{itemize}
+    \item Gesehen in Übung: $\bild \phi \ug G'$.
+    \item Dann folgt mit \cref{stz:lagrange}: $|\bild \phi|\teilt |G'|$ 
+    \item Und mit \cref{cor:ordnung}: $|\bild \phi| \teilt |G|$.
+\end{itemize}
+
+Seien $G$ eine Gruppe und $H\ug G$ $\leadsto$ $G/H$ Linksnebenklassen von $H$ in $G$.
+Können wir auf $G/H$ eine Gruppenstruktur definieren, so dass die Abbildung $\pi\colon G\to G/H, \pi(g)=gH$ ein Gruppenhomomorphismus ist?
+
+Ja, wenn $H\normal G$ (siehe Übung).
+
+\subsection*{Faktorgruppen}
+\begin{lemma}\label{lem:sur_gruppe}
+    Seien $G$ eine Gruppe und $X$ eine Menge mit einer Verknüpfung.
+    Sei $\phi\colon G\to X$ eine surjektive Abbildung, so dass $\phi(ab)=\phi(a)\phi(b)\quad \forall a,b\in G$. Dann ist $X$ eine Gruppe.
+\end{lemma}
+\begin{proof}
+    \begin{enumerate}[label=(\roman*)]
+        \item Seien $u,v,w\in X$. $\exists a,b,c \in G$ s.d. $\phi(a)=u, \phi(b)=v, \phi(c)=w$.
+        Dann ist 
+        \begin{align*}
+            u(vw)&=\phi(a)(\phi(b)\phi(c))=\phi(a)\phi(bc)\\
+            &=\phi(abc)=\phi(ab)\phi(c)\\
+            &=(\phi(a)\phi(b))\phi(c) = (uv)w
+        \end{align*} 
+        $\leadsto$ Assoziativität der Verknüpfung auf X.
+        \item Sei $e:=\phi(1)$ und $u\in X$. Dann $$\exists u\in G\text{, s.d. }u=\phi(a)\implies eu=\phi(1)\phi(a)=\phi(1a)=\phi(a)=u.$$ Analog: ue=u. $\leadsto e$ ist ein neutrales Element.
+        \item Sei $u\in X \implies \exists a\in G$ s.d. $u=\phi(a)$. Sei $u':=\phi(a^{-1})$. Dann ist $$u'u=\phi(a^{-1}\phi(a)=\phi(a^{-1}a)=\phi(1)=e.$$ Analog: $uu'=e$. $\leadsto$ es existieren Inverse.
+    \end{enumerate}
+\end{proof}
+Notation: Seien $G$ eine Gruppe, $A, B \subseteq G$.
+Dann definieren wir $$AB := \{ab\mid a\in A, b\in B\} \subseteq G.$$
+
+\begin{lemma}
+    Seien $G$ eine Gruppe, $N\normal G$ ein Normalteiler und $a,b \in G$. Dann ist $(aN)(bN) = abN$.
+    Das Produkt von zwei Nebenklassen ist also wieder eine Nebenklasse.
+\end{lemma}
+\begin{proof}
+    In Vorlesung 3 gesehen: $$Nb=bN\quad\forall b\in G$$
+    Da $N$ eine Untergruppe ist, ist $NN=N$ (Übung).
+    $$\implies (aN)(bN) = a(Nb)N=a(bN)N=abNN=abN.$$
+\end{proof}
+Wir erhalten also eine Verknüpfung auf die Nebenklassen.
+Falls $K_1, K_2\in G/N$: 
+Sei $a\in K_1, b\in K_2$. 
+$\implies K_1=aN, K_2=bN$.
+Dann ist $K_1K_2=abN$ (gemäss Lemma), d.h. $K_1K_2$ ist die Nebenklasse, die das Element $ab$ enthält.
+
+\begin{theorem}
+    Seien $G$ eine Gruppe und $N\normal G$.
+    Mit dieser Verknüpfung bildet $G/N =:\overline G$ eine Gruppe und die Abbildung $\pi\colon G\to G/N=\overline G \quad a\mapsto aN=: \overline a$ ist ein Homomorphismus.
+\end{theorem}
+\begin{proof}
+    Bereits beobachtet: $\pi(a)\pi(b)=(aN)(bN)=abN=\pi(ab)$.
+
+    Aus \cref{lem:sur_gruppe} folgt, dass $\overline G=G/N$ eine Gruppe ist und daher $\pi$ ein Homomorphismus ist.
+\end{proof}
+
+\begin{corollary}
+    Jeder Normalteiler $N\ug G$ ist Kern von einem Homomorphismus. Nämlich vom Homomorphismus $\pi\colon G\to G/N$.
+\end{corollary}
+\begin{proof}
+    Das neutrale Element von $G/N$ ist $N$. $\leadsto\ker \pi=N$
+\end{proof}
+\begin{theorem}[erster Isomorphiesatz]
+    Sei $\phi\colon G\to G'$ ein surjektiver Homomorphismus und $N:=\ker\phi$. Dann ist die Gruppe $G/N$ isomorph zur Gruppe $G'$ unter dem Homomorphismus $\overline\phi\colon G/N\to G'\quad \overline a=aN\mapsto\phi(a)$
+\end{theorem}
+\begin{proof}
+    \begin{enumerate}
+        \item $\overline\phi$ ist wohldefiniert: $\phi(an)=\phi(a)\phi(n)=\phi(a)$, d.h. $\overline\phi(aN)$ hängt nicht von der Wahl des Repräsentanten ab.
+        \item $\overline\phi$ ist ein Homomorphismus: 
+        \begin{align*}
+            \overline\phi((aN)(bN))&=\overline\phi(abN)\\
+            &=\phi(ab)=\phi(a)\phi(b)\\
+            &=\overline\phi(aN)\overline\phi(bN)
+        \end{align*}
+        \item $\overline\phi$ ist bijektiv: $\overline\phi$ ist surjektiv, da $\phi$ surjektiv ist. $\overline\phi$ ist injektiv, da $\ker\overline\phi=\{N\}$ und $N$ ist das neutrale Element in $G/N$. $\implies\overline\phi$ ist injektiv.
+    \end{enumerate}
+\end{proof}
+\begin{definition}
+    Seien $G,G'$ Gruppen, dann ist $G\times G'$ eine Gruppe mit der Verknüpfung $(a,a')(b,b')=(ab,a'b')$.
+    Neutrales Element: $(1_G,1_{G'}$.
+    Inverses Element: $(a,a')^{-1}=(a^{-1},a^{-1})$.
+    Es heisst das \defn{direkte Produkt} von $G$ und $G'$.
+\end{definition}
 
 \end{document}

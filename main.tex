@@ -797,15 +797,15 @@ Isometrien von $\R^n$
 \end{bemerkung}
 Zwei wichtige Untergruppen: 
 \begin{enumerate}[label=(\arabic*)]
-    \item $\trans_n\ug\isom(\R^n$: Die Untergruppe der \defn{Translationen}, d.h. Abbildung on der Form $t_a\colon X\mapsto X + a$ für $a\in R^n$. Es gilt $t_at_{a'}=t_{a+a'}$.
+    \item $\trans_n\ug\isom(\R^n)$: Die Untergruppe der \defn{Translationen}, d.h. Abbildung on der Form $t_a\colon X\mapsto X + a$ für $a\in R^n$. Es gilt $t_at_{a'}=t_{a+a'}$.
     \item $O \ug \isom(\R^n)$: Die Untergruppe der Isometrien von der Form $d_B\colon X\mapsto BX$ für $B\in O(n)$. Es gilt $d_Bd_{B'}=d_{BB'}$.
 \end{enumerate}
 Jedes $f\in \isom(\R^n)$ lässt sich eindeutig schreiben als $t_ad_B$ für $B\in O(n), a\in \R^n$.
 Falls $f(X)=BX+a, g(X)=B'X+a'$, dann ist \begin{align*}
     f\circ g(X)&=B(B'X+a')+a\\
     &= BB'X + Ba'+a
-\end{align*}.
-d.h. falls $F=t_ad_B, g=t_{a'}+d_{B'}$, so ist 
+\end{align*}
+D.h. falls $F=t_ad_B, g=t_{a'}+d_{B'}$, so ist 
 \begin{align*}
     f\circ g&=t_ad_Bt_{a'}d_{B'}\\
     &=t_{Ba'+a}d_{BB'}.
@@ -816,5 +816,134 @@ $\ker\psi=\trans_n$.
 \begin{bemerkung}
     Die Abbildung $\isom(R^n)\to\trans_n, t_ad_B\mapsto t_a$ ist kein Homomorphismus.
 \end{bemerkung}
+
+\section*{Vorlesung 6}
+
+\paragraph{Gestern:} $\isom(\R^n)$
+Abbildung $\R^n\to\R^n$ von der Form $f(x)=t_ad_B(x)=BX+a$
+$B\in O(n), a\in \R^n$.
+
+$O\leq \isom(\R^n)$: Isometrien, die den Ursprung fixieren, d.h. von der Form $f(X)=d_B(X)=BX$.
+
+$\trans_n\normal \isom(\R^n)$ Translationen
+
+
+\subsection*{Orientierung}
+
+Falls $n=2:$
+
+Erinnerung:
+$SO(2)=\left\{
+    \begin{pmatrix}
+        \cos\theta&-\sin\theta\\ \sin\theta&\cos\theta
+    \end{pmatrix}\mid 0\leq\theta\leq2\pi\right\}
+$
+
+$O(2)/SO(2)=\{\pm 1\}\iso C_2$
+
+$\implies SO(2)$ hat zwei Nebenklassen:
+$O(2)=SO(2)\cup\begin{pmatrix}
+    1&0\\0&-1
+\end{pmatrix} SO(2)$.
+
+\begin{definition}
+Sei $f\in \isom(\R^2), \quad f=t_ad_B$.
+
+Falls $B\in SO(2)$ ist, heisst $f$ \defn{orientierungserhaltend}.
+
+Falls $B\in \begin{pmatrix}1&0\\0&-1\end{pmatrix} SO(2)$, so heisst $f$ \defn{orientierungsumkehrend}.
+\end{definition}
+
+\begin{bemerkung}
+    Falls $B\in SO(2)$, so ist $d_B$ eine Drehung um $O$ um den Winkel $\theta$.
+\end{bemerkung}
+
+\begin{bemerkung}
+Falls $B\in  \begin{pmatrix}1&0\\0&-1\end{pmatrix} \begin{pmatrix}
+        \cos\theta&-\sin\theta\\ \sin\theta&\cos\theta
+    \end{pmatrix}$, so definiert $d_B$ eine Spiegelung an der Geraden mit Winkel $\theta/2$ zur x-Achse.
+\end{bemerkung}
+
+\begin{theorem}
+    Die Untergruppe von $\isom(\R^n)$ der Elemente, die einen Punkt $p\in\R^n$ fixieren, ist die  Konjugierte Untergruppte $O'=t_pOt_p^{-1}\ug \isom(\R^n)$
+\end{theorem}
+\begin{proof}
+    \begin{align*}
+        f(p) = p &\Leftrightarrow t_p^{-1}f(p)=t_p^{-1}(p)=0\\
+        &\Leftrightarrow t_p^{-1}f(t_p(0))=0\\
+        &\Leftrightarrow t_p^{-1}ft_p\in O\\
+        &\Leftarrow f\in t_p O t_p^{-1}
+    \end{align*}
+\end{proof}
+
+\begin{theorem}
+    Sei $G\ug \isom(\R^n)$ eine endliche Untergrupe. So hat $G$ einen Fixpunkt.
+\end{theorem}
+\begin{proof}
+    Sei $m=|G|$, sei $G=\{f_1,\ldots,f_m\}$.
+    Sei $q\in\R^n$ beliebig.
+    Betrachte die Bilder  $q_i\defeq f_i(q)$ für $i\in 1,\ldots,m$.
+    Sei $p\defeq \frac{1}{m}(q_1+\cdots+q_m)$.
+    
+    \textbf{Behauptung:} $f_j(p)=p\quad \forall f_j\in G$. 
+    
+    Beweis: Schreibe $f_j(X)=B_jX+a_j$.
+    \begin{align*}
+        &\implies f_j(p)=B_j(\frac{1}{m}(q_1+\cdots+q_m))+a_j\\
+        &=\frac{1}{m}(B_jq_1+\cdots+B_jq_m+ma_j)\\
+        &=\frac{1}{m}((B_jq_1+a_j)+\cdots+(B_jq_m+a_j))\\
+        &=\frac{1}{m}(f_j(q_1)+\cdots+f_j(q_m))\\
+        &=\frac{1}{m}(f_jf_1(q)+\cdots+f_jf_m(q))\\
+        &\overset{(*)}{=}\frac{1}{m}(q_1+\cdots+q_m)=p\\
+    \end{align*}
+    $(*):\ \{f_1,\ldots,f_m\}=\{f_jf_1,\ldots,f_jf_m\}$
+\end{proof}
+
+\begin{corollary}
+    Sei $G\ug\isom(\R^n)$. eine endliche Untergruppe. So gibt es ein $a\in\R^n$ so dass $t_a^{-1}Gt_a\ug O$.
+\end{corollary}
+\begin{proof}
+    Sei $a\in \R^n$ der Fixpunkt von $G$. Dann ist $G\ug t_aOt_a^{-1}$
+    
+    $\implies t_a^{-1}Gt_a\ug O$.
+\end{proof}
+
+\begin{theorem}
+    Sei $n=2$ und sei $G\ug O$ eine endliche Untergruppe. 
+    So ist $G$ eine der folgenden Gruppen:
+    \begin{enumerate}[label=(\alph*)]
+        \item Die zyklische Gruppe der Ordnung $n$ erzeugt von der Drehung um den Winkel $\theta=2\pi/n$.
+        \item Die \defn{Diedergruppe } $D_n$ von Ordnung 2n erzeugt von zwei Elementen: der Drehung um den Winkel $\theta=2\pi/n$ und einer Spiegelung $S$ an einer geraden durch den Nullpunkt.
+    \end{enumerate}
+\end{theorem}
+\begin{proof}
+    \textbf{1. Fall:} Alle Elemente in $G$ sind in SO(2), d.h. Drehungen. % (orientierungserhaltend)
+    
+    \textbf{Behauptung:} $G$ ist zyklisch.
+    
+    Beweis: Falls $G$=\{1\}, klar.
+    Sonst: Sei $\theta$ der kleinste positive Drehwinkel der Elemente in $G$. Sei $d_\theta\in G$ diese Drehung.
+    
+    Z.Z: $\zykl{d_\theta}=G$.
+
+    Sei $d_\alpha\in G$ eine Drehung um den Winkel $\alpha>0$. 
+    Schreibe $\alpha=n\theta+\beta$ mit $0\leq\beta<\theta$ und $n\in\Z$.
+
+    $d+B=d_\alpha d_{-n\theta}=d_\alpha(d_\theta^{-1})^n\in G$
+    \begin{align*}
+        &\implies \beta=0\\
+        &\implies d_\alpha(d_\theta^{-1})^n=1\\
+        &\implies d_\alpha=(d_\theta)^n\in\zykl{d_\theta}
+    \end{align*}
+    Sei $n\in\N$ minimal, s.d. $n\theta\geq2\pi$.
+    
+    D.h. $2\pi\leq n\theta<2\pi+\theta$.
+    Da $\theta$ der kleinste Drehwinkel in G ist, folgt daraus:
+    $\implies 2\pi=n\theta\implies\theta=2\pi/n$.
+
+
+    \textbf{2. Fall:} $G$ enthält Spiegelung. Betrachte $\phi\colon G\to\{\pm1\}$ gegeben durch Det.
+    $\overset{1. Fall}{\implies} \ker\phi$ ist zurklisch erzeugt von Drehung $\implies G=\ker\phi+S\ker\phi$ mit $S$ Spiegelung.
+\end{proof}
 
 \end{document}

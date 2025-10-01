@@ -9,8 +9,9 @@
 \usepackage{stmaryrd}
 \usepackage{enumitem}
 \usepackage{todonotes}
-\usepackage{cleveref}
+\usepackage[nameinlink]{cleveref}
 \usepackage{parskip}
+\usepackage{tikz-cd}
 
 \crefname{section}{\S}{\S\S}
 \crefname{table}{Tab.}{}
@@ -18,7 +19,7 @@
 \crefname{algorithm}{Alg.}{}
 \crefname{equation}{Eq.}{}
 \crefname{appendix}{App.}{}
-\crefname{satz}{Satz}{}
+\crefname{theorem}{Satz}{}
 \crefname{lemma}{Lem.}{}
 \crefname{corollary}{Kor.}{}
 \crefformat{section}{\S#2#1#3} 
@@ -26,6 +27,7 @@
 \crefname{definition}{Def.}{}
 \crefname{conjectiure}{Con.}{}
 \crefname{bemerkung}{Bem.}{}
+\crefname{behauptung}{Beh.}{}
 
 \theoremstyle{plain}
 \newtheorem{definition}{Definition}
@@ -37,10 +39,11 @@
 \newtheorem{mytransform}{Transform}
 \newtheorem{claim}{Claim}
 \newtheorem{bemerkung}{Bemerkung}
+\newtheorem{behauptung}{Behauptung}
 \renewcommand{\proofname}{Beweis:}
 
-\renewcommand{\ker}{\mathop{\text{Kern}}}
-\newcommand{\bild}{\mathop{\text{Bild}}}
+\renewcommand{\ker}{\mathop{\mathrm{Kern}}}
+\newcommand{\bild}{\mathop{\mathrm{Bild}}}
 \newcommand{\defn}[1]{\textbf{#1}}
 \newcommand{\defeq}{:=}
 \newcommand{\R}{\mathbb{R}}
@@ -73,6 +76,10 @@
 \newcommand{\zykl}[1]{{<}{#1}{>}}
 \newcommand{\sym}{\mathop{\text{Sym}}}
 \newcommand{\id}{\mathrm{id}}
+\newcommand{\ggt}{\mathop{\text{ggT}}}
+\newcommand{\iso}{\simeq}
+\newcommand{\isom}{\mathop\text{Isom}}
+\newcommand{\trans}{\mathcal{T}}
 
 \title{Algebra I -- {Prof. Christian Urech}}
 \author{Mitschrift: Franz Nowak}
@@ -579,7 +586,7 @@ Dann ist $K_1K_2=abN$ (gemäss Lemma), d.h. $K_1K_2$ ist die Nebenklasse, die da
 \begin{proof}
     Das neutrale Element von $G/N$ ist $N$. $\leadsto\ker \pi=N$
 \end{proof}
-\begin{theorem}[erster Isomorphiesatz]
+\begin{theorem}[erster Isomorphiesatz]\label{stz:isoeins}
     Sei $\phi\colon G\to G'$ ein surjektiver Homomorphismus und $N:=\ker\phi$. Dann ist die Gruppe $G/N$ isomorph zur Gruppe $G'$ unter dem Homomorphismus $\overline\phi\colon G/N\to G'\quad \overline a=aN\mapsto\phi(a)$
 \end{theorem}
 \begin{proof}
@@ -600,5 +607,214 @@ Dann ist $K_1K_2=abN$ (gemäss Lemma), d.h. $K_1K_2$ ist die Nebenklasse, die da
     Inverses Element: $(a,a')^{-1}=(a^{-1},a'^{-1})$.
     Es heisst das \defn{direkte Produkt} von $G$ und $G'$.\looseness=-1
 \end{definition}
+
+
+
+\section*{Vorlesung 5}
+
+Clicker Frage: Sei $S^1 \ug \C^*$ die Untergruppe der komplexen Zahlen bestehnd aus den Elementen mit Betrag 1. Dann ist der Quotient $\C^*/S^1$ isomorph zu $\R^*_{>0}$. (Wahr)
+
+Begründung:
+Die Abbildung $\phi\colon\C^*\to R^*_{>0}, \quad z\mapsto |z|$ ist ein surjektiver Homomorphismus. 
+$\ker\phi=S^1 \overset{\text{1. Isosatz}}{\implies} C^*/S^1\iso \R^*_{>0}$
+
+Clicker Frage: Sei $G$ eine Gruppe und $H_1,H_2\ug G$ Untergruppen. Dann ist $H_1\cup H_2$ eine Untergruppe von $G$. (Wahr)
+
+Begründung:
+\begin{gather*}
+    1\in H_1\cup H_2\\
+    a,b\in H_1\cup H_2\implies ab\in H_1\cup H_2\\
+    a^{-1}\in H_1\cup H2
+\end{gather*}
+AllgemeinL Falls $H_i\ug G, i\in I$ eine Familie von Untergruppen ist, so ist $\cup_{i\in I}H_i\ug G$ eine Untergruppe (selber Beweis).
+
+\begin{definition}
+    Sei $S\subseteq G$ eine Teilmenge. Dann ist $\zykl{s}\defeq \cup_{H\ug G s.d. S\subseteq H}H$ die \defn{von $S$ erzeugte Untergruppe}.
+\end{definition}
+\paragraph{Erinnerung:} $G,G'$ Gruppen $\leadsto$ $G\times G'$ ist Gruppe mit Verknüpfung $(a,a')(b,b')=(ab,a'b')$.
+\paragraph{Bsp:} Kleinsche Vierergruppe (die "Matratzengruppe").
+$$C_2\times C_2 =\{(1,1),(1,-1),(-1,1),(-1,-1)\}$$
+\paragraph{Bsp:} $m,n>0$ s.d. $\ggt(m,n)=1$ dann ist $C_{mn}\iso C_m\times C_n$
+
+Wir haben vier Homomorphismen:
+
+% \begin{tikz}
+% $G\arrow^i G\times G' \arrow^p G$
+% $G'\arrow^i'       \arrow^p' G'$
+% See picture.
+\[
+\begin{tikzcd}[row sep=large, column sep=huge]
+G \arrow[dr,"i"] & & G \\
+& G\times G' \arrow[ur,"p"] \arrow[dr,swap,"p'"] & \\
+G' \arrow[ur,swap,"i'"] & & G'
+\end{tikzcd}
+\]
+
+\begin{align*}
+    i(x) &= (x,1)\\
+    i'(x)&=(1,x')\\
+    p(x,x')&=x\\
+    p'(x,x')&=x'
+\end{align*}
+\begin{bemerkung}
+    $i,i'$ sind injektiv, d.h. \begin{align*}
+        G\times 1&=\bild i \iso G\\
+        1\times G'&=\bild i'\iso G'
+    \end{align*}
+    $p$ und $p'$ sind surjektiv $$\ker p=1\times G', \ker p'=G\times 1$$ 
+\end{bemerkung}
+
+Sei $H$ eine Gruppe und $\phi\colon H\to G, \phi'\colon H\to G'$ Homomorphismen.
+Dann ist $\Phi\colon H\to G\times G'\quad \Phi(h)=(\phi(h),\phi'(h))$ ein Homomorphismus.
+
+Umgekehrt ist jeder Homomorphismus $\Phi\colon H\to G\times G'$ von dieser Form mit $\phi=\Phi\circ p$ und $\phi'=\Phi\circ p'$.
+\begin{bemerkung}
+    $\Phi(h)-(1,1) \Leftrightarrow \phi(h)=1$ und $\phi'(h)=1$ d.h. $\ker \Phi =\ker\phi\cup\ker\phi'$.
+\end{bemerkung}
+Seien $H,K\ug G$. Betrachte $HK=\{hk\mid h\in H, k\in K\}$. Wann ist $HK$ eine Untergruppe?
+Wann ist $\pi\colon H\times K \to G \quad \pi(h,k)=hk$ ein Homomorphismus?
+
+\begin{theorem}
+    \begin{enumerate}[label=(\alph*)]
+        \item Ist $H\cup K=\{1\}$, so ist $\pi$ injektiv.
+        \item Ist $H$ oder $K$ ein Normalteiler, so ist $HK=KH$ und $HK$ ist eine Untergruppe von $G$.
+        \item Sind $H$ und $K$ Normalteiler und gilt $H\cup K=\{1\}$ und $HK=G$ so ist $\pi\colon H\times K\to G$ ein Isomorphismus.
+    \end{enumerate}
+\end{theorem}
+\begin{proof}
+    \begin{enumerate}[label=(\alph*)]
+        \item Seien $(h_1,k_1),(h_2,k_2)\in H\times K$ s.d. $h_1k_1=h_2k_2$. 
+        \begin{align*}
+        &\implies \underbrace{k_1k_2^{-1}}_{\in K}=\underbrace{h_1^{-1}h_2}_{\in H}\overset{H\cup K =\{1\}}{=}1\\
+        &\implies k_1=k_2 \text{ und } h_1=h_2\\
+        &\implies \pi \text{ ist injektiv}.
+        \end{align*}
+        \item oBdA. $H$ ist Normalteiler. Seien $h\in H, k\in K$.
+        \begin{align*}
+            &\implies kh=\underbrace{(khk^{-1})}_{\in H}k\in HK\\
+            \implies KH\subset HK
+        \end{align*}
+        Analog: $HK\subset KH$.
+        $\implies KH=HK$.
+        Z.z: $HK$ ist Untergruppe.
+        \begin{enumerate}[label=(\roman*)]
+            \item Seien $hk, h'k'\in HK$. 
+            \begin{align*}
+                \implies (hk)(h'k')&=h\underbrace{(kh')}_{\in KH=HK}k'\\
+                &= h(h''k'')k'\\
+                &=(hh'')(k''k')\in HK
+            \end{align*}
+            \item $1\in HK$
+            \item $hk\in HK\implies (hk)=k^{-1}h^{-1}\in kh=HK$
+        \end{enumerate}
+        \item Seien $h\in H, k\in K$
+        \begin{align*}
+        &\implies \underbrace{\underbrace{(hkh^{-1})}_{\in k}k^{-1}}_{\in K} = \underbrace{h\underbrace{(kh^{-1}k^{-1})}_{\in H}}_{\in H}\\
+        &\implies hkh^-1k^-1 = 1\\
+        &\implies hk=kh\\
+        &\implies \pi(h_1,k_1)\pi(h_2,k_2) = h_1k_1h_2k_2=h)1h_2k_1k_2=\pi((h_1,k_1)(h_2,k_2))
+        \end{align*}
+        $\implies \pi$ ist Homomorphismus.
+        Gemäss (a) ist $\pi$ injetiv. Da $HK=G$ ist $\pi$ surjektiv $\implies \pi$ ist Isomorphismus.
+    \end{enumerate}
+\end{proof}
+
+\subsubsection*{Beispiele}
+\begin{itemize}
+    \item Gruppen von der Ordnung 1: nur $\{1\}$
+    \item Gruppen von der Ordnung 2: nur $C_2$
+    \item Gruppen von der Ordnung 3: nur $C_3$
+    \item Gruppen von der Ordnung 4: $C_4, C_2\times C_2$ (s. Übung).
+    \item Gruppen von der Ordnung 5: $C_5$
+\end{itemize}
+\begin{behauptung}
+    Die einzigen Gruppen von Ordnung 6 sind $C_6$ und $S_3$ (bis auf Isomorphie).
+\end{behauptung}
+\begin{proof}
+    Sei $G$ eine Gruppe mit $|G|=G$. Falls $G$ ein Element der Ordnung 6 enthält, so ist $G\iso C_6$.
+    Ansonsten 3 mögliche Fälle:
+    \begin{enumerate}[label=(\alph*)]
+        \item Alle $g\in G, g\neq 1$ haben Ordnung 2
+        \item Alle $g\in G, g\neq 1$ haben Ordnung 3
+        \item Es gibt $g\in G$ von Ordnung 2 und $h\in G$ von Ordnung 3.
+    \end{enumerate}
+    Falls (a), so ist $G$ abelsch. Sei $g\in G$ 
+    \begin{align*}
+    &\implies \zykl{g}==\{1,g\}\normal G\\
+    &\implies |G/\zykl{g}|=3\\
+    &\implies G/\zykl{g}\iso C_3
+    \end{align*}
+    $\pi\colon G\to G/\zykl{g}$ Quotient 
+    
+    $\forall g\in G$ ist $\pi(g)^2=\pi(g^2)=1$. Widerspruch zu $|G/\zykl{g}|=3$.
+    
+    Falls (b), so gilt $g=g^{-1}$ nur wenn $g=1$..
+    $\implies G=\{1,g,g^{-1}, h, h^{-1}, \ldots\}$. Nicht möglich, da $G$ eine gerade Ordnung hat.
+
+    D.h. wir sind im Fall (c). 
+    $G$ enthält $1,g,h,h^2,gh,gh^2$. (kleine Übung: Diese Elemente sind alle verschieden).
+    $\implies G=\{1,g,h,h^2,gh,gh^2\}$.
+    
+    Wir haben $hg=gh$ oder $hg=gh^2$.
+    Falls $hg=gh$, so hate $(gh)$ Ordnung 6.
+    Das haben wir aber ausgeschlossen. Also ist $hg=gh^2$.
+    
+    Die Relation $gh=h^2g$ definiert die Verknüpfung aug G eindeutig.
+    Jedes Produkt in $g$ und $h$ lässt sich mit dieser Regel in die Form $g^i h^j$ bringen, wobei $0\leq i\leq 1, 0\leq j \leq 2$.
+
+    Im Fall (c) gibt es also höchstens eine Gruppe. Diese muss $S_3$ sein.
+\end{proof}
+
+\begin{bemerkung}
+    Seien $g,h\in S_3, \quad$ mit
+    $$g\colon\begin{cases}
+    1\mapsto2\\
+    2\mapsto3\\
+    3\mapsto1
+    \end{cases}\quad
+    h\colon\begin{cases}
+        1\mapsto2\\
+        2\mapsto3\\
+        3\mapsto1
+    \end{cases}$$
+    
+    Dann ist $S_3=\{1,g,h,h^2,gh,gh^2\}$.
+    \begin{bemerkung}
+        Jede echte Untergruppe von $S_3$ ist zyklisch (da von Ordnung 2 oder 3).
+    \end{bemerkung}
+    \begin{bemerkung}
+        $A_3=\zykl{h}$
+    \end{bemerkung}
+\end{bemerkung}
+
+\subsection*{Symmetrie}
+Isometrien von $\R^n$
+\begin{definition}
+    Eine \defn{Isometrie} von $\R^n$ ist eine Abbildung $f\colon\R^n\to R^n$ von der Form $f(X)=BX+a$ wobei $B\in O(n), b\in R^n$. Wir bezeichnen mit $\isom(\R^n)$ die Gruppe der Isometrien von $\R^n$.
+\end{definition}
+\begin{bemerkung}
+    Man kann zeigen, dass Isometrien genau die Abbildungen $\R^n\to R^n$ sind, welche die Distanzen erhalten.
+\end{bemerkung}
+Zwei wichtige Untergruppen: 
+\begin{enumerate}[label=(\arabic*)]
+    \item $\trans_n\ug\isom(\R^n$: Die Untergruppe der \defn{Translationen}, d.h. Abbildung on der Form $t_a\colon X\mapsto X + a$ für $a\in R^n$. Es gilt $t_at_{a'}=t_{a+a'}$.
+    \item $O \ug \isom(\R^n)$: Die Untergruppe der Isometrien von der Form $d_B\colon X\mapsto BX$ für $B\in O(n)$. Es gilt $d_Bd_{B'}=d_{BB'}$.
+\end{enumerate}
+Jedes $f\in \isom(\R^n)$ lässt sich eindeutig schreiben als $t_ad_B$ für $B\in O(n), a\in \R^n$.
+Falls $f(X)=BX+a, g(X)=B'X+a'$, dann ist \begin{align*}
+    f\circ g(X)&=B(B'X+a')+a\\
+    &= BB'X + Ba'+a
+\end{align*}.
+d.h. falls $F=t_ad_B, g=t_{a'}+d_{B'}$, so ist 
+\begin{align*}
+    f\circ g&=t_ad_Bt_{a'}d_{B'}\\
+    &=t_{Ba'+a}d_{BB'}.
+\end{align*}
+Wir haben also insbesondere Homomorphismus $\psi \colon\isom(R^n)\to O, \psi(t_ad_B)=d_B$.
+
+$\ker\psi=\trans_n$.
+\begin{bemerkung}
+    Die Abbildung $\isom(R^n)\to\trans_n, t_ad_B\mapsto t_a$ ist kein Homomorphismus.
+\end{bemerkung}
 
 \end{document}

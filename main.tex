@@ -80,6 +80,7 @@
 \newcommand{\iso}{\simeq}
 \newcommand{\isom}{\mathop\text{Isom}}
 \newcommand{\trans}{\mathcal{T}}
+\newcommand{\operateson}{\curvearrowright}
 
 \title{Algebra I -- {Prof. Christian Urech}}
 \author{Mitschrift: Franz Nowak}
@@ -692,9 +693,9 @@ Wann ist $\pi\colon H\times K \to G \quad \pi(h,k)=hk$ ein Homomorphismus?
         \item oBdA. $H$ ist Normalteiler. Seien $h\in H, k\in K$.
         \begin{align*}
             &\implies kh=\underbrace{(khk^{-1})}_{\in H}k\in HK\\
-            \implies KH\subset HK
+            \implies KH\subseteq HK
         \end{align*}
-        Analog: $HK\subset KH$.
+        Analog: $HK\subseteq KH$.
         $\implies KH=HK$.
         Z.z: $HK$ ist Untergruppe.
         \begin{enumerate}[label=(\roman*)]
@@ -943,7 +944,205 @@ Falls $B\in  \begin{pmatrix}1&0\\0&-1\end{pmatrix} \begin{pmatrix}
 
 
     \textbf{2. Fall:} $G$ enthält Spiegelung. Betrachte $\phi\colon G\to\{\pm1\}$ gegeben durch Det.
-    $\overset{1. Fall}{\implies} \ker\phi$ ist zurklisch erzeugt von Drehung $\implies G=\ker\phi+S\ker\phi$ mit $S$ Spiegelung.
+    $\overset{1. Fall}{\implies} \ker\phi$ ist zyklisch erzeugt von Drehung $\implies G=\ker\phi+S\ker\phi$ mit $S$ Spiegelung.
 \end{proof}
 
+\section*{Vorlesung 7}
+
+$|D_3|=6$ und $D_3$ ist nicht zyklisch $\implies 
+D_3\iso S_3$ 
+
+Die Diedergruppe $D_n$ von Ordnung $2n$ enthält die Symmetrien vom n-gon.
+
+$D_n\subseteq\isom(\R^2)$ bestehend aus allen $g\in \isom(R^2)$ s.d. $gP=P$.
+
+
+\begin{bemerkung}
+    Sei $x$ eine Drehung um den Winkel $2\pi/ n$ 
+    $\implies \ord x=n$
+    
+    Sei $y$ eine Spiegelung $\implies \ord y =2$.
+    Dann ist $xy$ wieder eine Spiegelung.
+    \begin{align*}
+        &\implies 1=(xy)^2=xyxy\\
+        &\implies xy=yx^{-1}=yx^{n-1}
+    \end{align*}
+    Dies definiert alle Relationen in $D_n$.
+\end{bemerkung}
+
+\begin{theorem}
+    $D_n$ ist erzeugt von zwei Elementen $x,y$, die die Relationen $x^n=1, y^2=1, xy=yx^{-1}$ erfüllen, d.h. 
+    $$D_n=\{1,x,\ldots,x^{n-1},y,xy,\ldots,x^{n-1}y\}$$
+\end{theorem}
+
+Wir überspringen die unendlichen diskreten Untergruppen der \defn{Gitter} (siehe Artin).
+
+\subsection*{Gruppenoperationen}
+Gruppe der Gruppenautomorphismen.
+
+\begin{definition}
+    Sei $G$ eine Gruppe und $X$ eine Menge. Eine \defn{(Links-)Operation} oder \defn{Aktion} oder \defn{Wirkung} von $G$ auf $X$ ist eine Abbildung 
+    $$G\times X\to X\quad (g,x)\mapsto gx$$
+    so dass 
+    \begin{enumerate}[label=(\alph*)]
+        \item $1x=x\quad \forall x\in X$
+        \item $(gg')x=g(g(g'x)\quad \forall g\in G, x\in X$
+    \end{enumerate}
+    $X$ heisst \defn{G-Menge}. Wir schreiben $G \operateson X$ für "$G$ operiert auf $X$.
+\end{definition}
+Für jedes $g\in G$ erhalten wir eine Abbildung
+$$m_g\colon X\to X\quad m_g(x)=gx$$
+$m_g$ heisst \defn{Linksmultiplikation} mit $g$.
+\begin{bemerkung}
+    $m_g$ ist bijektiv und $(m_g)^{-1}=m_{g^{-1}}$.
+\end{bemerkung}
+\begin{proof}
+    \begin{align*}    
+        m_{g^{-1}}(m_g(x))&=g^{-1}(gx)\\
+        &=g^{-1}gx =1x=x
+    \end{align*}
+    Analog: $m_g(m_{g^{-1}}(x))=x$
+\end{proof}
+\begin{definition}
+    Für zwei $x\in X$ ist die \defn{Bahn} oder das \defn{Orbit} von $x$:
+    $$B_x\defeq\{y\in X\mid y=gx\text{ für ein } g\in G\} = Gx$$
+\end{definition}
+
+\begin{bemerkung}
+    Für $x,y\in X$ definieren wir $x\sim y$ falls $y=gx$ für ein $g\in G$.
+    Dann ist $\sim$ eine Äquivalenzrelation (kleine Übung) und die Bahnen sind genau die Äquivalenzklassen von $\sim$.
+\end{bemerkung}
+\begin{beispiel}
+    \begin{itemize}
+        \item $\isom(\R^2)$ operiert auf $R^2$. (Hat nur einen Orbit)
+        \item Sei $D=\{\text{Dreiecke in }\R^2\}$
+        $\isom(\R^2)$ operiert auf $D$.
+        \item Zwei Dreiecke $\Delta, \Delta'$ sind \defn{kongruent}, falls es ein $g\in\isom(\R^2)$ gibt, so dass $g\Delta = \Delta'$. Die Bahn $B_\Delta$ ist die Menge aller zu $\Delta$ kongruenten Dreiecke.
+    \end{itemize}
+\end{beispiel}
+\begin{definition}
+    Eine Operation $G\operateson X$ heisst \defn{transitiv}, falls es nur eine Bahn gibt. D.h. $$\forall x,x'\in X\ \exists g\in G \text{ s.d. } gx=x'$$
+\end{definition}
+\begin{definition}
+    Der \defn{Stabilisator} von $x\in X$ ist $G_x\defeq \{ g\in G\mid gx=x\}$
+\end{definition}
+\begin{bemerkung}
+    $G_x\ug G$ ist eine Untergruppe.
+\end{bemerkung}
+\begin{bemerkung}
+    Für $g,h\in G$ gilt: 
+    \begin{align*}
+    gx=hx &\Leftrightarrow h^{-1}gx=x\\
+    &\Leftrightarrow h^{-1}g\in G_x
+    \end{align*}
+\end{bemerkung}
+
+\begin{beispiel}
+    \begin{itemize}
+        \item $\isom(\R^2)\operateson\R^2$ Der Stabilisator von O ist die Untergruppe $O\ug\isom(\R^2)$. $O\iso O(2)$.
+        \item $\isom(R^2)\operateson D$. Sei $\Delta$ ein gleichseitiges Dreieck. Dann ist der Stabilisator von $\Delta$ isomorph zu der Diedergruppe $D_3$ von Ordnung 6.
+    \end{itemize}
+\end{beispiel}
+
+\subsection*{Operation auf Nebenklassen}
+\paragraph{Beobachtung:} $H\ug G \leadsto G$ operiert auf $G/H$.
+
+Für $K\in G/H$ definieren wir 
+$$gK \defeq \{gk\mid k\in K\}$$
+Das heisst, falls $K=aH$, so ist $gK=gaH$.
+
+\begin{bemerkung}
+    \begin{itemize}
+        \item Diese Operation ist transitiv, denn $B_H=G/H$.
+        \item Sei $g\in G$, dann gilt $gH=H\Leftrightarrow g\in H$. D.h., der Stabilisator von $H$ ist $H$: $D_H=H$.
+    \end{itemize}
+\end{bemerkung}
+\begin{beispiel}
+    $D_3$, erzeugt von $x,y$ und $x^3=y^2=1$ sowie $yx=x^2y$.
+    Sei $H=\zykl{y}=\{1,y\}.$
+    Nebenklassen:
+    \begin{align*}
+        K_1&=\{1,y\}\\
+        K_2&=\{x,xy\}\\
+        K_3&=\{x^2,x^2y\}\\
+        G/H&=\{K_1,K_2,K_3\}
+    \end{align*}
+
+    \paragraph{Beobachtung:} $m_x\colon G/H\to G/H\quad K_i\mapsto xK_i,\quad i\in\{1,2,3\}$
+    $$m_x\colon\begin{cases}
+        K_1\mapsto K_2\\
+        K_2\mapsto K_3\\
+        K_3\mapsto K_1
+    \end{cases} \qquad m_y\colon\begin{cases}
+        K_1\mapsto K_1\\
+        K_2\mapsto K_3\\
+        K_3\mapsto K_2
+    \end{cases}$$
+    $\leadsto$ Wir erhalten einen Isomorphismus $G\xrightarrow{\sim} \sym(G/H)\quad g\mapsto m_g$
+\end{beispiel}
+\begin{theorem}\label{stz:bahn}
+    Sei $X$ eine $G-Menge$ und $x\in X$. Sei $H=G_x \ug G$. Dann ist die Abbildung
+    $$\phi\colon G/H \to B_x \quad aH\mapsto ax$$
+    eine Bijektion und $\forall K\in G/H$ und $\forall g\in G$ gilt $\phi(gK)=g\phi(K)$.
+\end{theorem}
+\begin{proof}
+    \begin{itemize}
+        \item $\phi$ ist wohldefiniert. Seien $a,b\in G$ s.d. $aH=bH\Leftrightarrow b=ah$ für ein $h\in H \implies bx=a\underbrace{hx}_x =ax$.
+        \item $\phi$ ist surjektiv: klar, da $B_x$ genau aus den Elementen der Form $ax$ besteht, $a\in G$.
+        \item $\phi$ ist inketiv: falls $ax=bx \implies x=a^{-1}bx\implies a^{-1}b\in H\implies aH=bH$. 
+        \item Die letzte Aussage folgt aus der Definition von $\phi$.
+    \end{itemize}
+\end{proof}
+\begin{bemerkung}
+    Sei $x\in X$ und $y=ax$ für $a\in G$. Dann
+    \begin{enumerate}[label=(\alph*)]
+        \item $\{g\in G\mid gx=y\}=aG_x$
+        \item $G_y=aG+xa^{-1}$
+    \end{enumerate}
+\end{bemerkung}
+\begin{proof}
+    \begin{enumerate}[label=(\alph*)]
+        \item $gx=y=ax \Leftrightarrow a^{-1}g\in G_x\Leftrightarrow g\in aG_x$
+        \item \begin{align*}
+            gy=y&\Leftrightarrow gax=ax\\
+            &\Leftrightarrow a^{-1}yax=x\\
+            &\Leftrightarrow a^{-1}ya\in G_x\\
+            &\Leftrightarrow g\in aG_xa^{-1}
+        \end{align*}
+    \end{enumerate}
+\end{proof}
+\begin{corollary}[Bahnformel]
+    $|G|=|G_x|\cdot|B_x|$
+
+    (Ordnung G)=(Ordnung des Stabilisators)$\cdot$(Ordnung der Bahn)
+\end{corollary}
+\begin{proof}
+    Wir haben $|G|=|G_x|\cdot [G:G_x]$.
+    Die Bahnformel folgt nun direkt aus \cref{stz:bahn}.
+\end{proof}
+\begin{bemerkung}
+\begin{itemize}
+    \item Es folgt direkt, dass $|Bx|=[G:G_x]$. Die Länge jeder Bahn muss die Gruppenordnung teilen.
+    \item Falls $X$ endlich ist: Seien $B_1,\ldots,B_k$ die Bahnen. Dann ist $$|X| = |B_1|+\cdots+ |B_k|$$.
+\end{itemize}
+\end{bemerkung}
+\subsubsection*{Beispiel: Dodekaeder}
+    $D\subseteq R^3 $ Dodekaeder.
+    Sei $G\ug \isom{\R^3}$ die orientierungserhaltenden Symmetrien $g$, so dass $gD=D$. D.h., die Elemente in $G$ sind gegeben durch Matrizen in $SO(3)$. Diese sind Drehungen um Achsen. Was ist $|G|^2$?
+
+    $G$ operiert auf den Seiten von $D$. Sei $S$ eine Seite. $G_S$ besteht aus den Drehungen um Vielfache von $2\pi/5$.
+    
+    $\implies |G_S|=5$. 
+
+    $G$ operiert transitiv auf den Seiten. Es gibt 12 Seiten.
+
+    $\implies |G|=|G_S|\cdot 12=60$.
+    
+    $G_S$ fixiert zwei Seiten $\leadsto$ zwei Bahnen von Länge 1 + zwei von Länge 5.
+
+    $\leadsto 1+1+5+5 = 12$
+
+\begin{definition}
+    $G$ heisst die \defn{Ikosaeder Gruppe}.
+\end{definition}
 \end{document}

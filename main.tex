@@ -49,6 +49,7 @@
 \newcommand{\R}{\mathbb{R}}
 \newcommand{\C}{\mathbb{C}}
 \newcommand{\Z}{\mathbb{Z}}
+\newcommand{\F}{\mathbb{F}}
 \newcommand{\norm}[1]{||#1||}
 \newcommand{\vu}{\boldsymbol{u}}
 \newcommand{\vv}{\boldsymbol{v}}
@@ -79,6 +80,7 @@
 \newcommand{\ggt}{\mathop{\text{ggT}}}
 \newcommand{\iso}{\simeq}
 \newcommand{\isom}{\mathop\text{Isom}}
+\newcommand{\aut}{\mathop\text{Aut}}
 \newcommand{\trans}{\mathcal{T}}
 \newcommand{\operateson}{\curvearrowright}
 
@@ -1145,4 +1147,107 @@ Das heisst, falls $K=aH$, so ist $gK=gaH$.
 \begin{definition}
     $G$ heisst die \defn{Ikosaeder Gruppe}.
 \end{definition}
+
+
+\section*{Vorlesung 8}
+\begin{theorem}
+    Sei $G$ eine Gruppe, $H\ug G, K\ug G$ Untergruppen. Dann gilt $[H:H\cap K]\ug [G:K]$.
+\end{theorem}
+\begin{proof}
+    Sei $X=G/K$ und sei $x=K\in X$. D.h. $|X|=[G:K]$ und $G\operateson X$. Dann ist $G_x=K$.
+    Betrachte die Operation $H\operateson X$. Dann ist $H_x=H\cap K$. Sei $B$ die Bahn von $x$ unter $H$. Dann ist $|B|\ug|X|$. Gemäss Bahnformel ist $|B|=[H:H\cap K] \implies [H:H\cap K]\ug |X|=[G:K]$.
+\end{proof}
+
+Sei $X$ eine Menge und $G$ eine Gruppe. Jede Operation $G\operateson X$ liefert einen Homomorphismus $\phi\colon G\to \sym(X)\quad \phi(g)\defeq m_g$.
+
+$\phi$ ist tatsächlich ein Homomorphismus:
+
+$\phi(gh)=m_{gh}$
+
+$\phi(g)\phi(h)=m_gm_h$ und $m_gh(x)=(gh)x=g(hx)=m_g(m_h(x)) \quad \forall x\in X$.
+
+d.h. $\phi(gh)=\phi(g)\phi(h)$.
+
+Umgekehrt definiert jeder Homomorphismus $\phi\colon G\to\sym(X)$ eine Operation $G\operateson X$ durch $gx\defeq \phi(g)(x)$.
+
+Mit dieser Beobachtung zeigt man:
+\begin{theorem}
+    Es gibt eine Bijektion
+    $$\{\text{Operationen } G\operateson X\} \leftrightarrow\{\text{Homomorphismen } G\to \sym(X)\}$$
+    $$G\operateson X \mapsto \phi\colon G\to \sym(X) \quad g\mapsto m_g$$
+\end{theorem}
+
+\begin{definition}
+    Eine Operation $G\operateson X$ heisst \defn{treu}, falls der entsprechende Homomorphismus $\phi\colon G\to \sym(X)$ injektiv ist.
+    D.h., falls für ein $g\in G$ gilt $gx=x\quad \forall x$, dann ist $g=1$.
+\end{definition}
+\begin{theorem}
+    Sei $\F_2$ der Körper mit 2 Elementen. Dann ist $G=GL_2(\F_2)$ isomorph zu $S_3$.
+\end{theorem}
+\begin{proof}
+    Sei $V=\F_2^2$, $V=\{0,e_1,e_2,e_1+e_2\}$.
+
+    $G\operateson V$ durch Linksmultiplikation. 0 ist Fixpunkt.
+    $\{e_1, e_2, e_1+e_2\}$ bildet eine weitere Bahn.
+    Das gibt einen Homomorphismus $\phi\colon G\to S_3$.
+    Für $P\in GL_2(\F_2)$ s.d. $Pe_1=e_1$ und $Pe_2=e_2 \Leftrightarrow P=1$, d.h. Diese Operation ist treu und somit effektiv.
+    $G$ ist nicht abelsch $\implies |G| \geq 6$. 
+    $\implies \phi$ ist ein Isomorphismus.
+\end{proof}
+\begin{theorem}
+    Für $g\in S_3$ sei $k_g:S_3\to S_3\quad k_g(a)=gag^{-1}$ ist ein Automorphismus von $S_3$.
+    Dann ist $f\colon S^3\to\aut(S_3)\quad f(g)=k_g$ ein Isomorphismus.\footnote{Gilt für fast alle symmetrischen Gruppen 
+    % (ausser $S_6$)
+    .}
+\end{theorem}
+\begin{proof}
+\begin{itemize}
+    \item $f$ ist Homomorphismus:
+    \begin{align*}
+        k_{gh}(x)&=(gh)x(gh)^{-1}\\
+        &=ghxh^{-1}g^{-1}\\
+        &k_gk_h(x)
+    \end{align*}
+    D.h. $k_{gh}-k_gk_h$.
+    $\implies f(gh)=f(g)f(h)$.
+    \item $f$ ist injektiv:
+    Falls $gag^{-1}=a\quad \forall a\in S_3$ so ist $g=1$ (kleine Übung).
+    \item $f$ ist surjektiv: Beobachtung: $\aut(S_3)$ operiert auf die Menge der Elemente von Ordnung 2 $\{y, xy, x^2y\}$:
+    $$y\colon\begin{cases}
+        1\mapsto 2\\
+        2\mapsto 1\\
+        3\mapsto 3
+    \end{cases}\qquad
+    x\colon\begin{cases}
+        1\mapsto 2\\
+        2\mapsto 3\\
+        3\mapsto 1
+    \end{cases}
+    $$
+    \item Die Operation $\aut(S_3)\operateson \{y,xy,x^2y\}$ ist treu:
+    Falls $\alpha\in \aut(S_3)$ s.d. $\alpha(y)=y$ und $\alpha(xy)=xy$, so ist auch $\alpha(x)=\alpha(xyy0=xyy=x$. Da $x$ und $y$ $S_3$ erzeugen, ist $\alpha=id$.
+    
+    D.h., die Abbildung $\aut(S_3)\to\sym(\{y,xy,x^2y\})$ ist injektiv 
+    \begin{align*}
+    &\implies|\aut(S_3)|\ug 6\\
+    &\implies |\aut(S_3)|=6\\
+    &\implies S_3\to \aut(S_3) \text{ ist bikektiv, d.h. ein Isomorphismus.}
+    \end{align*}
+\end{itemize}
+\end{proof}
+
+\begin{theorem}
+    Die endlichen Untergruppen von $SO(3)$ sind die folgenden:
+    \begin{itemize}
+        \item $C_k$: Die zyklische Gruppe der Drehungen um Vielfache von $2\pi/k$ um eine Achse.
+        \item $D_k$: Die Diedergruppe, also die Symmetrien eines regelmässigen k-Ecks in einer Ebene gegeben durch räumliche Drehungen.
+        \item $T$: Die Tetraedergruppe, also die 12 Drehungen, die ein Tetraedron erhalten.
+        \item $W$: Die Würfelgruppe, also die 24 Drehungen, die den Würfel erhalten.
+        \item $I$: Ikosaedergruppe, also die 60 Drehungen, die ein Dodekaeder/Ikosaeder erhalten.
+    \end{itemize}
+\end{theorem}
+\begin{proof}
+    Siehe Artin.
+\end{proof}
+
 \end{document}

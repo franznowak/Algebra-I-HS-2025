@@ -1,12 +1,15 @@
 \documentclass{article}
 
 \usepackage{graphicx}
-\usepackage{amsfonts}
+
 \usepackage{amsmath}
-\usepackage{amssymb}
-\usepackage{amsthm}
 \usepackage{mathtools}
+\usepackage{amsfonts}
+\usepackage{amsthm}
+
 \usepackage{stmaryrd}
+\usepackage{amssymb}
+
 \usepackage{enumitem}
 \usepackage{todonotes}
 \usepackage[nameinlink]{cleveref}
@@ -1249,5 +1252,174 @@ Mit dieser Beobachtung zeigt man:
 \begin{proof}
     Siehe Artin.
 \end{proof}
+
+\section*{Vorlesung 9}
+
+\subsection*{Mehr über Gruppen}
+Eine Gruppe operiert auf sich selbst durch Linksmultiplikation:
+$$G\times G \to G \qquad (g,x) \mapsto gx$$.
+Diese Operation ist transitiv.
+Sei $x\in G$, dann ist der Stabilisator $G_x=\{1\}$.
+Insbesondere ist der Homomorphismus injektiv: 
+$$G\to\sym(G)\qquad g\mapsto m_g$$
+$\implies$ die Operation ist treu.
+
+\begin{theorem}[Cayley]
+    Sei $G$ eine endliche Gruppe. Dann ist $G$ isomorph zu einer Untergruppe von $S_n$, wobei $n=|G|$.
+\end{theorem}
+\begin{proof}
+    Der Homomorphismus $$\phi\colon G\to\sym(G) \iso S_n \qquad g\mapsto m_g$$ ist injektiv.
+    $\implies G$ ist isomorph zu $\bild\phi\ug\sym(G)\iso S_n$.
+\end{proof}
+G operiert auch auf sich selbst durch Konjugation:
+$$G\times G \to G \qquad (g,x)\mapsto gxg^{-1}$$
+Sei $x\in G$.
+\begin{definition}
+    Der Stabilisator von $x$ bezüglich Konjugation heisst \defn{Zentralisator}.
+    Wir schreiben $Z(x)$ mit
+    \begin{align*}
+    Z(x) &= \{g\in G\mid gxg^{-1}=x\}\\
+    &= \{g\in G\mid gx=xg\}
+    \end{align*}
+    Die Bahn von $x$ unter Konjugation heisst \defn{Konjugiertenklasse} oder \defn{Konjugationsklasse} von $x$ in $G$.
+    Wir schreiben $K(x)$ mit
+    $$K(x)=\{x'\in G\mid x'=gxg^{-1} \text{ für ein } g\in G\}$$
+\end{definition}
+\begin{bemerkung}
+    \quad
+    \begin{itemize}
+        \item Aus der Bahnformel folgt $|G| = |K(x)||Z(x)|$.
+        \item $|K(1)| = 1$.
+    \end{itemize}
+\end{bemerkung}
+Falls $|G|$ endlich ist, so gilt die sog. \defn{Klassengleichung}:
+$$|G|=\sum\limits_{K \text{ Konj. klasse}}|K| = |K_1|+\cdots+|K_l|$$ 
+\begin{bemerkung}
+    Die Zahlen auf der rechten Seite sind Teiler von $|G|$ und mindestens eine davon ist $1$.
+\end{bemerkung}
+\begin{beispiel}
+    Konjugiertenklassen in $D_3$. Erzugende: $x$ (Drehung) und $y$ (Spiegelung).
+    $\{1\}, \{x, x^2\}, \{y,xy,x^y\}$. (Kleine Übung).
+    $\xrightarrow{\text{Klassengleichung}} |G| = 1+2+3$.
+\end{beispiel}
+\begin{definition}
+    Das \defn{Zentrum} $Z$ einer Gruppe $G$ ist der Normalteiler 
+    $$Z = \{x\in G\mid gx=xg\quad \forall g\in G\}$$
+\end{definition}
+\begin{bemerkung}
+    \quad
+    \begin{itemize}
+        \item $x\in Z \Leftrightarrow Z(x) = G$
+        \item $x\in Z\Leftrightarrow |K(x)|=1$
+    \end{itemize}
+\end{bemerkung}
+\begin{definition}
+    Sei $p$ eine Primzahl. Eine \defn{p-Gruppe} ist eine Gruppe $G$, sodass $|G|=p^e$ für ein $e\geq1$.
+\end{definition}
+\begin{beispiel}
+    \quad
+    \begin{itemize}
+        \item $C_p, C_{p^2}, C_{p^3}, \ldots$ sind p-Gruppen
+        \item $C_p \times C_p \times \cdots \times C_p$
+        \item $U_3(\F_p)=\left\{\begin{pmatrix}
+            1&a&b\\
+            0&1&c\\
+            0&0&1
+        \end{pmatrix}\mid a,b,c\in \F_p\right\} \ug GL_3(\F_p)$ ist eine p-Gruppe von Ordnung $p^3$.
+    \end{itemize}
+\end{beispiel}
+\begin{theorem}
+    Das Zentrum von einer p-Gruppe ist strikt grösser als die triviale Gruppe $\{1\}$.
+\end{theorem}
+\begin{proof}
+    Klassengleichung:
+    $$|G|=p^e=\sum\limits_{K Konj.klassen}|K|=1+\sum\limits_{K Konj.klassen}|K|$$
+    alle $|K|$ sind Teiler von $p^e$.
+    
+    $\implies$ es gibt weitere Konjugiertenklassen mit nur einem Element.
+    
+    $\implies$ es gibt $x\in G\backslash \{1\}$ sodass $x\in Z$.
+\end{proof}
+\begin{beispiel}
+    Das Zentrum von $U_3(\F_p)$ ist die Untergruppe 
+    $$\left\{\begin{pmatrix}
+            1&0&c\\
+            0&1&0\\
+            0&0&1
+        \end{pmatrix}\mid c\in \F_p\right\}\iso\F_p$$
+\end{beispiel}
+\begin{theorem}
+    Sei $G$ eine p-Gruppe und $X$ eine endliche Menge, sodass $p\nmid |X|$.
+    Falls $G \operateson X$, dann gibt es ein $x\in X$ sodass $gx=x\quad \forall g\in G$.
+\end{theorem}
+\begin{proof}
+    Seien $B_1,\ldots,B_k$ die Bahnen von $G$. Dann ist $|X|=|B_1|+\ldots+|B_k|$.
+    Gemäss Bahnformel gilt $|B_i|\big{|} |G_i|\quad \forall i=1,\ldots, k$.
+    Da $p\nmid |X|$, ist $|B_i|=1$ für mindestens ein $i$.
+\end{proof}
+
+\begin{theorem}
+    Jede Gruppe $G$ der Ordnung $p^2$ ist abelsch.
+\end{theorem}
+\begin{proof}
+    Nehmen wir an, dass $G$ nicht abelsch ist. 
+    Dann gibt es ein $x\in G$, sodass $x\notin Z$ und somit $Z\subsetneq Z(x)$.
+    Wir wissen, dass $|Z|\geq p$.
+    Da $|Z(x)|\big{|}|G|$, d.h.  $|Z(x)|=p^2$
+    $\implies Z(x)=G$, damit folgt aber, dass $x\in Z\quad \lightning$.
+
+    $\implies G$ ist abelsch.
+\end{proof}
+\begin{bemerkung}
+    Es gibt nichtabelsche Gruppen von Ordnung $p^3$, z.B. $|U_3(\F_p)| = p^3$ und $|D_4| = 8 = 2^3$.
+\end{bemerkung}
+\begin{corollary}
+    Sei $G$ eine Gruppe mit $p^2$ Elementen. Dann ist entweder $G\iso C_{p^2}$ oder $G \iso C_p\times C_p$.
+\end{corollary}
+\begin{proof}
+    Jedes Element in $G$ hat Ordnung $1, p$ oder $p^2$.
+    \paragraph{1. Fall:} $G$ enthält ein Element von Ordnung $p^2$. $\implies G$ ist zyklisch.
+    \paragraph{2. Fall:} Alle Elemente in $G\backslash\{1\}$ haben Ordnung $p$.
+    Sei $x\in G\backslash\{1\}$ und $H_1=\zykl{x}$. Sei $y\in G\backslash H$, und $H_2=\zykl{y}$
+    Dann ist $H_1\cap H_2 \lneq H_2$
+    und somit $H_1 \cap H_2 = \{1\}$.
+
+    $G$ ist abelsch $\implies H_1$ und $H_2$ sind Normalteiler.
+    $\implies H_1H_2 \ug G$.
+
+    Da $H_1 \lneq H_1H_2$ ist, ist $|H_1H_2|=p^2$ $\implies H_1H_2=G$.
+    Wir haben gesehen, dass daraus folgt:
+    $$G\iso H_1\times H_2$$
+\end{proof}
+
+\subsection*{Ikosaedergruppe}
+Erinnerung: $I\ug SO(3)$ die Untergruppe der Drehungen, die das Dodekaeder $D\subset R^3$ erhalten.
+
+Gesehen: $|I|=60$
+\begin{itemize}
+    \item Identität (Ord. 1)
+    \item Drehungen, die Eckpunkte von $D$ fixieren: Es gibt 20 Ecken, also 10 Drehachsen $\implies 2\cdot 10 = 20$ solche Drehungen $\neq \id$. (Ord. 3) Sind alle konjugiert zueinander (s. unten).
+    \item Drehungen um Mittelpunkte von Seiten. Es gibt 12 Flächen, also 6 mögliche Drehachsen.$\implies 6{\cdot} 4 = 24$ solche Drehungen $\neq \id$. (Ord. 5)
+    \item Drehungen um Mittelpunkte von Kanten. Es gibt 30 Kanten, also 15 mögliche Drehachsen. $\implies 15$ solche Drehungen. (Ord. 2)
+\end{itemize}
+$60=1+20+24+15$
+$\leadsto$ Das sind alle möglichen Elemente in $I$.
+
+Was sind die Konjugationsklassen?
+
+\begin{bemerkung}
+    Seien $g,x\in G$, so ist $\ord(gxg^{-1})=\ord(x)$.
+\end{bemerkung}
+
+\begin{itemize}
+    \item Die Identität bildet eine Konjugationsklasse.
+    \item Alle Rotationen um $2\pi/3$ (im Gegenuhrzeigersinn) um Achsen durch Ecken sind konjugiert.
+    \item Alle Rotationen um $2\pi/5$ um Achsen durch Seiten sind konjugiert zueinander und zu den Rotationen um den Winkel $-2\pi/5 = 8\pi/5$.
+    \item Alle Rotationen um Achsen durch Seiten um $4\pi/5$ und um $-4\pi/5$=$6\pi/5$. sind konjugiert.
+    \item Alle Rotationen um Achsen durch Kanten um den Winkel $\pi$ sind konjugiert.
+\end{itemize}
+$\implies 5$ Konjugationsklassen.
+Klassengleichung: $60=1+20+12+12+15$.
+
 
 \end{document}

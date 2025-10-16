@@ -632,10 +632,10 @@ Begründung:
     a,b\in H_1\cap H_2\implies ab\in H_1\cap H_2\\
     a^{-1}\in H_1\cap H2
 \end{gather*}
-AllgemeinL Falls $H_i\ug G, i\in I$ eine Familie von Untergruppen ist, so ist $\cap_{i\in I}H_i\ug G$ eine Untergruppe (selber Beweis).
+AllgemeinL Falls $H_i\ug G, i\in I$ eine Familie von Untergruppen ist, so ist $\bigcap\limits_{i\in I}H_i\ug G$ eine Untergruppe (selber Beweis).
 
 \begin{definition}
-    Sei $S\subseteq G$ eine Teilmenge. Dann ist $\zykl{s}\defeq \cap_{H\ug G s.d. S\subseteq H}H$ die \defn{von $S$ erzeugte Untergruppe}.
+    Sei $S\subseteq G$ eine Teilmenge. Dann ist $\zykl{s}\defeq \bigcap\limits_{\substack{H\ug G \\s.d. S\subseteq H}}H$ die \defn{von $S$ erzeugte Untergruppe}.
 \end{definition}
 \paragraph{Erinnerung:} $G,G'$ Gruppen $\leadsto$ $G\times G'$ ist Gruppe mit Verknüpfung $(a,a')(b,b')=(ab,a'b')$.
 \paragraph{Bsp:} Kleinsche Vierergruppe (die "Matratzengruppe").
@@ -1298,7 +1298,7 @@ $$|G|=\sum\limits_{K \text{ Konj. klasse}}|K| = |K_1|+\cdots+|K_l|$$
     Die Zahlen auf der rechten Seite sind Teiler von $|G|$ und mindestens eine davon ist $1$.
 \end{bemerkung}
 \begin{beispiel}
-    Konjugiertenklassen in $D_3$. Erzugende: $x$ (Drehung) und $y$ (Spiegelung).
+    Konjugationsklassen in $D_3$. Erzugende: $x$ (Drehung) und $y$ (Spiegelung).
     $\{1\}, \{x, x^2\}, \{y,xy,x^y\}$. (Kleine Übung).
     $\xrightarrow{\text{Klassengleichung}} |G| = 1+2+3$.
 \end{beispiel}
@@ -1336,7 +1336,7 @@ $$|G|=\sum\limits_{K \text{ Konj. klasse}}|K| = |K_1|+\cdots+|K_l|$$
     $$|G|=p^e=\sum\limits_{K Konj.klassen}|K|=1+\sum\limits_{K Konj.klassen}|K|$$
     alle $|K|$ sind Teiler von $p^e$.
     
-    $\implies$ es gibt weitere Konjugiertenklassen mit nur einem Element.
+    $\implies$ es gibt weitere Konjugationsklassen mit nur einem Element.
     
     $\implies$ es gibt $x\in G\backslash \{1\}$ sodass $x\in Z$.
 \end{proof}
@@ -1393,7 +1393,7 @@ $$|G|=\sum\limits_{K \text{ Konj. klasse}}|K| = |K_1|+\cdots+|K_l|$$
 \end{proof}
 
 \subsection*{Ikosaedergruppe}
-Erinnerung: $I\ug SO(3)$ die Untergruppe der Drehungen, die das Dodekaeder $D\subset R^3$ erhalten.
+Erinnerung: $I\ug SO(3)$ die Untergruppe der Drehungen, die das Dodekaeder $D\subseteq R^3$ erhalten.
 
 Gesehen: $|I|=60$
 \begin{itemize}
@@ -1421,5 +1421,81 @@ Was sind die Konjugationsklassen?
 $\implies 5$ Konjugationsklassen.
 Klassengleichung: $60=1+20+12+12+15$.
 
+\section*{Vorlesung 10}
+\subsection*{Einfache Gruppen}
+\begin{definition}
+    Eine Gruppe $G$ ist \defn{einfach}, falls $\{1\}$ und $G$ die einzigen Normalteiler von $G$ sind.
+\end{definition}
+\begin{bemerkung}
+    $G$ ist einfach $\Leftrightarrow$ für alle surjektiven Homomorphismen $\phi\colon G\to G'$ gilt $G=G'$ oder $G'=\{1\}$.
+\end{bemerkung}
+\begin{bemerkung}
+    Einfache Gruppen sind die "Bausteine" von Gruppen.
+\end{bemerkung}
+\begin{beispiel}
+    $C_p$ für $p$ prim.
+\end{beispiel}
+\begin{theorem}
+    Die Ikosaedergruppe $I$ ist einfach.
+\end{theorem}
+\begin{proof}
+    Klassengleichung von $I$:
+    $$60=1+15+20+12+12$$
+    Sei $N\normal G \implies gNg^{-1}=N \quad \forall g\in G$.
+
+    $\implies$ falls $x\in N$, so ist auch die Konjugationsklasse $K(x)\subseteq N$. Das heisst $N=\bigcup\limits_{x_i\in N}K(x_i)$. $|N|$ teilt 60.
+
+    Es folgt:
+    \begin{align*}
+    N&=1+\text{ Terme aus }\{15,20,12,12\}\\
+    &\implies |N|=1 \text{ oder }|N|=60\\
+    &\implies N = \{1\} \text{ oder } |N|=I\\
+    &\implies I \text{ ist einfach.}
+    \end{align*}
+\end{proof}
+\begin{theorem}
+    $I$ ist isomorph zu $A_5$.
+\end{theorem}
+\begin{proof}
+    Wir suchen eine Menge mit 5 Elementen, auf welche $I$ operiert.
+    Es gibt 5 Möglichkeiten, einen Würfel in ein Dodekaeder $D$ einzubetten, sodass die Ecken auch Ecken von $D$ sind und die Kanten in den Seiten von $D$ sind.
+    Jede Seite von $D$ enthält genau eine Würfelkante.
+    Die Wahl von einer solchen Kante definiert die Einbettung. 
+    
+    $\leadsto$ 5 mögliche Einbettungen vom Würfel. $I$ operiert darauf.
+
+    $\leadsto \phi\colon I\to S_5$. 
+    
+    $\implies \ker\phi=I$ oder $\ker\phi=\{I\}$ einfach.
+
+    $\ker\phi=I$ ist nicht möglich, da die Operation nicht trivial ist.
+
+    $\implies \ker\phi=\{1\}$ und $\phi$ injektiv.
+
+    Betrachte $I\xrightarrow{\phi}S_5\xrightarrow{\sgn}\{\pm1\}$.
+    
+    Dann ist $\ker\sgn\phi=I$ da $I$ keine Normalteiler von Ordnung 30 enthält.
+
+    $\implies \phi(I) \subseteq A_5$.
+
+    Da $|I|=|A_5|=60$, folgt: $\phi\colon I\to A_5$ ist ein Isomorphismus.
+\end{proof}
+\begin{corollary}
+    $A+5$ ist einfach.\footnote{Tatsächlich sind alle alternierenden Gruppen ausser $A_4$ einfach.}
+\end{corollary}
+
+\subsection*{Operationen auf Teilmengen}
+Falls $G\operateson X$, so operiert $G$ auch auf die Menge der Teilmengen $\mathcal{P}(X)$ von $X$.
+
+$G \times \mathcal{P}(X) \to \mathcal{P}(X)$ 
+für $U \subseteq X,\ gU=\{gu\mid u\in U\} \subseteq X$.
+
+Dies definiert eine Gruppenoperation.
+
+\begin{bemerkung}
+    $|gU|=|U|$, das heisst, wir können auch auf Teilmengen von gegebener Grösse beschränken.
+\end{bemerkung}
+
+Sei $U\subseteq X$. Der Stabilisator $G_U$ von $U$ besteht aus den $g\in G$ sodass $gU=U$, das heisst, $gu\in U \ \forall u\in U$.
 
 \end{document}

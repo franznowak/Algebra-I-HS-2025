@@ -84,6 +84,7 @@
 \newcommand{\iso}{\simeq}
 \newcommand{\isom}{\mathop\text{Isom}}
 \newcommand{\aut}{\mathop\text{Aut}}
+\newcommand{\stab}{\mathop\text{Stab}}
 \newcommand{\trans}{\mathcal{T}}
 \newcommand{\operateson}{\curvearrowright}
 
@@ -1354,7 +1355,7 @@ $$|G|=\sum\limits_{K \text{ Konj. klasse}}|K| = |K_1|+\cdots+|K_l|$$
 \end{theorem}
 \begin{proof}
     Seien $B_1,\ldots,B_k$ die Bahnen von $G$. Dann ist $|X|=|B_1|+\ldots+|B_k|$.
-    Gemäss Bahnformel gilt $|B_i|\big{|} |G_i|\quad \forall i=1,\ldots, k$.
+    Gemäss Bahnformel gilt $|B_i|\teilt |G_i|\quad \forall i=1,\ldots, k$.
     Da $p\nmid |X|$, ist $|B_i|=1$ für mindestens ein $i$.
 \end{proof}
 
@@ -1365,7 +1366,7 @@ $$|G|=\sum\limits_{K \text{ Konj. klasse}}|K| = |K_1|+\cdots+|K_l|$$
     Nehmen wir an, dass $G$ nicht abelsch ist. 
     Dann gibt es ein $x\in G$, sodass $x\notin Z$ und somit $Z\subsetneq Z(x)$.
     Wir wissen, dass $|Z|\geq p$.
-    Da $|Z(x)|\big{|}|G|$, d.h.  $|Z(x)|=p^2$
+    Da $|Z(x)|\teilt|G|$, d.h.  $|Z(x)|=p^2$
     $\implies Z(x)=G$, damit folgt aber, dass $x\in Z\quad \lightning$.
 
     $\implies G$ ist abelsch.
@@ -1432,6 +1433,9 @@ Klassengleichung: $60=1+20+12+12+15$.
 \begin{bemerkung}
     Einfache Gruppen sind die "Bausteine" von Gruppen.
 \end{bemerkung}
+\begin{bemerkung}
+    $\{1\}$ ist nicht einfach.
+\end{bemerkung}
 \begin{beispiel}
     $C_p$ für $p$ prim.
 \end{beispiel}
@@ -1497,5 +1501,216 @@ Dies definiert eine Gruppenoperation.
 \end{bemerkung}
 
 Sei $U\subseteq X$. Der Stabilisator $G_U$ von $U$ besteht aus den $g\in G$ sodass $gU=U$, das heisst, $gu\in U \ \forall u\in U$.
+
+\section*{Vorlesung 11}
+\paragraph{Gesehen:} Wenn $G\operateson X$, dann operiert $G$ auch auf die Menge der Teilmengen von $X$.
+Für $U\subseteq X$ ist der Stabilisator $\stab(U)=G_U=\{g\in G\mid gU=U\}$
+
+\begin{theorem}
+    $G \operateson X$. Sei $U\subseteq X$ und $H\ug G$. Dann ist $H\ug \stab(U) \Leftrightarrow U$ ist die Vereinigung von allen $H$-Bahnen. 
+\end{theorem}
+\begin{proof}
+    $H$ stabilisiert $U $
+    
+    $\Leftrightarrow$ die $H$-Bahn $B_x$ ist in $U$ enthalten $\forall x\in U$ 
+    
+    $\Leftrightarrow U=\bigcup\limits_{x\in U}B_x$.
+\end{proof}
+$G\operateson \{ \text{Teilmengen von } G\}$ durch Linksmultiplikation.
+
+\begin{theorem}
+    Sei $U\subseteq G$. Dann ist $|\stab(U)|$ ein Teiler von $|U|$.
+\end{theorem}
+\begin{theorem}
+    Sei $H=\stab(U)$. Dann operiert $H$ auf $U$.
+    $\implies U$ ist eine Vereinigung von $H$-Bahnen. Diese sind von der Form $H_g, g\in U$ $\implies U$ ist eine Vereinigung von Rechtsnebenklassen von $H$ 
+    $\implies |U|$ ist Vielfaches von $H$.
+\end{theorem}
+
+$G\operateson \{\text{Teilmengen von }G\}$ durch Konjugation.
+
+\begin{definition}
+    Sei $H\ug G$. Dann ist die Bahn von $H$ unter dieser Operation die Menge der zu $H$ konjugierten Untergruppen.
+    Das heisst
+    $$B_H=\{gHg^{-1}\mid g\in G\}$$
+    Der Stabilisator von $H$ unter dieser Operation heisst \defn{Normalisator von $H$}.
+    $$N(H)=\{g\in G\mid gHg^{-1}=H\}$$
+\end{definition}
+\begin{bemerkung}
+    \quad
+    \begin{itemize}
+        \item $H\ug N(H)$
+        \item $N(H)=G \Leftrightarrow H\normal G$ ist Normalteiler.
+    \end{itemize}
+\end{bemerkung}
+Bahnformel: $|G|=|N(H)|\cdot|\{\text{zu } H \text{ konjugierte Untergruppen}\}|$.
+
+\subsection*{Die Sylow Sätze}
+Gesehen: Sei $G$ Gruppe, $H\ug G \implies |H|\teilt|G|$.
+
+\paragraph{Clicker-Frage:} Sei $G$ eine Gruppe und $d$ ein Teiler von $G$. Folgt daraus dass eine Untergruppe $H\ug G$ existiert, mit $|H|=d$? \textbf{Nein.}
+
+Beispiel: $|I|$=60, aber $I$ hat keine Untergruppe von Ordnung $30$.
+\begin{behauptung}
+    $H\ug G, [G:H]=2$, dann ist $H$ normal.
+\end{behauptung}
+\begin{proof}
+    Sei $g\in G\backslash H$.
+    
+    $G=H\cup gH$ und $G=H\cup Hg$ d.h. 
+    
+    $gH=G\backslash H=Hg$
+    
+    $\implies$ Links- und Rechtsnebenklassen stimmen überein.
+    $\implies H\normal G$.
+\end{proof}
+
+Sei $p$ prim und $G$ eine endliche Gruppe, s.d. $|G|=n=p^em$, wobei $e\geq 0, p\nmid m$.
+
+\begin{theorem}[Sylow I]
+    Es gibt eine Untergruppe $H\ug G$ sodass $H=p^e$.
+\end{theorem}
+\begin{definition}
+    Eine solche Untergruppe $H$ heisst \defn{p-Sylowuntergruppe} ("p-Sylow").
+\end{definition}
+\begin{corollary}
+    Wenn $p\ \teilt\ |G|$, dann existiert ein $x\in G$ von Ordnung $p$.
+\end{corollary}
+\begin{proof}
+    Gemäss Sylow I: $\exists H\ug G$, s.d. $|H|=p^e$
+
+    Sei $y\in H\backslash\{1\}$.
+
+    Dann hat $y$ Ordnung $p^r$ für $1\leq r \leq e$. $\implies y^{p^{r-1}}$ hat Ordnung $p$.
+\end{proof}
+
+\begin{theorem}[Sylow II]
+    Sei $G$ eine endliche Gruppe.
+    \begin{enumerate}[label=(\alph*)]
+        \item Alle p-Sylowuntergruppen in $G$ sind konjugiert zueinander. D.h. falls $H,H'\ug G$ p-Sylow sind, so $\exists g\in G$, s.d. $gHg^{-1}=H'$.
+        \item Sei $K\ug G$ eine Untergruppe, sodass $|K|=p^d$, so ist $K$ in einer p-Sylow von $G$ enthalten.
+    \end{enumerate}
+\end{theorem}
+\begin{theorem}[Sylow III]
+    Sei $s$ die Anzahl der p-Sylows in $G$. Dann gilt $s\teilt m$ und $s\equiv 1 \mod p$. ($|G|=p^em$)
+\end{theorem}
+
+\subsubsection*{Anwendungen von Sylowsätzen}
+\begin{theorem}
+    Jede Gruppe der Ordnung 15 ist zyklisch.
+\end{theorem}
+\begin{proof}
+    Sei $G$ eine Gruppe, sodass $|G|=15=5\cdot 3$.
+    
+    $\underset{\text{Sylow III}}{\implies}$ Die Anzahl der 5-Sylows ist Teiler von 3 und $\equiv 1\mod 5$.
+
+    $\implies$ Es gibt nur eine Untergruppe $H\ug G$ mit $|H|=5$. Insbesondere ist $gHg^{-1}=H\quad\forall g\in G$. D.h. $H\normal G$.
+
+    Die Anzahl von 3-Sylows ist Teiler von 5 und $\equiv 1\mod 3$.
+
+    $\implies$ Es gibt eine eindeutige Untergruppe $K\ug G$ von Ordnung 3.
+
+    Insbesondere ist $K$ normal.
+
+    $H\cap K = \{1\}$
+
+    $HK\ug G$ ist eine Untergruppe. Da $|HK|>5$, gilt $HK=G$.
+
+    $\underset{Satz}{\implies} G\iso H\times K$. Wir haben $H \iso C_5, K\iso C_3$ (Gruppen von Ordnung $p$ sind zyklisch).
+
+    $\implies G\iso C_5\times C_3\iso C_15$.
+\end{proof}
+
+\begin{theorem}
+    Sei $G$ eine Gruppe, sodass $|G|=10$. Dann ist $G\iso C_5\times C_2\iso C_10$ oder $G\iso D_5$.
+\end{theorem}
+\begin{proof}
+    Die Anzahl der 5-Sylows teilt 2 und ist $1 \mod 5$.
+
+    $\implies$ Es gibt nur eine 5-Sylow $K\ug G$ und diese ist somit normal.
+
+    $K\iso C_5$. Sei $x\in K$ sodass $K=\zykl{x}$.
+
+    Sei $H$ eine 2-Sylow. Sei $y\in H$, sodass $H=\zykl{y}$. 
+    Da $K$ normal ist, ist $yxy^{-1} = x^r$ für $1\leq r\leq 4$ d.h. $yx=x^ry$.
+
+    Da $K\cap H=\{1\}$, folgt, dass die $x^iy^j$ alle verschieden sind 
+    \begin{align*}
+        (x^iy^j&=x^{i'}y^{j'}\\\
+        &\implies x^{i-i'}=y^{j-j'}\\
+        &\implies i-i'=0=j-j')
+    \end{align*}
+    Das heisst $G=\{x^iy^j\mid 0\leq i\leq 4, 0\leq j\leq 1\}$ und die Relationen $x^5=1, y^2=1, xy=x^ry$ definieren die Gruppenstruktur eindeutig.
+
+    Welche Werte kann $r$ annehmen?
+    
+    Falls $yx=x^ry$:
+    
+    $\implies x=yyx=yx^ry=x^{r^2}yy=x^{r^2}$
+
+    $\implies r^2\equiv 1\mod 5$
+
+    $\implies r=2$ und $r=3$ nicht möglich!
+
+    Falls $r=1$, dann ist $yx=xy$, insbesondere ist $H\normal G$ normal. 
+    
+    Da $HK=G$ und $H\cap K=\{1\}$
+
+    $\implies G\iso H\times K\iso C_2\times C_5=C_10$.
+
+    Falls $r=4$, dann ist $yx=x^4y=x^{-1}y \implies G\iso D_5$.
+\end{proof}
+
+\begin{theorem}
+    Sei $G$ eine Gruppe, sodass $|G|=pq$ für $p,q$ prim. Sei $p>q$.
+    Falls $p\not\equiv 1\mod q$, so ist $G\iso C_{pq}$.
+
+    Falls $p\equiv 1\mod q$, so ist $G\iso C_{pq}$ oder $G$ ist nicht abelsch. (Selbe Beweisidee wie oben).
+\end{theorem}
+
+\begin{lemma}
+    Sei $n=p^em, p\nmid m, p$ prim, $e\geq 0$. Dann teilt $p$ nicht $N=\begin{pmatrix}
+        n\\p^e
+    \end{pmatrix}$.
+\end{lemma}
+\begin{proof}
+    $$N=\begin{pmatrix}
+        n\\p^e
+    \end{pmatrix}=\frac{n(n-1)\cdots(n-p^e+1)}{p^e(p^e-1)\cdots 1}$$
+    Sei $0\leq k\leq n-1$. Schreibe $k=p^il, p\nmid l$. 
+    
+    Dann gilt $p^i\mid (n-k)$ und $p^i\teilt(p^e-k)$, aber $p^{i+1}\nmid (n-k)$ und $p^{i+1}\nmid (p^e-k)$.
+
+    Das heisst, Zähler und Nenner sind gleich oft durch $p$ teilbar.
+    
+    $\implies p\nmid N$.
+\end{proof}
+
+\begin{theorem}[Wiederholung Sylow I]
+    Sei $G$ eine Gruppe, sodass $|G|=p^em$, dann existiert $H\ug G, |H|=p^e$. Beweis von Sylow 1;
+\end{theorem}
+\begin{proof}
+    Sei $X$ die Menge aller Teilmengen von $G$ mit $p^l$ Elementen.
+
+    Betrachte $G\operateson X$ durch Linksmultiplikation.
+
+    $|X|=\begin{pmatrix}
+        n\\p^e
+    \end{pmatrix} =: N$
+
+    Wir haben $N=|X|=\sum\limits_{B \text{ Bahnen}}|B|$
+
+    Da $p\nmid N$, gibt es ein $U\in X$, sodass $p\nmid |B_U|$.
+
+    Bahnformel: $|\stab(U)|\cdot|B_U|=|G|=p^lm$
+
+    $\implies p^e\teilt |\stab(U)|$.
+
+    Vorher gesehen: $|\stab(U)|\teilt |U|=p^e$.
+
+    $\implies |\stab(U)|=p^e$
+
+    $\implies \stab(U)\leq G$ ist eine p-Sylow.
+\end{proof}
 
 \end{document}

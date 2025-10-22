@@ -1690,7 +1690,7 @@ Sei $p$ prim und $G$ eine endliche Gruppe, s.d. $|G|=n=p^em$, wobei $e\geq 0, p\
     Sei $G$ eine Gruppe, sodass $|G|=p^em$, dann existiert $H\ug G, |H|=p^e$. Beweis von Sylow 1;
 \end{theorem}
 \begin{proof}
-    Sei $X$ die Menge aller Teilmengen von $G$ mit $p^l$ Elementen.
+    Sei $X$ die Menge aller Teilmengen von $G$ mit $p^e$ Elementen.
 
     Betrachte $G\operateson X$ durch Linksmultiplikation.
 
@@ -1702,7 +1702,7 @@ Sei $p$ prim und $G$ eine endliche Gruppe, s.d. $|G|=n=p^em$, wobei $e\geq 0, p\
 
     Da $p\nmid N$, gibt es ein $U\in X$, sodass $p\nmid |B_U|$.
 
-    Bahnformel: $|\stab(U)|\cdot|B_U|=|G|=p^lm$
+    Bahnformel: $|\stab(U)|\cdot|B_U|=|G|=p^em$
 
     $\implies p^e\teilt |\stab(U)|$.
 
@@ -1711,6 +1711,110 @@ Sei $p$ prim und $G$ eine endliche Gruppe, s.d. $|G|=n=p^em$, wobei $e\geq 0, p\
     $\implies |\stab(U)|=p^e$
 
     $\implies \stab(U)\leq G$ ist eine p-Sylow.
+\end{proof}
+
+\section*{Vorlesung 12}
+
+\begin{theorem}[Erinnerung: Sylow II]
+    \quad
+    \begin{enumerate}[label=(\alph*)]
+        \item Alle p-Sylows in $G$ sind konjugiert zueinander
+        \item Sei $K\ug G$ eine Untergruppe, sodass $|K|=p^d$, so ist $K$ in einer p-Sylow enthalten.
+    \end{enumerate}
+\end{theorem}
+
+\begin{proof}[Beweis Sylow II]
+    Sei $H\ug G$ eine p-Sylow. Betrachte $G\operateson X=G/H$ durch Linksmultiplikation.
+    $$|X|=[G:H]=m$$
+    Sei $K\ug G, |K|=p^d, d\leq e$.
+    \paragraph{Behauptung:}$\exists a\in G$, s.d. $a^{-1}Ka\subseteq H$. 
+    Die Behauptung impliziert (a) und (b):
+    Falls $d=e$, so ist $a^{-1}Ka=H$.
+    Falls $d\leq e$, so ist $K$ in der p-Sylow $aHa^{-1}$ enthalten.
+    \paragraph{Beweis der Behauptung:} Betrachte $K\operateson X=G/H$, d.h. für $k\in K, a\in G$ ist $k(aH)=kaH$.
+    Wir haben:
+    $$m=|X|=\sum\limits_{\text{K-Bahnen }B}|B|$$
+    $|B| \teilt |K|=p^d$ für alle Bahnen $B$.
+    
+    Da $p\nmid m$, folgt, dass eine Bahn $B$ existiert, sodass $|B|=1$.
+    
+    Das heisst, es gibt eine Nebenklasse $aH\in G/H$, sodass $kaH=aH,\quad\forall k\in K$.
+    
+    $\implies a^{-1}kaH=H$
+
+    $\implies a^{-1}ka\in H$
+
+    und somit $a^{-1}Ka\ug H$.
+\end{proof}
+
+\begin{theorem}[Erinnerung: Sylow III]
+    Sei $s$ die Anzahl der p-Sylows in $G$. Dann:
+    $$s\teilt m \text{ und } s\equiv 1\mod p$$
+\end{theorem}
+
+\begin{proof}[Beweis Sylow III]
+    Sei $Y$ die Menge der p-Sylows in $G$.
+    $G$ operiert auf $Y$ durch Konjugation:
+    $$H\mapsto gHg^{-1}$$
+    Gemäss Sylow II gibt es nur eine Bahn.
+
+    Bahnformel:
+\begin{align*}
+    |G|&=|Y||\stab(H)|\\
+    &=|Y||N(H)|
+\end{align*}
+D.h., $|Y|=[G:N(H)]$.
+
+Da $H\ug N(H)$, ist $|H|=p^e$ ein Teiler von $|N(H)|=p^ec$.
+$$|G|=p^em=|Y|\cdotp^ec \implies |Y|\teilt m$$
+
+Sei $H$ eine p-Sylow. Betrachte $H\operateson Y$ durch Konjugation. 
+Sei $H'\in Y$ sodass $H'$ von $H$ stabilisiert wird.
+$\implies H\ug N(H')$.
+
+Da $|N(H')|\teilt|G|$, ist $p^e$ die höchste Potenz von $p$, die $|N(H')|$ teilt.
+
+$\implies H$ und $H'$ sind p-Sylows in $N(H')$.
+
+$\implies \exists g\in N(H')$, sodass $H'=gH'g^{-1}=H$.
+
+Das heisst, $H$ ist der einzige Fixpunkt der Operation $H\operateson Y$. Die Längen der anderen Bahnen sind Vielfache von $p$ (da sie $|H|=p^e$ teilen).
+
+$\implies |Y|\equiv1\mod p$.
+\end{proof}
+
+\begin{theorem}
+Sei $G$ eine endliche abelsche Gruppe. Dann ist $G$ isomorph zu dem Produkt $G_{p_1}\times\cdots\times G_{p_r}$, wobei die $G_{p_i}$ $p_i$-Gruppen für Primzahlen $p_1,\ldots,p_r$ sind.
+\end{theorem}
+\begin{proof}
+    Schreibe $|G|=p_1^{r_1}\cdots p_n^{r_n}$ (Primfaktorisierung).
+
+    Sei $H_i$ eine $p_i$-Sylow für $i=1,\ldots,n$.
+    Alle $H_i$ sind normal. 
+    $H_1H_2$ ist Untergruppe von $G$ und $H_1H_2$ ist isomorph zu $H_1\times H_2$, da $H_1\cap H_2=\{1\}$.
+
+Per Induktion zeigt man ähnlich, dass $H_1H_2\cdots H_s$ eine Untergruppe ist und isomorph zu $H_1\times\cdots \times H_s$:
+
+$H_1\cdots H_{s-1} \iso H_1\times\cdots\times H_{s-1}$
+
+$(H_1\cdots H_{s-1})H_s$ ist Untergruppe
+
+$H_1\cdots H_{s-1}\cap H_s=\{1\}$.
+
+$\implies H_1\times\cdots\times H_n \iso H_1\cdots H_n$.
+
+Da $H_1\times\cdots\times H_n$ genau $|G|$ Elemente enthält, folgt $G=H_1\cdots H_n \iso H_1\times H_1\times\cdots\times H_n$.
+\end{proof}
+
+\begin{definition}
+    Eine Gruppe $G$ heisst \defn{endlich erzeugt}, wenn es eine endliche Teilmenge $\{x_1,\ldots,x_n\}\subseteq G$ gibt, sodass $G=\zykl{x_1,\ldots,x_n}$
+\end{definition}
+
+\begin{theorem}
+    Sei $G$ eine endlich erzeugte abelsche Gruppe. Dann ist $G$ isomorph zu $\Z^n\times C_{p_1^{r_1}}\times\cdots\times C_{p_n^{r_n}}$, wobei $p_1, \ldots, p_n$ Primzahlen sind (nicht unbedingt verschieden) und $r_i\geq 0$.
+\end{theorem}
+\begin{proof}
+    Siehe Algebra II.
 \end{proof}
 
 \end{document}

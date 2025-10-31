@@ -54,6 +54,7 @@
 \newcommand{\C}{\mathbb{C}}
 \newcommand{\Z}{\mathbb{Z}}
 \newcommand{\F}{\mathbb{F}}
+\newcommand{\Q}{\mathbb{Q}}
 \newcommand{\norm}[1]{||#1||}
 \newcommand{\vu}{\boldsymbol{u}}
 \newcommand{\vv}{\boldsymbol{v}}
@@ -88,6 +89,7 @@
 \newcommand{\stab}{\mathop\text{Stab}}
 \newcommand{\trans}{\mathcal{T}}
 \newcommand{\operateson}{\curvearrowright}
+\newcommand{\mat}{\mathrm{Mat}}
 
 \title{Algebra I -- {Prof. Christian Urech}}
 \author{Mitschrift: Franz Nowak}
@@ -2067,5 +2069,117 @@ $\zykl{X \mid R}$ heisst \defn{Präsentation} von $G$.
         \item Alle Wörter kommutieren.
     \end{itemize}
 \end{proof}
+
+
+\section*{Vorlesung 14}
+\subsection*{Ringe (Kapitel 10 in Artin)}
+
+\begin{definition}
+    Ein \defn{Ring} $R$ ist eine Menge mit zwei Verknüpfungen $+$ und $\cdot$, Addition und Multiplikation, sodass die folgenden Axiome erfüllt sind:
+    \begin{enumerate}[label=(\alph*)]
+        \item $(R, +)$ ist eine abelsche Gruppe. Bezeichne das neutrale Element mit $0$. 
+        \item Die Multiplikation ist assoziativ und hat ein neutrales Element $1\in R$.
+        \item Für alle $a, b, c\in R$ gilt: $(a+b)c = ac+bc$ und $c(a+b)=ca+cb$ (Distributivgesetz).
+    \end{enumerate}
+\end{definition}
+
+\subsubsection*{Beispiele}
+    \begin{itemize}
+        \item Die ganzen Zahlen $\Z$
+        \item Der Nullring $R=\{0\}$
+        \item $\Z\left[\frac{1}{2}\right] = \left\{\frac{a}{2^k}\mid a, k \in \Z\right\}$
+        \item Die Gaussschen Zahlen: $\Z[i]=\{a+bi\mid a, b\in \Z\}\subseteq \C$
+        \item $\Q[\sqrt{2}]=\{a+b\sqrt{2}\mid a, b\in \Q\}$
+        \item $\mat_{n\times n}$, der Ring der $(n\times n)$-Matrizen über einem Körper $K$. (Hier ist die Multiplikation nicht kommutativ.)
+    \end{itemize}
+
+\begin{bemerkung}
+    Ein \defn{kommutativer Ring} ist ein Ring, in dem die Multiplikation kommutativ ist.  In dieser Vorlesung: Ring = kommutativer Ring.
+\end{bemerkung}
+
+\begin{bemerkung}
+    In manchen Quellen ist die Existenz eines neutralen Elements nicht Teil der Definition eines Rings.
+\end{bemerkung}
+
+\begin{theorem}
+    Sei $R$ ein Ring. Dann gilt $0\cdot a=0 \quad \forall a\in R$.
+\end{theorem}
+\begin{proof}
+    Sei $x\in R$. Dann ist $xa = (0+x)a = 0a + xa \implies 0a=0$.
+\end{proof}
+Daraus folgt direkt:
+\begin{corollary}
+    Sei $R$ ein Ring. Falls $1=0$, so ist $R$ der Nullring.
+\end{corollary}
+\begin{bemerkung}
+    $(-1)a=-a$ für alle $a\in R$.
+\end{bemerkung}
+\begin{proof}
+    $a+(-1)a = (1-1)a=0a=0 \implies (-1)a=-a$
+\end{proof}
+\begin{definition}
+    Ein Ring $R$ ist ein \defn{Körper}, falls $R$ nicht der Nullring ist und jedes Element in $R\backslash\{0\}$ ein multiplikatives Inverses hat.
+\end{definition}
+
+\begin{definition}
+    Seien $R, R'$ Ringe. Ein \defn{Homomorphismus} $\phi\colon R\to R'$ ist eine Abbildung, s.d. $\forall a,b\in R$:
+    \begin{enumerate}[label=(\arabic*)]
+        \item $\phi(a+b)=\phi(a)+\phi(b)$
+        \item $\phi(ab) = \phi(a)\phi(b)$
+        \item $\phi(1_R)=1_{R'}$
+    \end{enumerate}
+    Falls $\phi$ ausserdem bijektiv ist, so ist $\phi$ ein \defn{Isomorphismus}.
+\end{definition}
+
+\begin{bemerkung}
+    Ein Ringhomomorphismus ist immer auch ein Gruppenhomomorphismus bezüglich der additiven Gruppe. $\implies \phi(0_R)=0_{R'}$.
+\end{bemerkung}
+
+\subsubsection*{Beispiele}
+\begin{itemize}
+    \item $\Z\to\Z/n\Z$ ist ein Ringhomomorphismus.
+    \item Sei $R$ der Nullring. Es gibt keinen Homomorphismus $\phi\colon R\to R'$, wenn $R'$ nicht auch der Nullring ist.
+\end{itemize}
+
+\begin{definition}
+    Sei $\phi\colon R\to R'$ ein Ringhomomorphismus. 
+    Der \defn{Kern} von $\phi$ ist
+    $\ker\phi=\{a\in R\mid \phi(a)=0\}$
+\end{definition}
+\begin{bemerkung}
+    Ein Ringhomomorphismus $\phi\colon R\to R'$ ist injektiv $\Leftrightarrow \ker\phi = 0$, da $\phi$ ein Homomorphismus von den additiven Gruppen ist.
+\end{bemerkung}
+\begin{definition}
+    Sei $R$ ein Ring. Ein \defn{Unterring} $S\subseteq R$ ist eine Teilmenge, s.d. 
+    \begin{enumerate}[label=(\arabic*)]
+        \item $S$ ist eine Untergruppe bezüglich Addition
+        \item $S$ ist abgeschlossen bezüglich Multiplikation
+        \item $1\in S$
+    \end{enumerate}
+\end{definition}
+\begin{bemerkung}
+\quad
+\begin{itemize}
+    \item Falls $R\neq 0$, so ist $\ker\phi$ \underline{kein} Unterring (da $1\notin \ker\phi$).
+    \item Falls $a\in \ker\phi$ und $r\in R$, so ist auch $ra\in \ker\phi$.
+\end{itemize}
+\end{bemerkung}
+\begin{definition}
+    Ein \defn{Ideal} $I\subseteq R$ ist eine Teilmenge s.d.
+    \begin{enumerate}[label=(\roman*)]
+        \item $I \subseteq R$ ist eine additive Untergruppe
+        \item Ist $a\in I$, dann ist für alle $r\in R$ auch $ra\in I$.
+    \end{enumerate}
+\end{definition}
+\begin{bemerkung}
+\begin{itemize}
+\quad
+    \item $\ker\phi\subseteq R$ ist ein Ideal
+    \item $I\subseteq R$ ist ein Ideal genau dann, wenn $I\neq \emptyset$ und für alle $a_1,\ldots,a_n\in I$ und $r_1,\ldots, r_n\in R$ (und alle $n$) gilt, dass $r_1a_1+\cdots+r_na_n\in I$.
+\end{itemize}
+\begin{proof}
+    Kleine Übung.
+\end{proof}
+\end{bemerkung}
 
 \end{document}

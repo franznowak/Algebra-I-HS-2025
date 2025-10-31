@@ -15,6 +15,7 @@
 \usepackage[nameinlink]{cleveref}
 \usepackage{parskip}
 \usepackage{tikz-cd}
+\usetikzlibrary{calc}
 
 \crefname{section}{\S}{\S\S}
 \crefname{table}{Tab.}{}
@@ -1815,6 +1816,256 @@ Da $H_1\times\cdots\times H_n$ genau $|G|$ Elemente enthält, folgt $G=H_1\cdots
 \end{theorem}
 \begin{proof}
     Siehe Algebra II.
+\end{proof}
+
+\section*{Vorlesung 13}
+\subsection*{Freie Gruppen}
+Sei $X$ eine Menge von \defn{Zeichen}.
+\begin{beispiel}
+    $X=\{a,b,c\}$
+\end{beispiel}
+Ein \defn{Wort} ist eine endliche Folge von Zeichen.
+\begin{beispiel}
+    $X=\{a,b\}$
+
+    $a, b, aa, bababb$ sind Wörter in $X$.
+\end{beispiel}
+Sei $W$ die Menge aller Wörter in $X$. 
+Wir können Wörter zusammenhängen.
+
+\begin{beispiel}
+    $aa, ba \mapsto aaba$.
+\end{beispiel}
+Dies definiert eine assoziative Verknüpfung, somit haben wir eine \defn{Semigruppe} (Menge mit assoziativer Verknüpfung).
+
+$W\times W\to W\quad v,w\mapsto vw$.
+
+Das leere Wort ist das neutrale Element bezüglich dieser Verknüpfung. Wir bezeichnen es mit 1.
+Somit erhalten wir ein \defn{Monoid} (Semigruppe mit neutralem Element). 
+
+Dieses oben definierte Monoid nennt sich das \defn{freie Monoid}.
+
+Um eine Gruppe zu definieren, brauchen wir auch noch Inverse.
+
+Wir fügen zu jedem Zeichen $a\in X$ noch ein Zeichen $a^{-1}$ hinzu. Diese neue Menge nennen wir $X'$.
+
+\begin{beispiel}
+    $X=\{a,b\} \implies X'=\{a,a^{-1},b,b^{-1}\}$
+\end{beispiel}
+Sei $W'$ die Menge der Wörter mit Zeichen in $X'$.
+\begin{beispiel}
+    $X'=\{a,a^{-1},b,b^{-1}\}$
+    
+    $aa^{-1}b\in W',\ b\in W',\ b^{-1}b\in W'$
+\end{beispiel}
+
+Falls in einem Wort $w\in W'$ für ein $x\in X$ der Abschnitt $\ldots xx^{-1}\ldots$ oder $\ldots x^{-1}x\ldots$ vorkommt, so kürzen wir die zwei Symbole $x,x^{-1}$ weg und erhalten ein kürzeres Wort.
+
+\begin{definition}
+    Ein Wort ist \defn{reduziert}, wenn man keine solche Kürzung mehr möglich ist.
+\end{definition}
+
+\begin{bemerkung}
+    Ein gegebenes Wort $w\in W'$ lässt sich endlich oft kürzen, bis wir ein reduziertes Wort $w_0$ enthalten. Ein solches $w_0$ heisst \defn{reduzierte Form} von $w$.
+\end{bemerkung}
+\begin{beispiel}
+    $babb^{-1}a^{-1}c^{-1}ca$
+
+    Mögliche Kürzungen:
+    \begin{itemize}
+        \item $babb^{-1}a^{-1}c^{-1}ca\to baa^{-1}c^{-1}ca \to bc^{-1}ca\to ba$
+        \item $babb^{-1}a^{-1}c^{-1}ca\to babb^{-1}a^{-1}a \to babb^{-1}\to ba$
+    \end{itemize}
+\end{beispiel}
+\begin{theorem}
+    Jedes Wort $w\in W'$ hat genau eine reduzierte Form.
+\end{theorem}
+\begin{proof}
+    Induktion über die Länge von $w$.
+    
+    Base case ist klar für $|w|=0$.
+    
+    Falls $w$ reduziert ist, sind wir fertig.
+    
+    Falls $w$ nicht reduziert ist:
+    
+    $w=\ldots xx^{-1} \ldots$ für ein $x\in X'$
+
+    \paragraph{Behauptung:} Wir erreichen jede reduzierte Form von $w$, indem wir zuerst $\ldots xx^{-1}\ldots$ kürzen.
+    Dies impliziert den Satz per Induktion.
+    \paragraph{Beweis der Behauptung:} Sei $w_0$ eine reduzierte Form von $w$.
+    
+    Fall 1: $xx^{-1}$ wird irgendwann einmal weggekürzt. Dann können wir $xx^{-1}$ auch direkt kürzen.
+
+    Fall 2: $x^x{-1}$ wird nicht gekürzt. Das Paar $x^x{-1}$ kommt nicht in $w_0$ vor, d.h. irgendwann ist entweder $\ldots x^{-1}xx^{-1}\ldots$ oder $\ldots xx^{-1}x\ldots$.
+
+    Diese Vereinfachung hat jedoch denselben Effekt wie wenn man $xx^{-1}$ kürzt $\leadsto$ Fall 1.
+\end{proof}
+
+Für zwei Wörter $w,w'\in W$ definiere $w\sim w'$, falls $w$ und $w'$ dieselbe reduzierte Form haben.
+
+$\leadsto$ Äquivalenzrelation auf $W'$.
+
+\begin{theorem}
+    Seien $v,v',w,w'\in W'$. Aus $w\sim w'$ und $v\sim v'$ folgt $wv\sim w'v'$.
+\end{theorem}
+\begin{proof}
+    $wv\underset{\text{vereinfachen}}{\leadsto} w_0v_0\leadsto$ weiter vereinfachen.
+
+    Ähnlich $w'v'\underset{\text{vereinfachen}}{\leadsto} w_0v_0 \leadsto$ weiter vereinfachen. 
+    
+    $\implies$ $wv$ und $w'v'$ haben dieselbe reduzierte Form.
+\end{proof}
+
+\begin{theorem}
+    Die Menge $F$ der Äquivalenzklassen von Wörtern in $W'$ bildet  mit der von $W'$ induzierten Verknüpfung eine Gruppe.
+\end{theorem}
+\begin{proof}
+    Die von $W'$ induzierte Verknüpfung ist wohldefiniert gemäss obigem Satz.
+    
+    Assoziativität ist klar.
+    
+    Neutrales Element: $1$; folgt auch aus der Verknüpfung.
+
+    Inverse: Für die Klasse von $w=xy\ldots z$ ist die Klasse von $z^{-1}\ldots y^{-1}x^{-1}$ ein Inverses.
+\end{proof}
+\begin{definition}
+    Diese Gruppe $F$ ist die \defn{freie Gruppe} auf der Menge $X$.
+\end{definition}
+
+\begin{bemerkung}
+    Jedes Element in $F$ entspricht genau einem reduzierten Element.
+    Verknüpfung: hintereinander schreiben, dann reduzieren.
+\end{bemerkung}
+
+\begin{beispiel}
+    Sei $F$ die freie Gruppe auf $\{a,b,c\}$.
+
+    $(abc^{-1})(cb) = abc^{-1}cb= abb$
+\end{beispiel}
+\begin{bemerkung}
+    Wir verwenden Produktschreibweise:
+    $$aaab^{-1}b^{-1} = a^3b^{-2}$$
+\end{bemerkung}
+\begin{beispiel}
+    Sei $F$ die freie Gruppe auf $X=\{a\}$. Dann ist $F=\{a^n\mid n\in \Z\} \iso \Z$
+
+    Sobald $|X|\geq 2$, wird F sehr kompliziert.
+\end{beispiel}
+\begin{theorem}
+    Sei $F$ die freie Gruppe auf $X$ und $G$ eine Gruppe.
+    
+    Jede Abbildung $f\colon X\to G$ lässt sich in eindeutiger Weise zu einem Homomorphismus $\phi\colon F\to G$ fortsetzen.
+\end{theorem}
+{\large
+\[
+\begin{tikzcd}[row sep=2cm, column sep=2cm, remember picture]
+  |[alias=X]| X \arrow[r, "f"] \arrow[d, hook', ""'] & |[alias=G]| G \\
+  |[alias=F]| F \arrow[ur, "\exists !\phi"'] &
+\end{tikzcd}
+\begin{tikzpicture}[remember picture, overlay]
+  \coordinate (M1) at ($ (X)!0.5!(G) $);
+  \coordinate (C)  at ($ (M1)!1/3!(F) $);
+  \draw[->] (C) ++(0:6pt) arc (0:300:6pt);
+\end{tikzpicture}
+\]}
+\begin{proof}
+    Sei $w=x_1\cdots x_n$ ein Wort in $W'$. 
+    Wir definieren $\phi(w)=f(x_1)\cdots f(x_n)$, wobei $f(a^{-1})=f(a)^{-1}$.
+    
+    $\phi$ ist wohldefiniert: Zwei äquivalente Wörter werden auf dasselbe Element in $G$ abgebildet.
+
+    $\phi$ ist offensichtlich ein Homomorphismus und eindeutig.
+\end{proof}
+
+\begin{bemerkung}
+    Seien $G$ eine Gruppe, $X\subseteq G$ und $F$ die freie Gruppe auf $X$. Dann existiert ein Homomorphismus $\phi\colon F\to G$.
+
+    Falls $X\subseteq G$ Erzeugende von $G$ sind, dann ist $\phi$ surjektiv.
+
+    $\underset{\text{1. Isosatz}}{\implies} G \iso F/N$, wobei $N=\ker \phi$.
+    
+    Die Elemente in $N$ heissen \defn{Relationen} zwischen den Erzeugenden. 
+    
+    D.h., $w\in F$ ist eine Relation $\Leftrightarrow \phi(w)=1$, d.h. $w=1$ in $G$.
+
+    Umgekehrt, falls $F$ die freie Gruppe auf $X$ ist und $N \normal F$, so ist $G=F/N$ die Gruppe, in der die Relationen $N=1$ gelten $\forall n\in N$.
+\end{bemerkung}
+\begin{definition}
+    Eine Teilmenge $R\subseteq N$ heisst Menge von \defn{definierenden Relationen} für $G$, falls $N$ der kleinste Normalteiler ist, der $R$ enthält, d.h. $$N=\bigcap_{\substack{H\normal G\\ R\subseteq H}}H$$
+\end{definition}
+$X$ und $R$ definieren $G$. Wir schreiben $G=\zykl{X \mid R}$.
+
+$\zykl{X \mid R}$ heisst \defn{Präsentation} von $G$.
+
+\begin{theorem}
+    Seien $G$ eine Gruppe und $N \normal G$, und $\pi\colon G\to\overline{G}=G/N$ Quotient, $a\mapsto \overline a=aN$.
+
+    Sei $\phi\colon G\to G'$ ein Homomorphismus mit $N\subseteq \ker\phi$. Dann existiert ein eindeutiger Homomorphismus $\overline{\phi}\colon \overline{G}\to G'$, sodass $\overline{\phi}\circ\pi=\phi$.
+\end{theorem}
+\[
+\begin{tikzcd}[row sep=1.5cm, column sep=1.5cm, remember picture]
+  |[alias=G]| G \arrow[rr, "\phi"] \arrow[dr, swap, "\pi"] && |[alias=G']| G' \\
+  & |[alias=Gbar]| \overline{G} \arrow[ur, "\exists !\overline{\phi}"'] &
+\end{tikzcd}
+\begin{tikzpicture}[remember picture, overlay]
+  \coordinate (M1) at ($ (G)!0.5!(G') $);
+  \coordinate (C)  at ($ (M1)!1/3!(Gbar) $);
+  \draw[->] (C) ++(0:6pt) arc (0:300:6pt);
+\end{tikzpicture}
+\]
+\begin{proof}
+    Wir definieren $\overline{\phi}(\overline{a})\defeq \phi(a)$.
+
+    Da $\overline{\phi}(\pi(a))=\phi(a)$ sein soll, gibt es keine andere Wahl.
+
+    $\overline{\phi}$ ist wohldefiniert: Seien $a,a'\in G$ s.d. $\overline(a)=\overline{a'}\implies \exists n\in N s.d. a'=an$.
+    $\underset{N\in\ker\phi}{\implies}\phi(a')=\phi(a)\phi(a)=\phi(a)$.
+
+    $\overline{\phi}$ ist ein Homomorphismus: $\overline{\phi}(\overline{a})\overline{\phi}(\overline{b}) = \phi(a)\phi(b)=\phi(ab)=\overline{\phi}(\overline{ab})$.
+\end{proof}
+\begin{theorem}
+    Diedergruppe $D_n = \zykl{x,y\mid x^n,y^2, xyxy}$.
+\end{theorem}
+\begin{proof}
+    Wir haben gesehen, dass $D_n$ von der Drehung $x$ und der Spiegelung $y$ erzeugt ist und dass gilt: $x^n=1, y^n=1, xyxy=1$.
+
+    Sei $F$ die freie Gruppe auf $\{x, y\}$
+    $\implies \exists$ surjektiver Homomorphismus 
+    
+    $\phi\colon F\to D_n$ s.d.
+    $R=\{x^n,y^n,xyxy\}\subseteq \ker\phi$.
+
+    Sei $N$ der kleinste Normalteiler, der $R$ enthält. 
+    
+    $\implies N\subseteq \ker\phi$.
+
+    $\underset{\text{satz}}{\implies} \exists$ Homomorphismus $\overline{\phi}\colon F/N\to D_n$, s.d. $\overline{\phi}\circ\pi=\phi$, 
+    
+    wobei $\pi\colon F\to F/N$.
+
+    \paragraph{Zu zeigen:} $\overline{\phi}$ ist ein Isomorphismus.
+    \begin{itemize}
+        \item $\overline{\phi}$ ist surjektiv, da $\phi$ surjektiv ist.
+        \item in $F/N$ gilt $\overline{x}^n=1,\ \overline{y}^2=1,\ \overline{x}\overline{y}\overline{x}\overline{y}=1$
+
+        $\implies$ Wir können jedes Element in $F/N$ auf die Form $\overline{x}^i\overline{y}^j$ bringen, mit $0\leq i \leq n-1$ und $0\leq j\leq 1$.
+
+        $\implies F/N$ enthält $\leq2n$ Elemente.
+        
+        Da $|D_n| = 2n$, folgt, dass $\overline{\phi}$ bijektiv sein muss.
+     \end{itemize}
+\end{proof}
+
+\begin{theorem}
+    Die Gruppe $G=\zykl{x, y|xyx^{-1}y^{-1}}$ ist abelsch.
+\end{theorem}
+\begin{proof}[Beweisidee]
+    \quad
+    \begin{itemize}
+        \item $x, y, x^{-1}, y^{-1}$ kommutieren alle miteinander.
+        \item Alle Wörter kommutieren.
+    \end{itemize}
 \end{proof}
 
 \end{document}

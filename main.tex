@@ -16,6 +16,7 @@
 \usepackage{parskip}
 \usepackage{tikz-cd}
 \usetikzlibrary{calc}
+% \usetikzlibrary{arrows.meta}
 
 \crefname{section}{\S}{\S\S}
 \crefname{table}{Tab.}{}
@@ -32,6 +33,7 @@
 \crefname{conjectiure}{Con.}{}
 \crefname{bemerkung}{Bem.}{}
 \crefname{behauptung}{Beh.}{}
+\crefname{beobachtung}{Beob.}{}
 
 \theoremstyle{plain}
 \newtheorem{definition}{Definition}
@@ -44,6 +46,7 @@
 \newtheorem{claim}{Claim}
 \newtheorem{bemerkung}{Bemerkung}
 \newtheorem{behauptung}{Behauptung}
+\newtheorem{beobachtung}{Beobachtung}
 \renewcommand{\proofname}{Beweis:}
 
 \renewcommand{\ker}{\mathop{\mathrm{Kern}}}
@@ -1571,7 +1574,7 @@ Beispiel: $|I|$=60, aber $I$ hat keine Untergruppe von Ordnung $30$.
 Sei $p$ prim und $G$ eine endliche Gruppe, s.d. $|G|=n=p^em$, wobei $e\geq 0, p\nmid m$.
 
 \begin{theorem}[Sylow I]
-    Es gibt eine Untergruppe $H\ug G$ sodass $H=p^e$.
+    Es gibt eine Untergruppe $H\ug G$ sodass $|H|=p^e$.
 \end{theorem}
 \begin{definition}
     Eine solche Untergruppe $H$ heisst \defn{p-Sylowuntergruppe} ("p-Sylow").
@@ -2182,4 +2185,250 @@ Daraus folgt direkt:
 \end{proof}
 \end{bemerkung}
 
+\section*{Vorlesung 15}
+
+\begin{definition}
+    Sei $R$ ein Ring. Ein \defn{Unterring} $S\subseteq R$ ist eine Teilmenge, s.d. $S\subseteq R$ ist eine Teilmenge, sodass
+    \begin{enumerate}[label=(\arabic*)]
+        \item $S$ ist Untergruppe bezüglich Addition
+        \item $S$ ist abgeschlossen bezüglich Multiplikation
+        \item $1\in S$
+    \end{enumerate}
+\end{definition}
+\begin{definition}
+    Sei $R$ ein Ring. Ein \defn{Ideal} $I\subseteq R$ ist eine Teilmenge, s.d.
+    \begin{enumerate}[label=(\alph*)]
+        \item $I$ ist eine Untergruppe bezüglich Addition.
+        \item Ist $n\in R$ und $a\in I$, so ist $ra\in I$.
+    \end{enumerate}
+\end{definition}
+\begin{bemerkung}
+    Sei $\phi\colon R\to R'$ ein Homomorphismus.
+    $\implies \bild\phi \subseteq R'$ ist ein Unterring.
+\end{bemerkung}
+\begin{proof}
+    $\bild\phi$ ist eine Untergruppe, da $\phi$ auch Gruppenhomomorphismus ist.
+    
+    $a=\phi(r), b=\phi(s)$ für $r, s\in R$
+
+    $\implies ab=\phi(r)\phi(s)=\phi(rs)$, d.h. $ab\in\bild \phi$.
+
+    $\implies$ abgeschlossen bez. Multiplikation.
+
+    $1_{R'}\in \bild\phi$ da $\phi(1_R)=\phi(1_{R'})$.
+\end{proof}
+
+\subsubsection*{Beispiel}
+\quad
+\begin{itemize}
+    \item Für $n\in\Z$ ist $n\Z$ ein Ideal.
+    \item Allgemein, für $a\in R$ ist $aR=Ra=\{ra\mid r\in R\} = (a)$ ein Ideal.
+\end{itemize}
+
+\begin{definition}
+    Ein Ideal von der Form $(a)$ für ein $a\in R$ heisst \defn{Hauptideal}.
+\end{definition}
+\begin{definition}
+    Seien $a_1, \ldots, a_n \in R$. Das Ideal $(a_1, \ldots, a_n)=\left\{\sum\limits_{i=1}^n r_ia_i\mid r_i\in R \right\}$ heisst das \defn{Ideal erzeugt von} $a_1, \ldots, a_n$.
+\end{definition}
+\begin{definition}
+    Sei $R$ ein Ring. Ein $a\in R$ ist eine \defn{Einheit}, falls es ein $b\in R$ gibt, s.d. $ab=1$.
+\end{definition}
+
+\paragraph{Ticker Frage:}
+Sei $R$ ein Ring und $a\in R$ eine Einheit. Dann ist $(a) = R$. (wahr, da $1=ba\in(a) \implies r\cdot 1=r\in (a)\quad \forall r\in R$).
+
+\begin{theorem}
+    Jedes Ideal in $\Z$ ist ein Hauptideal.
+\end{theorem}
+\begin{proof}
+    Jede Untergruppe von $\Z^+$ ist von der Form $n\Z$ für ein $n\in \Z$. Dies sind alles Ideale.
+\end{proof}
+\begin{theorem}
+    \begin{enumerate}[label=(\alph*)]
+        \item Sei $K$ ein Körper. Dann sind 0 und $(1)$ die einzigen Ideale.
+        \item Hat ein Ring $R$ genau zwei Ideale, so ist $R$ ein Körper.
+    \end{enumerate}
+\end{theorem}
+\begin{proof}
+    \begin{enumerate}[label=(\alph*)]
+        \item Sei $I\subseteq K$ ein Ideal. Falls $I\neq (0)$, so enthält $I$ ein Element $a\neq 0$. Da $K$ ein Körper ist, ist $a$ eine Einheit.
+        
+        $\implies (a)=(1)=K$.
+        \item $R\neq 0$, da $R$ zwei Ideale enthält, d.h. $1\neq 0$.
+        Sei $0\neq a\in R$, dann ist $(a)\neq(0)$.
+
+        $\implies (a)=(1)=R$
+
+        $\implies \exists b\in R $ s.d. $ ba=1$
+
+        $\implies b=a^{-1}$. D.h. $R$ ist ein Körper.
+    \end{enumerate}
+\end{proof}
+
+\begin{corollary}
+    Seien $K$ ein Körper und $R\neq\{0\}$ ein Ring.
+    Jeder Homomorphismus $\phi\colon K\to R$ ist injektiv.
+\end{corollary}
+\begin{proof}
+    $\ker\phi\subseteq K$ ist ein Ideal.
+
+    Falls $\ker\phi=(1)$, so ist $R=0$. Ansonsten ist $\ker(\phi)=(0)$.
+
+    $\implies \phi$ ist injektiv.
+\end{proof}
+
+\begin{definition}
+    Sei $S$ ein Ring, $R\subseteq S$ ein Unterring und $\alpha\in S$. Wir bezeichnen mit $R[\alpha]\subseteq S$ den kleinsten Unterring, der $R$ und $\alpha$ enthält.
+\end{definition}
+\begin{bemerkung}
+    $$R[\alpha]=\{s\in S\mid \exists n \text{ und } r_0,\ldots r_n\in R \text{ s.d. } s=r_0+r_1\alpha+\cdots+r_n\alpha^n\} =: R'$$
+\end{bemerkung}
+\begin{proof}
+    $R'$ ist Unterring und $R\subseteq R'$, $\alpha\in R' \implies R[\alpha]\subseteq R'$.
+
+    Offensichtlich ist auch $R[\alpha\supseteq R'$.
+\end{proof}
+
+\subsubsection*{Beispiele}
+\quad
+\begin{itemize}
+    \item $\Z[i] =\{a+bi\mid a,b,\in\Z\}  \subseteq\C$
+    \item $\Q[\sqrt{2}]\subseteq\R$
+\end{itemize}
+\subsection*{Polynomringe}
+Sei $R$ ein Ring und $x$ eine Variable. Der \defn{Polynomring} $R[x]$ ist der Ring der Polynome 
+
+$$R[x]=\left\{\sum\limits_{i=0}^n a_ix^i\mid n\geq 0, a_i\in R \right\}$$
+
+mit der üblichen Addition und Multiplikation.
+
+\begin{bemerkung}
+    $R[x]$ ist im Allgemeinen nicht dasselbe wie der Ring der polynomialen Abbildungen $R\to R$.
+\end{bemerkung}
+
+\begin{beispiel}
+    Wenn $R$ endlich ist, so gibt es nur endlich viele Abbildungen $R\to R$ und somit nur endlich viele polynomiale Abbildungen.
+    Aber der Ring der Polynome $R[x]$ ist unendlich.
+\end{beispiel}
+
+\begin{bemerkung}
+    Die Inklusionsabbildung $\iota R\hookrightarrow R[x]\quad a\mapsto a+0x+\cdots$
+    ist ein Ringhomomorphismus.
+    Wir können $R$ somit als Unterring von $R[x]$ anschauen.
+\end{bemerkung}
+
+\begin{definition}
+    Seien $R$ ein Ring und $x_1,\ldots,x_n$ Variablen.
+    Der \defn{Polynomring} $R[x_1,\ldots,x_n]$ in $n$ Variablen ist der Ring der Polynome 
+
+    $$\left\{\sum\limits_{i_1, \ldots, i_n}a_{i_1\cdots i_n}x_1^{i_1}\cdots x_n^{i_n} \mid \substack{ a_{i_1\cdots i_n}\in R, (i_1,\ldots,i_n)\in \Z^n_{\geq0},\\ \text{ nur endlich viele der $a_{i_1\cdots i_n}$ sind nicht 0}}\right\}$$
+
+    mit der üblichen Addition und Multiplikation.
+
+    Elemente von der Form $x_1^{i_1}\cdots x_n^{i_n}$ heissen \defn{Monome}.
+\end{definition}
+\begin{bemerkung}
+    Oft schreibt man $i=(i_1,\ldots,i_n)$ und dann $a_ix^i=a_{i_1\cdots i_n}x_1^{i_1}\cdots x_n^{i_n}$ (Multiindex Schreibweise).
+
+    In dieser Schreibweise gilt, für $i=(i_1,\ldots, i_n), j=(j_1,\ldots,j_n): \quad x^ix^j=x^{i+j}$.
+\end{bemerkung}
+\begin{beobachtung}
+    Ein $a\in R$ induziert einen Homomorphismus $R[x]\to R\quad p(x)\mapsto p(a)$.
+\end{beobachtung}
+\begin{theorem}[Einsetzungsprinzip]
+    Sei $\phi\colon R\to R'$ ein Ringhomomorphismus zu gegebenen Elementen $\alpha_1,\ldots,\alpha_n \in R'$, gibt es einen eindeutig bestimmten Homomorphismus $\Phi\colon R[x_1,\ldots,x_n]\to R'$, so dass die Einschränkung von $\Phi$ auf die konstanten Polynome mit $\phi$ übereinstimmt und sodass $\Phi(x_1)=\alpha_i$ für $i=1,\ldots,n$.    
+\end{theorem}
+\[
+\begin{tikzcd}[row sep=1cm, column sep=1cm, remember picture]
+  |[alias=R]| R \arrow[rr, "\phi"] \arrow[dr, hook, swap, "i"] && |[alias=R']| R' \\
+  & |[alias=Rx]| R[x] \arrow[ur, "\Phi"'] &
+\end{tikzcd}
+\begin{tikzpicture}[remember picture, overlay]
+  \coordinate (M1) at ($ (R)!0.5!(R') $);
+  \coordinate (C)  at ($ (M1)!1/3!(Rx) $);
+  \draw[->] (C) ++(0:6pt) arc (0:300:6pt);
+\end{tikzpicture}
+\]
+\begin{proof}
+    Multindex-Schreibweise
+    \begin{align*}
+        x&=(x_1,\ldots,x_n)\\
+        \alpha&=(\alpha_1,\ldots,\alpha_n)\\
+        i&=(i_1,\ldots,i_n)
+    \end{align*}
+    Für $r\in R$, schreiben wir $r'\defeq \phi(r)$.
+
+    Falls $\Phi$ existiert, so muss gelten
+    \begin{align*}
+        \Phi\left(\sum nx^i\right)&=\sum \phi(r_i)\alpha^i\\
+        &=\sum r'_i\alpha^i
+    \end{align*}
+    (da $\Phi$ ein Homomorphismus ist). D.h. $\Phi$ ist eindeutig.
+
+    \paragraph{Es genügt zu zeigen:} Die Abbildung $\Phi\colon R[x]\to R \quad \sum r_i x^i\mapsto \sum r'_i\alpha^i$ ist ein Homomorphismus.
+
+    Wir haben:
+    \begin{align*}
+        \Phi\left(\sum r_ix^i+\sum s_ix^i\right)&= \Phi\left(\sum (r_i+s_i)x^i\right)\\
+        &= \sum (r_i+s_i)\alpha^i\\
+        &=\sum(r'_i+s'_i)a^i\\
+        &=\sum r'_i\alpha^i+\sum s'_i\alpha^i\\
+        &= \Phi\left(\sum r_i\alpha^i\right)+\Phi\left(\sum s_i\alpha^i\right)
+        \end{align*}
+        
+        \begin{align*}
+        \Phi\left(\left(\sum r_ix^i\right)\left(\sum s_jx^{j}\right)\right) &= \Phi\left(\sum r_is_jx^{i+j}\right)\\
+        &= \sum(r_is_j)'\alpha^{i+j}\\
+        &=\sum r'_is'_j\alpha^{i+j}\\
+        &= \left(\sum r'_i\alpha^i\right)\left(\sum s'_j\alpha^j\right)\\
+        &=\Phi\left(\sum r_i\alpha^i\right)\Phi\left(\sum s_j\alpha^j\right)
+    \end{align*}
+    und $\Phi(1)=1$ (per Definition).
+\end{proof}
+
+\begin{bemerkung}
+    Sei $\psi\colon R\to R'$ ein Homomorphismus $\leadsto$ Homomorphismus 
+    
+    \begin{tikzcd}[row sep=1cm, column sep=1.5cm, baseline=(current bounding box.center)]
+        R \arrow[r] \arrow[rr, bend right=40, swap, "\phi"] & R' \arrow[r,hook] & R'[x]
+    \end{tikzcd}
+    
+    Gemäss Satz können wir $\phi$ eindeutig zu einem Homomorphismus $\Phi\colon R[x]\to R'[x]$ fortsetzen, sodass $x$ auf $x$ abgebildet wird. 
+
+    $\Phi$ bildet ein Polynom $a_0+a_1x+\cdots a_nx^n$ auf das Polynom $\phi(a_0)+\phi(a_1)x+\cdots+\phi(a_n)x^n$ ab.
+\end{bemerkung}
+
+\begin{beispiel}
+    $\psi\colon\Z\to\F_p=\Z/p\Z$ Reduktion modulo $p$.
+
+    $\leadsto$ $\Phi\colon\Z[x]\to\F_p[x]$
+    $f(x)=a_0+\cdots+a_nx^n\mapsto \overline{a_0}+\cdots+\overline{a_n}x^n$
+
+    $\overline{f}(x)$ ist die Restklasse von $f(x)$ modulo $p$.
+
+    (Bemerkung: $\ker\Phi=(p))$.
+
+    $$R[x][y]\underbrace{\iso}_{\text{wollen wir zeigen}} R[x,y]$$
+\end{beispiel}
+\begin{beispiel}
+    $$x^2y^2+4x^3-3x^2y-4y^2+2=(x^2-4)y^2-(3x^2)y+(4x^3+2)$$
+\end{beispiel}
+\begin{theorem}
+    Seien $x=(x_1,\cdots,x_n), y=(y_1,\ldots,y_m)$ zwei Mengen von Variablen. Dann gibt es einen eindeutigen Isomorphismus $\Phi\colon R[x, y]\to R[x][y]$ s.d. $\Phi$ auf $R$ die Identität ist und $\Phi$ die Variablen auf sich selbst abbildet.
+\end{theorem}
+\begin{proof}
+    Es gibt einen eindeutigen Homomorphismus $\Phi\colon R[x,y]\to R[x][y]$ s.d. $\Phi$ auf $R$ die Identität ist und $\Phi$ die Variablen auf sich selbst schickt.
+    \paragraph{Zu zeigen:} $\Phi$ ist ein Isomorphismus.
+
+    Betrachten wir die Inklusion $\psi\colon R[x]\hookrightarrow R[x,y]$
+
+    $\leadsto \psi$ lässt sich eindeutig fortsetzen zu einem Homomorphismus 
+    
+    $\Psi\colon R[x][y]\to R[x,y]$ so dass die $y_i$'s auf sich selbst abgebildet werden.
+
+    $\Psi\circ\Phi\colon R[x, y]\to R[x,y]$ ist die Identität auf $R$ und schickt die Variablen auf sich selbst.
+
+    $\underset{\text{Einsetzungsprinzip}}{\implies} \Psi\circ\Phi=\id_{R[x,y]}$, Ähnlich: $\Phi\circ\Psi = \id_{R[x, y]}$
+\end{proof}
 \end{document}

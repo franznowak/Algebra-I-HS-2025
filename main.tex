@@ -2,6 +2,7 @@
 
 \usepackage{graphicx}
 
+\usepackage{cancel}
 \usepackage{amsmath}
 \usepackage{mathtools}
 \usepackage{amsfonts}
@@ -373,7 +374,7 @@ $\overset{\text{\cref{bem:ker}}}{\implies}\ker\phi$ ist immer ein Normalteiler.
 \paragraph{Erinnerung:}
 Eine Untergruppe $N\ug G$ ist ein Normalteiler, falls:
 $$\forall a\in N, \forall b \in G: bab^{-1}\in N $$.
-Clicker Frage zu Normalteilern $\normal$:
+Clicker-Frage zu Normalteilern $\normal$:
 \begin{enumerate}
     \item $B_n(K) \ug GL_n(K)$ ist kein Normalteiler.
     \item $Z^+ \normal R^+$ ist Normalteiler (weil $R^+$ abelsch)
@@ -534,7 +535,7 @@ Dies definiert eine Äquivalenzrelation auf $G$ und die Rechtsnebenklassen sind 
 \end{proof}
 
 \section*{Vorlesung 4}
-Clicker Frage zu Homomorphismen $\phi\colon G\to G'$:
+Clicker-Frage zu Homomorphismen $\phi\colon G\to G'$:
 \begin{itemize}
     \item Gesehen in Übung: $\bild \phi \ug G'$.
     \item Dann folgt mit \cref{stz:lagrange}: $|\bild \phi|\teilt |G'|$ 
@@ -625,13 +626,13 @@ Dann ist $K_1K_2=abN$ (gemäss Lemma), d.h. $K_1K_2$ ist die Nebenklasse, die da
 
 \section*{Vorlesung 5}
 
-Clicker Frage: Sei $S^1 \ug \C^*$ die Untergruppe der komplexen Zahlen bestehnd aus den Elementen mit Betrag 1. Dann ist der Quotient $\C^*/S^1$ isomorph zu $\R^*_{>0}$. (Wahr)
+\paragraph{Clicker-Frage:} Sei $S^1 \ug \C^*$ die Untergruppe der komplexen Zahlen bestehend aus den Elementen mit Betrag 1. Dann ist der Quotient $\C^*/S^1$ isomorph zu $\R^*_{>0}$. (Wahr)
 
 Begründung:
 Die Abbildung $\phi\colon\C^*\to R^*_{>0}, \quad z\mapsto |z|$ ist ein surjektiver Homomorphismus. 
 $\ker\phi=S^1 \overset{\text{1. Isosatz}}{\implies} C^*/S^1\iso \R^*_{>0}$
 
-Clicker Frage: Sei $G$ eine Gruppe und $H_1,H_2\ug G$ Untergruppen. Dann ist $H_1\cap H_2$ eine Untergruppe von $G$. (Wahr)
+\paragraph{Clicker-Frage:} Sei $G$ eine Gruppe und $H_1,H_2\ug G$ Untergruppen. Dann ist $H_1\cap H_2$ eine Untergruppe von $G$. (Wahr)
 
 Begründung:
 \begin{gather*}
@@ -639,7 +640,7 @@ Begründung:
     a,b\in H_1\cap H_2\implies ab\in H_1\cap H_2\\
     a^{-1}\in H_1\cap H2
 \end{gather*}
-AllgemeinL Falls $H_i\ug G, i\in I$ eine Familie von Untergruppen ist, so ist $\bigcap\limits_{i\in I}H_i\ug G$ eine Untergruppe (selber Beweis).
+Allgemein: Falls $H_i\ug G, i\in I$ eine Familie von Untergruppen ist, so ist $\bigcap\limits_{i\in I}H_i\ug G$ eine Untergruppe (selber Beweis).
 
 \begin{definition}
     Sei $S\subseteq G$ eine Teilmenge. Dann ist $\zykl{s}\defeq \bigcap\limits_{\substack{H\ug G \\s.d. S\subseteq H}}H$ die \defn{von $S$ erzeugte Untergruppe}.
@@ -2431,4 +2432,147 @@ mit der üblichen Addition und Multiplikation.
 
     $\underset{\text{Einsetzungsprinzip}}{\implies} \Psi\circ\Phi=\id_{R[x,y]}$, Ähnlich: $\Phi\circ\Psi = \id_{R[x, y]}$
 \end{proof}
+
+\section*{Vorlesung 16}
+
+Sei $R$ ein Ring. Es gibt einen eindeutigen Homomorphismus $\phi\colon \Z\to R$ gegeben durch 
+
+$\phi(n)=\underbrace{1_R+1_R+\cdot+1_R}_{\text{n-mal}}$ falls $n\geq 0$
+
+$\phi(-n)=\underbrace{-(1_R+1_R+\cdot+1_R)}_{\text{n-mal}}$
+
+Falls $\psi\colon\Z\to\R$ ein Homomorphismus ist, so ist $\psi(1)=1_R$
+
+$\implies \psi=\phi$, d.h. $\phi$ ist eindeutig.
+
+\paragraph{Zu zeigen:} $\phi$ ist ein Homomorphismus.
+
+$\phi(m+n) = \phi(m)+\phi(n)$
+
+$\phi(mn)=\underbrace{1_R+1_R+\cdot+1_R}_{\text{mn-mal}}=\underbrace{1_R+1_R+\cdot+1_R}_{\text{m-mal}}\underbrace{1_R+1_R+\cdot+1_R}_{\text{n-mal}} = \phi(m)\phi(n)$
+
+\begin{definition}
+    $\ker\phi\subseteq \Z$ ist Ideal $\implies\ker\phi=n\Z$ für ein $n\geq 0$.
+    Dieses $n$ ist die \defn{Charakteristik} von $R$.
+\end{definition}
+
+\paragraph{Gestern:} $R$ Ring $\leadsto R[x]$
+
+$f\in R[x]$
+
+$f = a_nx^n+\cdots+a_1x+a_0, \quad a_n\neq 0$
+
+$\deg(f) \defeq n$ heisst der \defn{Grad} von $f$.
+
+$a_n$ ist der \defn{Leitkoeffizient}.
+
+Ist $a_n=1$, so heisst $f$ \defn{normiert}.
+
+\begin{beispiel}
+    $f=2x^3+x^2-1\in\Z[x]$ hat Grad 3 und Leitkoeffizient 2.
+    $f$ ist nicht normiert.
+\end{beispiel}
+
+\begin{theorem}
+    Seien $R$ ein Ring und $f,g,\in R[x]$, s.d. der Leitkoeffizient von $f$ eine Einheit ist. Dann gibt es Polynome $q,r \in R[x]$ s.d. $g=fq+r$ wobei $\deg(r) < \deg(f)$.
+\end{theorem}
+\begin{proof}
+    Induktion über $\deg(g)$.
+
+    Falls $\deg(g) < \deg(f)$, dann ist $g=0f+r$.
+
+    Falls $\deg(g)\geq\deg(f)=m$:
+
+    Wir schreiben:
+
+    \begin{align*}
+        g&=a_0+a_1x+\cdots+a_nx^n & a_n\neq 0\\
+        f& = b_0+b_1x+\cdots+b_mx^m & \substack{b_m\neq 0\\b_m\text{ Einheit}}
+    \end{align*}
+
+    Sei $g_1 = g - b_m^{-1}a_nx^{n-m}f$
+
+    $=a_0+\cdots+\cancel{a_nx^n}-b_m^{-1}a_nb_0-\cdots-\cancel{b_m^{-1}a_nb_mx^n}$
+
+    d.h. $\deg(g_1)<\deg(g)$
+
+    Induktion: $\exists q_1,r_1\in R[x]$
+    s.d. $g_1=fq_1+r_1$ \quad $\deg(r_1)<\deg(q_1)$
+
+    $g_1=f(\underbrace{b_m^{-1}a_nx^{n-m}+q_1}_{\defeq q})+\underbrace{r_1}_{\defeq r}$
+\end{proof}
+\begin{corollary}
+    Sei $g\in R[x]$ und sei $\alpha \in \R$ s.d. $g(\alpha) = 0$. Dann gilt $g=(x-\alpha)q$ für ein $q\in R[x]$.
+\end{corollary}
+\begin{proof}
+    Wir schreiben $g=(x-\alpha)q +r$
+
+    $\deg(r) < \deg(x-\alpha) = 1$
+
+    $\implies r\in R$
+
+    $\implies r=0$
+\end{proof}
+
+\begin{bemerkung}
+    Sei $K$ ein Körper. Jedes $f\in K[x]\backslash\{0\}$ hat eine Einheit als Leitkoeffizient.
+\end{bemerkung}
+\begin{theorem}
+    Sei $K$ ein Körper. Jedes Ideal in K[x] ist ein Hauptideal.
+\end{theorem}
+\begin{proof}
+    Sei $I\subseteq K[x]$ ein Ideal.
+    
+    Falls $I=(0)$ sind wir fertig.
+
+    Ansonsten: Sei $f\in I\backslash \{0\}$ vom kleinsten Grad.
+
+    Behauptung: $I=(f)$.
+    
+    Beweis: Sei $g\in I$. Wir schreiben
+    $g=fq+r, \deg(r)<\deg(f)$.
+
+    $\implies r=g-fq\in I$
+
+    Da aber $\deg(g) < \deg(f)$, folgt $r=0$.
+
+    $\implies g\in (f)$.
+\end{proof}
+
+\subsection*{Restklassenringe}
+
+Sei $R$ ein Ring und $I\subseteq R$ ein Ideal.
+
+$\leadsto I$ ist eine additive Untergruppe mit Nebenklassen $r+I\quad r\in R$.
+
+Die Menge der Nebenklassen $R/I$ bildet eine Gruppe.
+
+$\pi\colon R\to R/I$ ist ein Gruppenhomomorphismus.
+
+\begin{theorem}
+    \begin{enumerate}[label=(\alph*)]
+        \item Es gibt eine eindeutige Ringstruktur auf $\overline{R}=R/I$ so dass
+
+        $\pi\colon R\to\overline{R},\quad r\mapsto r+I$ ein Ringhomomorphismus ist.
+        \item $\ker \pi =I $
+    \end{enumerate}
+\end{theorem}
+\begin{proof}
+    Für $(r+I),(s+I)\in \overline{R}$ definieren wir $(r+I)(s+I)\defeq (rs+I)$
+
+    Diese Multiplikation ist wohldefiniert: 
+
+    Seien u und v jeweils Repräsentanten von $s+I$ und $r+I$.
+
+    $\implies$ es gibt $a,b \in I$, s.d. $u=s+a, v=r+b$.
+
+    $\implies vu=(r+b)(s+a)=rs+\underbrace{(ra+bs+ba)}_{\in I}$
+
+    $\implies vu+I = rs + I$
+
+    Man überprüfe direkt, dass $\overline{R}$ mit dieser Multiplikation alle Ringaxiome erfüllt und dass $\pi$ ein Homomorphismus mit $\ker I$ ist (kleine Übung).
+
+    $R/I$ heisst \defn{Restklassenring} von $R$ modulo $I$ oder auch \defn{Faktorring}.
+\end{proof}
+
 \end{document}

@@ -2837,6 +2837,167 @@ $$f(t)=\sum_{i=-n}^n a_it^i=t^{-n}\left(\sum_{i=-m}^na_it^{i+n}\right)$$
 Wir bezeichnen oft $R'=K[t,t^{-1}]$.
 \end{beispiel}
 
+\section*{Vorlesung 18}
+\paragraph{Gestern:} Sei $R$ ein Ring.
+
+$R[\alpha]=R[x]/(f)$ mit $f\in R[x]$. $\alpha$ ist die Restklasse von $x$.
+
+Dies nennen wir die Adjunktion von $\alpha$ zu $R$, s.d. $\alpha$ die Relation $f(\alpha)=0$ erfüllt.
+
+\begin{beispiel}
+    $f=x^2$ 
+    
+    $\implies R[\alpha]=R+R\alpha$ und es gilt $\alpha^2=0$.
+\end{beispiel}
+
+Der Homomorphismus $\phi\colon R\to R[\alpha]$ ist nicht immer injektiv. 
+
+Falls $f$ normiert ist, so ist $\phi$ inkektiv (folgt aus dem Satz von gestern).
+
+Im Allgemeinen ist $\ker\phi=R\cap(f)$.
+
+\begin{beispiel}
+    $R[x]/(x\cdot0-1)=0$
+\end{beispiel}
+
+\subsection*{Integritätsbereiche \& Quotientenkörper}
+
+Sei $R$ ein Ring.
+
+\begin{definition}
+    Ein $a\in R\backslash\{0\}$ heisst \defn{Nullteiler}, falls ein $b\in R\backslash\{0\}$ existiert, s.d. $ab=0$.
+\end{definition}
+\begin{beispiel}
+    In $\Z/10\Z$ gilt $\overline{5}\cdot\overline{2}=\overline{0}$.
+\end{beispiel}
+\begin{definition}
+    Ein \defn{Integritätsbereich} (IB) ist ein Ring $R$, der nicht der Nullring ist und der keine Nullteiler enthält.
+\end{definition}
+D.h. in einem IB gilt
+$1\neq 0$ und aus $ab=0$ folgt immer $a=0$ oder $b=0$.
+
+\begin{beispiel}
+    Jeder Unterring von einem Körper ist ein IB.
+\end{beispiel}
+\begin{bemerkung}
+    Sei $R$ ein IB. 
+    Falls $ab=ac$ für ein $a\neq 0$, so folgt $b=c$.
+\end{bemerkung}
+\begin{proof}
+    $ab=ac \implies a(b-c)=0\implies (b-c)=0\implies(b=c)$
+\end{proof}
+
+\begin{theorem}
+    Sei $R$ ein IB, dann ist auch $R[x]$ ein IB.
+\end{theorem}
+\begin{proof}
+    Seien $f,g\in R[x]\backslash\{0\}$.
+    Wir schreiben 
+    \begin{align*}
+        f&=a_0+\cdots+a_nx^n \qquad a_n\neq 0\\
+        g&=b_0+\cdots+b_mx^m \qquad b_m\neq0
+    \end{align*}
+    $\implies fg=\underbrace{a_nb_n}_{\neq 0 \text{da $R$ IB}}x^{m+n}+\cdots$
+
+    $\implies fg\neq 0$
+\end{proof}
+
+\begin{theorem}
+    Sei $R$ ein IB mit endlich vielen Elementen, dann ist $R$ ein Körper.
+\end{theorem}
+\begin{proof}
+    Sei $a\in R\backslash\{0\}$.
+
+    Man betrachte: 
+    $m_a\colon R\backslash\{0\} \to R\backslash\{0\}$
+
+    $b \mapsto ab$
+
+    Falls $ab=ac$, so ist $b=c$, d.h. $m_a$ ist injektiv.
+    
+    $\underset{R\text{ endlich}}{\implies} m_a$ ist surjektiv.
+
+    $\implies \exists b\in R$ s.d. $m_a(b)=ab=1$
+
+    $\implies a$ ist eine Einheit.
+\end{proof}
+
+\begin{theorem}
+    Sei $R$ ein IB. Dann gibt es einen Körper $K$ und einen injektiven Ringhomomorphismus $i\colon R\hookrightarrow K$.
+\end{theorem}
+\begin{beispiel}
+    $\Z \hookrightarrow \Q$
+\end{beispiel}
+\begin{proof}[Beweis/Konstruktion]
+Ein \defn{Bruch} ist ein Symbol $\frac{a}{b}$, wobei $a,b\in R$ und $b\neq 0$.
+
+Wir definieren $\frac{a_1}{b_1} \approx \frac{a_2}{b_2}$, falls $a_1b_2=a_2b_2$.
+
+Dies ist eine Äquivalenzrelation.
+
+Reflexivität und Symmetrie sind klar.
+
+Transitivität:
+
+Falls $\frac{a_1}{b_1}\approx\frac{a_2}{b_2}\approx\frac{a_3}{b_3}$
+
+$\implies a_1b_2=a_2b_1$ und $a_2b_3=b_2a_3$
+
+$\implies a_1b_2b_3 = a_2b_1b_3 = a_3b_2b_1$
+
+$\underset{b_2\neq0}{\implies} a_1b_3=a_3b_1$
+
+$\implies \frac{a_1}{b_1} \approx \frac{a_3}{b_3}$.
+
+
+Der \defn{Quotientenkörper} $K$ von $R$ ist die Menge der Äquivalenzklassen von Brüchen. 
+Wir schreiben $\frac{a_1}{b_1}=\frac{a_2}{b_2}$, falls $\frac{a_1}{b_1}\approx\frac{a_2}{b_2}$.
+
+Wir definieren Addition und Multiplikation auf $K$.
+
+$\frac{a}{b}\cdot\frac{c}{d} = \frac{ac}{bd}$
+
+$\frac{a}{b}+\frac{c}{d} = \frac{ad+bc}{bd}$
+
+\paragraph{Zu überprüfen:}
+\begin{itemize}
+    \item Addition und Multiplikation sind wohldefiniert.
+    \item Alle Körperaxiome sind erfüllt.
+\end{itemize}
+$\leadsto$ kleine Übung.
+
+Wir haben ausserdem 
+
+$i\colon R\to K$
+
+$a\mapsto \frac{a}{1}$
+
+Dies ist ein Ringhomomorphismus (klar)
+
+und inketiv: $\frac{a}{1}=\frac{b}{1}\Leftrightarrow a\cdot 1=b\cdot 1$.
+\end{proof}
+\begin{beispiel}
+    Sei $K$ ein Körper. Der Quotientenkörper $K(x)$ von $K[x]$ heisst \defn{Körper der rationalen Funktionen} in $x$ über $K$.
+
+    $K(x) = \left\{\text{Äquivalenzklassen } \frac{f}{g}, \text{ wobei } f,g\in K[x], g\neq 0\right\}$
+\end{beispiel}
+\begin{theorem}
+    Sei $R$ ein IB mit Quotientenkörper $K$.
+    Sei $K'$ ein Körper und $\phi\colon R\to K'$ ein injektiver Homomorphismus. Dann gibt es einen eindeutigen Homomorphismus $\Phi\colon K\to K'$ s.d. $\phi=\Phi\circ i$.
+\end{theorem}
+\[
+\begin{tikzcd}[row sep=1.5cm, column sep=1cm, remember picture]
+  |[alias=R]| R \arrow[rr, "\phi"] \arrow[dr, hook, swap, "i"] && |[alias=K']| K' \\
+  & |[alias=K]| K \arrow[ur, "\exists!\ \Phi"'] &
+\end{tikzcd}
+\begin{tikzpicture}[remember picture, overlay]
+  \coordinate (M1) at ($ (R)!0.5!(K') $);
+  \coordinate (C)  at ($ (M1)!1/3!(K) $);
+  \draw[->] (C) ++(0:6pt) arc (0:300:6pt);
+\end{tikzpicture}
+\]
+
+
 
 
 \end{document}

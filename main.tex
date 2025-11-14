@@ -302,7 +302,7 @@ Dann ist $\zykl{a}=\{\ldots, a^{-2},a^{-1},1, a, a^2,\ldots\}$ und alle Partitio
 \end{proof}
 
 \begin{bemerkung}
-    Zwei zuklische Gruppen gleicher Ordnung sind immer isomorph.
+    Zwei zyklische Gruppen gleicher Ordnung sind immer isomorph.
 \end{bemerkung}
 \begin{proof}
     Seien $G=\zykl{a}, G'=\zykl{b}$ und $\phi \colon G\to G', \quad \phi(a^n)\mapsto b^n$.
@@ -459,7 +459,7 @@ Wir schreiben $a\equiv b$, falls ein $h\in H$ existiert, so dass $b=ah$, d.h. fa
 \end{proof}
 
 \begin{definition}
-    Die Anzahl der Linksnebenklassen von $H$ in $G$ ist der sogenannte \defn{Index von $H$ in $G$}. Wir schreiben $[G:H]$ für den Index. ($[G\text{ in }H]$ kann $\infty$ sein.)\looseness=-1
+    Die Anzahl der Linksnebenklassen von $H$ in $G$ ist der sogenannte \defn{Index von $H$ in $G$}. Wir schreiben $[G:H]$ für den Index. ($[G:H]$ kann $\infty$ sein.)\looseness=-1
 \end{definition}
 
 \begin{beispiel}
@@ -508,7 +508,7 @@ Daraus folgt direkt:
     Sei $G$ eine Gruppe und $H\ug G$. Die \defn{Rechtsnebenklassen} von $H$ in $G$ sind die Mengen $Ha\defeq\{ha\mid h\in H\}$.
 \end{definition}
 
-Definiere $a\equiv_R b$, falls es ein $h\in H$ gibt, so dass $b=ha$.
+Definiere $a\equiv_R b$, falls es ein $h\in H$ gibt, sodass $b=ha$.
 
 Dies definiert eine Äquivalenzrelation auf $G$ und die Rechtsnebenklassen sind die Äquivalenzklassen bezüglich dieser Relation. $\leadsto$  Partition von G.
 
@@ -766,14 +766,14 @@ Wann ist $\pi\colon H\times K \to G \quad \pi(h,k)=hk$ ein Homomorphismus?
     $\implies G=\{1,g,g^{-1}, h, h^{-1}, \ldots\}$. Nicht möglich, da $G$ eine gerade Ordnung hat.
 
     D.h. wir sind im Fall (c). 
-    $G$ enthält $1,g,h,h^2,gh,gh^2$. (kleine Übung: Diese Elemente sind alle verschieden).
+    $G$ enthält $1,g,h,h^2,gh,gh^2$. (kleine Übung: Diese Elemente sind alle verschieden.)
     $\implies G=\{1,g,h,h^2,gh,gh^2\}$.
     
     Wir haben $hg=gh$ oder $hg=gh^2$.
-    Falls $hg=gh$, so hate $(gh)$ Ordnung 6.
+    Falls $hg=gh$, so hat $(gh)$ Ordnung 6.
     Das haben wir aber ausgeschlossen. Also ist $hg=gh^2$.
     
-    Die Relation $gh=h^2g$ definiert die Verknüpfung aug G eindeutig.
+    Die Relation $gh=h^2g$ definiert die Verknüpfung auf G eindeutig.
     Jedes Produkt in $g$ und $h$ lässt sich mit dieser Regel in die Form $g^i h^j$ bringen, wobei $0\leq i\leq 1, 0\leq j \leq 2$.
 
     Im Fall (c) gibt es also höchstens eine Gruppe. Diese muss $S_3$ sein.
@@ -2574,5 +2574,269 @@ $\pi\colon R\to R/I$ ist ein Gruppenhomomorphismus.
 
     $R/I$ heisst \defn{Restklassenring} von $R$ modulo $I$ oder auch \defn{Faktorring}.
 \end{proof}
+
+\section*{Vorlesung 17}
+
+\paragraph{Gesehen:} Sei $R$ ein Ring, $I\subseteq R$ ein Ideal.
+$\leadsto \overline{R}=R/I$ hat eindeutige Ringstruktur, s.d. $\pi\colon R\to\overline{R}\quad r\mapsto r+I$ ein Homomorphismus ist.
+
+\begin{theorem}[Abbildungseigenschaft]
+    Sei $\phi\colon R\to R'$ ein Ringhomomorphismus und $I\subseteq R$ ein Ideal, s.d. $I\subseteq\ker\phi$. Dann existiert ein eindeutiger Ringhomomorphismus $\overline{\phi}\colon \overline{R}=R/I\to R'$ mit $\overline{\phi}\circ\pi=\phi$
+ \end{theorem}
+\[
+\begin{tikzcd}[row sep=1.5cm, column sep=1cm, remember picture]
+  |[alias=R]| R \arrow[rr, "\phi"] \arrow[dr, swap, "\pi"] && |[alias=R']| R' \\
+  & |[alias=Rbar]| \overline{R}=R/I \arrow[ur, "\exists!\ \overline{\phi}"'] &
+\end{tikzcd}
+\begin{tikzpicture}[remember picture, overlay]
+  \coordinate (M1) at ($ (R)!0.5!(R') $);
+  \coordinate (C)  at ($ (M1)!1/3!(Rbar) $);
+  \draw[->] (C) ++(0:6pt) arc (0:300:6pt);
+\end{tikzpicture}
+\]
+\begin{proof}
+    Aus der Abbildungseigenschaft für Gruppen folgt, dass ein eindeutiger Gruppenhomomorphismus $\overline{\phi}\colon\overline{R}\to R'$ existiert, s.d. $\phi=\overline{\phi}\circ\pi$, gegeben durch $\overline{\phi}(\overline{a})\defeq \phi(a)$, $\overline{a} = a+I$.
+    Man überprüfe direkt, dass $\overline{\phi}$ auch ein Ringhomomorphismus ist.
+\end{proof}
+
+\begin{beispiel}
+    $\phi\colon\Z\hookrightarrow\Q$, $\phi(n\Z)\subseteq \Q$ ist kein Ideal, falls $n\neq 0$.
+\end{beispiel}
+
+\begin{behauptung}[Clicker-Frage]
+    Sei $\phi \colon R\to R'$ ein surjektiver Homomorphismus mit $I\subseteq R$ Ideal $\implies \phi(I)\subseteq R'$ ist Ideal.
+\end{behauptung}
+\begin{proof}
+    $\phi(I)\subseteq R'$ ist eine additive Untergruppe (da es das Bild einer Untergruppe unter $\phi$ ist).
+
+    Sei $r'\in R'$ und $a'\in\phi(I)$ 
+    
+    $\implies \exists r\in R$ und $a\in I$ s.d. $\phi(r)=r'$ und $\phi(a)=a'$
+
+    $\implies r'a'=\phi(r)\phi(a)=\phi(ra)\in \phi(I)$
+\end{proof}
+
+\begin{behauptung}[Clicker-Frage]
+    % Seien $\phi\colon R\to R'$ ein Ringhomomorphismus und $J\subset R'$ ein Ideal. Dann gilt: $\phi^{-1}(J)\subset R$ ist ein Ideal.
+    Seien $\phi\colon R\to R'$ ein Homomorphismus und $J\subseteq R'$ ein Ideal. Dann gilt: $\phi^{-1}(J) \subseteq R$ ist ein Ideal.
+\end{behauptung}
+\begin{proof}
+    Seien $a,b\in\phi^{-1}(J)$
+
+    $\implies \phi(a+b)=\phi(a)+\phi(b)\in J$
+
+    $\implies a+b\in\phi^{-1}(J), \quad  0\in\phi^{-1}(J)$
+
+    Sei $r\in R$
+
+    $\implies \phi(ra)=\phi(r)\phi(a)\in J$
+
+    $\implies ra\in \phi^{-1}(J)$.
+\end{proof}
+
+\begin{theorem}[Entsprechungssatz]
+    Sei $R$ ein Ring, $I\subseteq R$ ein Ideal, $\pi\colon R\to R/I=\overline{R}$ Quotient.
+
+    Dann gilt:
+    \begin{enumerate}[label=(\alph*)]
+        \item Die Abbildung $\Phi\colon\left\{\text{Ideale }J\subseteq R \mid I\subseteq J\right\}\to\left\{\text{Ideale in } R\right\}$
+        
+        $J\mapsto \pi(J)$ ist eine Bijektion $\pi^{-1}(H)\xleftarrow{} H$.
+        \item Falls $J\subseteq R$ ein Ideal ist mit $I\subseteq J$, so gilt $R/J\iso \overline{R}/\pi(J)$
+    \end{enumerate}
+\end{theorem}
+\begin{proof}
+    \begin{enumerate}[label=(\alph*)]
+        \item $\pi(J)\subseteq R$ ist ein Ideal, da $\pi$ surjektiv ist.
+        Ist $H\subseteq \overline{R}$ ein Ideal, so ist $\pi^{-1}(H)\subseteq R$ ein Ideal, das $I$ enthält (da $\pi^{-1}(0)=I$).
+        D.h., beide Abbildungen sind wohldefiniert.
+        \paragraph{Z.z:}
+        \quad
+        \begin{itemize}
+            \item $\pi^{-1}(\pi(J))=J$ und
+            \item $\pi(\pi^{-1}(H))=H$
+        \end{itemize}
+        für alle $I\subseteq R$ und $H\subseteq \overline{R}$.
+
+        Wir haben $\pi(\pi^{-1}(H))=H$, da $\pi$ surjektiv ist.
+        
+        Ausserdem gilt $\pi^{-1}(\pi(J))\supseteq J$.
+
+        Sei $x\in \pi^{-1}(\pi(J))$, d.h. $\pi(x)\in\pi(J)$
+
+        $\implies \exists y\in J$ s.d. $\pi(x)=\pi(y)$.
+
+        $\implies \pi(x-y)=0$
+
+        $\implies x-y\in\ker\pi = I$.
+        
+        Da $y\in J$ und $x-y \in I\subseteq J$, folgt $x= (x-y)+y\in J$
+
+        $\implies \pi^{-1}(\pi(J))=J$
+
+        \item Sei $\phi\colon \overline{R}\to\overline{R}/\pi(J)$ Quotient.
+
+        Man betrachte $R \xrightarrow{\pi} \overline{R} \xrightarrow{\phi} \overline{R}/\pi(J)$.
+
+        Dann ist $\ker\pi\circ\phi=\pi^{-1}(\pi(J))\overset{(a)}{=}J$
+
+        $\implies \overline{R}/\pi(J)\iso R/J$.
+    \end{enumerate}
+\end{proof}
+
+Sei $R$ ein Ring und $a\in R$.
+Wir können $R/(a)$ interpretieren als den Ring, in welchem zusätzlich die Relation $a=0$ gilt.
+
+\begin{beispiel}
+    $R=\Z$ und ausserdem soll gelten $3\cdot 4=1\Leftrightarrow 11=0$.
+
+    $\leadsto \Z/(11)=\Z/11\Z$.
+\end{beispiel}
+\begin{beispiel}
+    Sei $R=\Z[i]$ der Ring der Gaussschen Zahlen. Sei $\overline{R}$ der Ring, den man durch Einführung der Relation $1+3i=0$ erhält, d.h. $\overline{R}=\Z[i]/(1+3i)$.
+
+    Wir haben $-i(1+3i)\in(1+3i)$, 
+    
+    d.h. in $\overline{R}$ gilt $\overline{-i}(\overline{1}+\overline{3}\overline{i})=0$
+
+    $\implies \overline{-i}+\overline{3}=0$
+
+    d.h. in $\overline{R}$ gilt $\overline{i}=\overline{3}$
+    
+    $\implies \overline{1}+\overline{3i} = \overline{1}+\overline{9}=\overline{10}=0$
+\end{beispiel}
+
+\begin{behauptung}
+    $\overline{R}\defeq\Z[i]/(1+3i)\iso \Z/10\Z$
+\end{behauptung}
+\begin{proof}
+    Man betrachte den Homomorphismus $\phi\colon\Z\to\overline{R}$ (es gibt genau einen).
+
+    Jedes Element in $\overline{R}$ ist von der Form $\overline{a}+\overline{bi}=\overline{a}+\overline{b}\overline{3}$ für $a, b \in \Z$
+
+    $\implies \phi$ ist surjetktiv.
+
+    Da $\overline{10}=0$ gilt in $\overline{R}$, folgt $10\Z\subseteq\ker{\phi}$.
+
+    Sei $n\in\ker\phi$. Dann ist $n\in(1+3i)\subseteq\Z[i]$,
+
+    d.h. $\exists a,b\in\Z$ sodass $n=(a+bi)(1+3i)=(a-3b)+\underbrace{(3a+b)}_{=0}i$
+
+    $\implies b=-3a$
+
+    $\implies n=a(1+3i)(1+3i) = 10a \implies n\in 10\Z$
+
+    $\implies \ker\phi=10\Z$
+
+    $\implies \overline{R}\iso\Z/\ker\phi=\Z/10\Z$
+\end{proof}
+
+\subsection*{Adjunktion von Elementen}
+Hinzufügen von Elementen zu einem Ring, die bestimmte Relationen erfüllen.
+\begin{beispiel}
+    $\pi\colon\R[x]\to \C$ s.d. $\pi/\R\colon \R\hookrightarrow \C$ und $\pi(x)=i.$
+    
+    Dann ist $\ker\pi=(x^2+1)$.
+
+    (\underline{Beweis} $(x^2+1)\subseteq \ker\pi$:
+
+    Falls $f\in\R[x]$ s.d. $f(i)=0$ $\implies (x-i)\teilt f$ aber auch $f(-i)=0 \implies (x+i)\teilt f$
+    $\implies (x^2+1)\teilt f \implies f\in(x^2+1)$.)
+
+    $\implies \C \iso \R[x]/(x^2+1)$
+\end{beispiel}
+\paragraph{Allgemein:} Sei $S$ ein Ring, $R\subseteq S$ Unterring, $\alpha\in S$.
+
+Man betrachte 
+$\pi\colon R[x]\to R[\alpha]$ sodass $\pi/R$ bildet $R$ auf $R$ ab und $\pi(x)=\alpha$.
+
+Dann ist $R[\alpha]\iso R[x]/\ker\pi$.
+    
+Sei $R$ ein Ring und $f\in R[x]$. 
+$f=c_nx^n+\cdots+c_0$. 
+
+Wir bezeichnen mit $\alpha$ die Restklasse von $x$ modulo $(f)$.
+Dann erfüllt $\alpha$ in $R[x]/(f)$ die Relation 
+$$\overline{c}_n\alpha^n+\overline{c}_{n-1}\alpha^{n-1}+\cdots+\overline{c}_0=0$$
+wobei $\overline{c}_i$ die Restklasse von $c_i$ modulo $(f)$ ist.
+    
+\begin{definition}
+    Oft bezeichnet man den Ring $R[x]/(f)$ durch $R[\alpha]$ und man nennt ihn den Ring, den man durch \defn{Adjunktion} von $\alpha$ zu $R$ erhält.
+\end{definition}
+
+\begin{theorem}
+    Seien $R$ ein Ring und $f\in R[x]$ ein normiertes Polynom, s.d. $\deg f =: n>0$. 
+    Dann ist die Abbildung
+    
+    $\Phi\colon R^n\to R[\alpha]=R[x]/(f)$
+
+    $(r_0,\ldots,r_{n-1})\mapsto r_0+r_1\alpha+\cdots+r_{n-1}\alpha^{n-1}$
+
+    eine Bijektion.
+\end{theorem}
+\begin{proof}
+    Jedes Element in $R[\alpha]$ ist von der Form $g(\alpha)$ für ein $g(x)\in R[x]$. 
+
+    Division mit Rest:
+
+    $g(x)=f(x)q(x)+r(x)$ mit $\deg r(x) < \deg f(x)$.
+
+    Da $f(\alpha) = 0$, folgt $g(\alpha)=r(\alpha) \implies \Phi$ surjektiv.
+
+    Um zu zeigen, dass $\Phi$ injektiv ist, zeigen wir 
+
+    $r_0+r_1\alpha+\cdots+r_{n-1}\alpha^{n-1} \neq 0$ für alle $r_0,\ldots, r_{n-1}\in R$, nicht alle null.
+
+    Dazu zeigen wir, dass $(f)\backslash\{0\}$ keine Elemente von Grad $< n$ enthält.
+
+    Sei $g\in (f)\backslash \{0\}$. Dann ist $g=hf$ für ein $h\in R[x]$
+    
+    $h=b_0+\cdots+b_mx^m, b_m\neq 0$
+
+    $\implies hf=b_mx^{m+n}+\cdots$
+
+    $\implies \deg g = \deg(hf) \geq n$.
+\end{proof}
+
+\begin{beispiel}
+    $\Z[\alpha]=\Z[x]/(x^3+3x+1)$
+
+    $\underset{\text{Satz}}{\implies}$ Jedes Element in $\Z[\alpha]$ ist von der Form $r_0+r_1\alpha+r_2\alpha^2, \quad r_i\in \Z$.
+
+    Wir haben z.B. 
+    $$(2+\alpha-\alpha^2)+(1+\alpha)= 3+2\alpha-\alpha^2$$
+
+    \begin{align*}
+    (2+\alpha-\alpha^2)(1+\alpha) &= 2+3\alpha-\alpha^3\\
+    &= \underbrace{(1+3\alpha+\alpha^3)(-1)}_{=0} + (3+6\alpha)\\
+    &= 3+6\alpha
+    \end{align*}
+\end{beispiel}
+
+Wir nutzen meist normierte Polynome, um leicht verständliche Ringe zu erhalten. 
+Hier ein Beispiel mit einem nicht normierten Polynom:
+\begin{beispiel}
+    Für $a\in R$ betrachten wir $R[x]/(ax-1)=R[\alpha]$
+
+    Dann ist $a\alpha=1$, d.h. $a$ ist invertierbar in $R[\alpha]$.
+
+    Sei $\beta\in R[\alpha]$. Wir schreiben
+    $$\beta=r_0+r_1\alpha+\cdots+r_m\alpha^m$$
+    für ein $m\geq 0$. Dann ist 
+    $\beta = \alpha^m(r_0a^m+r_1 a^{m-1}+\cdots+r_m)$.
+
+    Das heisst, Elemente in $R[\alpha]$ sind von der Form $\alpha^kr$ für $r\in R, k\geq 0$.
+\end{beispiel}
+
+\begin{beispiel}[Spezialfall]
+$R=K[t]$. Wir betrachten $'=K[t,x]/(xt-1)$.
+
+Dann ist $R'$ der Ring der \defn{Laurentpolynome}, d.h. Polynome in $t$ und $t^{-1}$.
+$$f(t)=\sum_{i=-n}^n a_it^i=t^{-n}\left(\sum_{i=-m}^na_it^{i+n}\right)$$
+
+Wir bezeichnen oft $R'=K[t,t^{-1}]$.
+\end{beispiel}
+
+
 
 \end{document}

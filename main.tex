@@ -94,6 +94,7 @@
 \newcommand{\trans}{\mathcal{T}}
 \newcommand{\operateson}{\curvearrowright}
 \newcommand{\mat}{\mathrm{Mat}}
+\newcommand{\ggT}{\mathrm{ggT}}
 
 \title{Algebra I -- {Prof. Christian Urech}}
 \author{Mitschrift: Franz Nowak}
@@ -2981,6 +2982,9 @@ und inketiv: $\frac{a}{1}=\frac{b}{1}\Leftrightarrow a\cdot 1=b\cdot 1$.
 
     $K(x) = \left\{\text{Äquivalenzklassen } \frac{f}{g}, \text{ wobei } f,g\in K[x], g\neq 0\right\}$
 \end{beispiel}
+
+\section*{Vorlesung 19}
+
 \begin{theorem}
     Sei $R$ ein IB mit Quotientenkörper $K$.
     Sei $K'$ ein Körper und $\phi\colon R\to K'$ ein injektiver Homomorphismus. Dann gibt es einen eindeutigen Homomorphismus $\Phi\colon K\to K'$ s.d. $\phi=\Phi\circ i$.
@@ -2997,7 +3001,352 @@ und inketiv: $\frac{a}{1}=\frac{b}{1}\Leftrightarrow a\cdot 1=b\cdot 1$.
 \end{tikzpicture}
 \]
 
+\begin{proof}
+    Wir definieren $\Phi(\frac{a}{b})\defeq \phi(a)\phi(b)^{-1}$
 
+    $\Phi$ ist eindeutig.
 
+    $\Phi$ ist wohldefiniert: 
+    
+    Falls $\frac{a_1}{b_1}\approx \frac{a_2} {b_2}\implies a_1b_2=b_1a_2$
 
+    \begin{align*}
+    \implies \phi(a_2)\phi(b_1)&=\phi(a_1)\phi(b_2)\\
+    \implies \Phi\left(\frac{a_2}{b_2}\right)&=\phi(a_2)\phi(b_2)^{-1}\\
+    &=\phi(a_1)\phi(b_1)^{-1}\\
+    &=\Phi\left(\frac{a_1}{b_1}\right)
+    \end{align*}
+    Man überprüft direkt, dass das ein Homomorphismus ist.
+\end{proof}
+
+\subsection*{Maximale Ideale}
+\begin{definition}
+    Sei $R$ ein Ring. Ein Ideal $I\subseteq R$ ist \defn{maximal}, falls $I\neq R$ und falls $I$ in keinem  anderen Ideal ausser $I$ und $R$ enthalten ist.
+\end{definition}
+
+\begin{beispiel}
+    Sei $K$ ein Körper. Dann ist $(0) \subseteq K$ maximal.     
+\end{beispiel}
+\begin{beispiel}
+    Die maximalen Ideale in $\Z$ sind die Ideale von der Form $p\Z$ für $p$ prim.
+\end{beispiel}
+\begin{proof}
+    Alle Ideale in $\Z$ sind von der Form $n\Z$. 
+    
+    Wir haben $n\Z \subseteq m\Z \Leftrightarrow m \teilt n$.
+
+    D.h. falls $p\Z\subseteq n\Z$, so gilt $n\teilt p \implies n=p$ oder $n=1$.
+\end{proof}
+\begin{theorem}
+    Ein Ideal $I\subseteq R$ ist maximal $\Leftrightarrow R/I$ ist ein Körper.
+\end{theorem}
+\begin{proof}
+    $R/I$ ist ein Körper $\Leftrightarrow R/I$ hat genau zwei Ideale: $(0)$ und $R/I$.
+    
+    Entsprechungssatz:
+
+    $\{$ Ideale $I\subseteq R$ s,d $I\subseteq J \} \overset{1:1}{\leftrightarrow} \{ $ Ideale in $R/I\}$
+
+    d.h. $R/I$ hat genau zwei Ideale $\Leftrightarrow$ I ist maximal.
+\end{proof}
+
+\begin{beispiel}
+    $\Z/n\Z$ ist ein Körper $\Leftrightarrow n$ ist prim.
+\end{beispiel}
+
+\begin{theorem}
+    Die maximalen Ideale in $\C[x]$ sind die Hauptideale von der Form $(x-a), a\in \C$.
+\end{theorem}
+\begin{bemerkung}
+    $(x-a)$ ist genau der Kern des Einsetzungshomomorphismus $e_a\colon \C[x]\to\C\quad f\mapsto f(a)$
+
+    D.h. es gibt eine Bijektion 
+    \begin{align*}
+    \C&\overset{\sim}{\to}\{\text{maximale Ideale in }\C[x]\} \\ a&\mapsto \ker e_a
+    \end{align*}
+\end{bemerkung}
+\begin{proof}
+    Sei $I\subseteq \C[x]$ maximal. Gesehen: $I=(f)$, wobei $f\in I$ von minimalem Grad in $(f)$ ist. 
+    Da $(0)\neq I \neq \C[x]$, ist $f$ nicht konstant.
+
+    $\implies \exists a\in\C$ s.d. $f(a)=0$
+
+    $\implies x-a\teilt f$
+
+    $\implies f\in (x-a)$
+
+    $\implies I\subseteq (x-a)$
+
+    $\underset{I\text{ maximal}}{\implies} I=(x-a)$
+
+    Umgekehrt: 
+
+    $\C[x]/(x-a) = \C[x]/\ker e_a \iso \C \implies (x-a)$ ist maximal (da $\C$ ein Körper ist).
+\end{proof}
+\begin{beispiel}
+    $(x^2+1)\subseteq \R[x]$ ist maximal, da $\R[x]/(x^2+1)\iso \C$
+\end{beispiel}
+\begin{beispiel}
+    Sei $(a_1,\ldots, a_n)\in \C^n$, dann ist das Ideal $(x_1-a_1, \ldots, x_n-a_n)\subseteq \C[x_1,\ldots,x_n]$ maximal.
+\end{beispiel}
+\begin{proof}
+    Übung.
+\end{proof}
+
+\begin{theorem}[Hilbert Nullstellenstatz]
+    Jedes maximale Ideal in $\C[x_1,\ldots,x_n]$ ist von dieser Form.
+\end{theorem}
+\begin{proof}
+    Siehe Artin.
+\end{proof}
+Das ist der Beginn der Algebraischen Geometrie.
+
+Geometrie von $\C^n \leftrightarrow $ maximale Ideale in $\C[x_1,\ldots,x_n]$
+
+\begin{theorem}
+    Sei $R$ ein Ring. Jedes Ideal $I \subseteq R, I\neq (1)$ ist in einem maximalen Ideal enthalten.
+\end{theorem}
+\begin{proof}
+    Siehe Übungen. Benötigt Lemma von Zorn / Auswahlaxiom.
+\end{proof}
+
+\begin{definition}
+    Ein Ideal $I\subseteq R$ heisst \defn{Primideal}, falls $I\neq (1)$ und falls für alle $a, b\in R$ gilt: falls $ab\in I$, so ist $a\in I$ oder $b\in I$.
+\end{definition}
+\paragraph{Übung:} $I\subseteq $ ist Primideal $\Leftrightarrow R/I$ ist Integritätsbereich.
+
+\subsection*{Faktorzerlegung}
+
+\subsubsection*{Ganze Zahlen}
+Gesehen: Jedes Ideal in $\Z$ ist von der Form $n\Z$ für $n\in\Z_{\geq0}$.
+
+Wir haben: 
+\begin{align*}
+a\Z+b\Z&=\{ar+bs\mid r,s\in \Z\}\\
+&=d\Z \text{ für ein } d\in \Z_{\geq0}
+\end{align*}
+$d$ heisste der \defn{grösste gemeinsame Teiler} von $a$ und $b$.
+Wir schreiben $d = \ggT(a,b)$.
+\begin{theorem}
+    $a,b \in \Z_{\geq0}, d=\ggT(a,b)$. Dann gilt:
+    \begin{enumerate}[label=(\alph*)]
+        \item $\exists r,s\in \Z$ s.d. $d=ar+bs$
+        \item $d\teilt a$ und $d\teilt b$
+        \item Sei $e\in\Z$ sodass $e\teilt a$ und $b\teilt a$, dann gilt $e\teilt d$.
+    \end{enumerate}
+\end{theorem}
+\begin{proof}
+    \begin{enumerate}[label=(\alph*)]
+        \item Klar, da $d\in a\Z+b\Z$
+        \item folgt, da $a, b \in d\Z$
+        \item $e\teilt a$ und $e\teilt b$ 
+        
+        $\implies a,b\in e\Z$
+
+        $\implies ar+bs\in e\Z$ für alle $r,s\in \Z$
+
+        $\implies d\in e\Z$.
+    \end{enumerate}
+\end{proof}
+
+\begin{lemma}
+    Seien $p\in \Z$ eine Primzahl und $a,b\in \Z$. Falls $p\teilt ab$, dann gilt entweder $p\teilt a$ oder $p\teilt b$.
+\end{lemma}
+\begin{proof}
+    Man nehme an $p\teilt ab$, aber $p\nmid a$.
+
+    $\implies \ggT(p,a)=1$
+
+    $\implies \exists r,s \in\Z$ s.d. $rp+sa=1$
+
+    $\implies \underbrace{rpb+sab}_{\text{durch $p$ teilbar}}=b$
+
+    $\implies p\teilt b$.
+\end{proof}
+\begin{theorem}
+    Sei $a\in \Z, a\neq 0.$
+    Dann gibt es ein $k\geq 0$ und Primzahlen $p_1, \ldots, p_k>0$ s.d. 
+    $a = c p_1\cdots p_k$ mit $c = \pm 1$.
+    
+    Diese Faktorisierung ist eindeutig (bis auf die Reihenfolge der Primfaktoren).
+\end{theorem}
+\begin{proof}
+    Induktion über $a$. 
+
+    Anfang: $a=1$ stimmt (keine Primfaktoren).
+
+    Induktionsschritt: 
+    
+    Falls $a$ prim ist, sind wir fertig.
+
+    Sonst $a=bb'$ für $b,b'<a$.
+
+    $\underset{\text{IH}}{\implies} b$ und $b'$ haben Primfaktorisierung.
+
+    $\implies a$ hat eine solche Faktorisierung.
+
+    Eindeutigkeit: Man  nehme an $\pm p_1\cdots p_n = \pm q_1\cdots q_m$ zwei solche Faktorisierungen.
+
+    Vorzeichen stimmen überein.
+
+    Wir haben $p_1\teilt q_1 \cdots q_m$
+
+    $\underset{p_1\text{ prim}}{\implies} p_1\teilt q_i$ für ein $i$. oBdA $i=1$.
+
+    $\implies p_1=q_1\implies p_2\cdots p_n=q_2\cdots q_m$ durch Induktion über $n$.
+\end{proof}
+Kleine Übung: Analoge Resultate gelten für $K[x]$ wenn $K$ ein Körper ist.
+
+\subsection*{Faktorielle Ringe}
+
+\begin{definition}
+    Seien $R$ ein IB und $a,b\in R$. 
+    \begin{itemize}
+        \item $a$ \defn{teilt} $b$, falls $b=aq$ für ein $q\in R$. Wir schreiben $a\teilt b$.
+        \item $a$ ist ein \defn{echter Teiler} von $b$, falls $b=aq$, sodass weder $a$ noch $q$ eine Einheit sind.
+        \item $a$ und $b$ sind \defn{assoziiert}, falls $a\teilt b$ und $b\teilt a$.
+        \item $a$ ist \defn{irreduzibel}, falls $a$ keine Einheit ist, $a\neq 0$ und falls $a$ keine echten Teiler hat.
+        \item $p\in R$ ist ein \defn{Primelement}, falls $p$ keine Einheit ist, $p\neq 0$, und falls $p\teilt ab$, so gilt $p
+        \teilt a$ oder $p\teilt b$.
+    \end{itemize}
+\end{definition}
+\begin{bemerkung}
+    $a$ und $b$ sind assoziiert $\Leftrightarrow b=ua$ für eine Einheit $u$. 
+\end{bemerkung}
+\begin{proof}
+    ``$\implies$"
+
+    $a=qb$ und $b=q'a$
+
+    $\implies a=qq'a$
+
+    $\implies 1=qq'$, d.h. $q$ ist eine Einheit.
+
+    ``$\impliedby$" klar.
+\end{proof}
+
+\begin{bemerkung}
+\quad
+\begin{itemize}
+    \item $a$ teilt $b$ $\Leftrightarrow (a) \supseteq (b)$
+    \item $a$ ist ein echter Teiler von $b$ $\Leftrightarrow (b) \subsetneq (a) \subsetneq (1)$
+    \item $a$ und $a'$ sind assoziiert $\Leftrightarrow (a) = (a')$
+    \item $a$ ist irreduzibel $\Leftrightarrow (a)=(0), (a)\subsetneq (1)$ und es gibt kein Hauptideal $(c)$, sodass $(a) \subsetneq (c) \subsetneq (1)$.
+    \item $p\neq 0$ ist prim $\Leftrightarrow$ aus $ab\in (p)$ folgt $a\in (p)$ oder $b \in (p)$.
+
+    $\Leftrightarrow (p)$ ist Primideal.
+\end{itemize}
+\end{bemerkung}
+\begin{bemerkung}
+    Falls $p\in R$ prim ist, so ist $p$ auch irreduzibel.
+\end{bemerkung}
+\begin{proof}
+    Falls $p=ab \implies p\teilt a$ oder $p\teilt b$.
+
+    oBdA $p\teilt b$.
+
+    $\implies b=rp$ für $r\in R$
+    
+    $\implies p=arp$
+
+    $\implies 1=ar$
+
+    $\implies a $ ist Einheit, d.h. $p$ hat keine echten Teiler.
+\end{proof}
+
+\section*{Vorlesung 20}
+Sei $R$ ein Integritätsbereich.
+
+\begin{enumerate}[label=(\arabic*)]
+    \item Können wir jedes $a\in R$ als Produkt von irreduziblen Elementen schreiben?
+    \item Falls ja, ist diese Zerlegung eindeutig?
+\end{enumerate}
+Wir müssen annehmen, dass $a\neq 0$ und $a$ keine Einheit ist.
+
+Idee zu (1): $a\in R, a\neq 0, a$ keine Einheit.
+Falls $a$ irreduzibel ist, sind wir fertig.
+
+Ansonsten ist $a=a_1b_1, a_1,b_1$ keine Einheit.
+
+Wir wiederholen diesen Prozess nun mit $a_1$ und $b_1$. 
+
+Endet dieser Prozess für alle $a\in R, a\neq 0, a$ keine Einheit, so sagen wir, dass in $R$ \defn{Faktorisierung} endet.
+
+\begin{theorem}
+    Sei $R$ ein Integritätsbereich. Die folgenden Bedingungen sind äquivalent:
+    \begin{enumerate}[label=(\alph*)]
+        \item Faktorisierung endet in $R$
+        \item $R$ enthält keine unendliche aufsteigende Kette von Hauptidealen: 
+        $(a_1)\subsetneq(a_2)\subsetneq (a_3)\subsetneq \cdots$
+    \end{enumerate}
+\end{theorem}
+\begin{proof}
+    Man nehme an, $R$ hat eine solche Kette $(a_1)\subsetneq(a_2)\subsetneq (a_3)\subsetneq \cdots$
+
+    Dann ist $(a_n) \subsetneq (1) \forall n$, d.h. $a_n$ ist ein echter Teiler von $a_{n-1}$, d.h. $a_{n-1}=a_nb_n$, $a_n,b_n$ keine Einheiten.
+
+    $\implies a_1=a_2b_2=a_3b_3b_2=a_4b_4b_3b_2$
+
+    $\implies$ Faktorisierung endet nicht in $R$.
+
+    Umgekehrt liefert eine solche unendliche Folge von Zerlegungen $a_1=a_2b_2=a_3b_3b_2=\cdots$ eine unendliche Folge von Hauptidealen. Dann haben wir eine unendliche Kette $(a_1)\subsetneq (a_2)\subsetneq(a_3)\subsetneq \cdots$
+\end{proof}
+
+\begin{beispiel}
+    Man nehme den Polynomring $K[x_1]$ und anjungiere alle $2^k$-ten Wurzeln von $x_1$ zu $K[x_1]$:
+
+    $K[x_1,x_2,x_3,\ldots]/(\{x_k^{2^k}-x_1\mid k\geq 2\})$
+
+    In $R$: $$x_1=x_2^2=x_3^4=x_4^8=\cdots$$
+    das heisst $$(x_1)\subsetneq (x_2)\subsetneq(x_3)\subsetneq \cdots$$
+
+    $\leadsto$ In der Praxis treten solche Ringe selten auf.
+\end{beispiel}
+
+Falls eine Faktorisierung in irreduzible Elemente existiert, so ist diese nicht immer eindeutig.
+
+\begin{beispiel}
+    $\Z[\sqrt{-5}]\subseteq \C$
+
+    $6=2\cdot 3= (1+\sqrt{-5})(1-\sqrt{-5})$
+
+    Man kann zeigen: $2,3, 1+\sqrt{-5}, 1-\sqrt{-5}$ sind alle irreduzibel in $\Z[\sqrt{-5}]$.
+\end{beispiel}
+
+\begin{definition}
+    Sei $R$ ein IB. $R$ heisst \defn{faktoriell}, wenn Folgendes erfüllt ist:
+    \begin{enumerate}[label=(\roman*)]
+        \item Faktorisierung endet
+        \item Die Faktorisierung in irreduzible Faktoren ist eindeutig im folgenden Sinn:
+
+        Falls $a\neq 0, a$ keine Einheit, geschrieben werden kann als $$a=p_1\cdots p_m=q_1\cdots q_n$$
+        für irreduzible $p_i$ und $q_i$ ist $m=n$ und --- nach Umordnung der Faktoren --- ist $p_i$ assoziiert zu $q_i$ für $i=1,\cdots,n$.
+    \end{enumerate}
+\end{definition}
+
+\begin{theorem}
+    Sei $R$ ein IB, in dem Faktorisierung endet. 
+    Dann ist $R$ faktoriell $\Leftrightarrow$ jedes irreduzible Element ist prim.
+\end{theorem}
+\begin{proof}
+    ``$\impliedby$" Man nehme an, jedes irreduzible Element ist auch prim. Sei $a\in R$ und seien $$a=p_1\cdots p_m=q_1\cdots q_n$$ zwei Zerlegungen in irreduzible Elemente.
+
+    Falls $n=1$,so ist auch $m=1$ und $p_1=q_1$ (da $p_1$ irreduzibel).
+
+    Falls $n>1$: $p_1$ ist prim, d.h. $p_1\teilt q_i$ für ein $i$. OBdA $i=1$.
+
+    Da $q_1$ irreduzibel ist, folgt, dass $p_1$ und $q_1$ assoziiert sind. 
+    
+    $\underset{\text{kürzen}}{\leadsto} p_2 \cdots p_n=q_2\cdots q_m$.
+
+    Behauptung folgt per Induktion über $n$.
+
+    ``$\implies$" Man nehme an, es gibt ein $p\in R$, das irreduzibel aber nicht prim ist.
+
+    $\implies \exists a,b\in R$, s.d. $p\teilt ab$ aber $p\nmid a$ und $p\nmid b$.
+
+    Das heisst, $pc=ab$ für ein $c\in R$. Faktorisiere $a, b, c$ in irreduzible Faktoren $c=c_1\cdots c_r$, $a=a_1\cdots a_m$, $b=b_1\cdots b_n$.
+
+    $\leadsto pc_1\cdots c_r=a_1\cdots a_mb_1\cdots b_n$ sind zwei verschiedene Faktorisierungen $\implies R$ ist nicht faktoriell.
+\end{proof}
 \end{document}

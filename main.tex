@@ -3349,4 +3349,228 @@ Falls eine Faktorisierung in irreduzible Elemente existiert, so ist diese nicht 
 
     $\leadsto pc_1\cdots c_r=a_1\cdots a_mb_1\cdots b_n$ sind zwei verschiedene Faktorisierungen $\implies R$ ist nicht faktoriell.
 \end{proof}
+
+\section*{Vorlesung 21}
+\subsubsection*{Letzte Woche}
+Sei $R$ ein Integritätsbereich
+
+\begin{itemize}
+    \item $r\in R$ ist \defn{irreduzibel}, falls $r$ keine echten Teiler hat, d.h. falls $r=ab \implies a$ oder $b$ ist eine Einheit
+    \item $r\in R$ ist \defn{prim}, falls aus $r\teilt ab$ folgt, dass $r\teilt a$ oder $r\teilt b$.
+\end{itemize}
+
+prim $\implies$ irreduzibel, aber im Allgemeinen irreduzibel $\not\implies$ prim.
+
+\begin{beispiel}
+    $\Z[\sqrt{-5}], 2\cdot 3=(1+\sqrt{-5})(1-\sqrt{-5})$
+    
+    $\leadsto 2$ ist irreduzibel aber nicht prim, da $2 \nmid (1+\sqrt{-5}), 2 \nmid (1-\sqrt{-5})$
+\end{beispiel}
+
+Ein IB $R$ ist \defn{faktoriell}, falls jedes $r\in R$ \emph{eindeutig} als Produkt von irreduziblen Elementen geschrieben werden kann. In faktoriellen Ringen:
+
+prim $\Leftrightarrow$ irreduzibel.
+
+\paragraph{Clicker-Frage:}
+Sei $R$ ein Integritätsbereich und seien $a,b\in R$, so dass $a\teilt b$. Falls $c$ assoziiert ist zu $a$, so gilt $c\teilt b$.
+\begin{proof}
+    $c$ ist assoziiert zu $a$: Falls $a\teilt c$ und $c\teilt a$, $\Leftrightarrow a=uc$ für $u\in R$ Einheit. 
+
+    Dann haben wir $a\teilt b$ $\Leftrightarrow b=aq=cuq \implies c\teilt b$.
+\end{proof}
+
+\begin{theorem}
+    Sei $R$ faktoriell und seien $a,b\in R$. 
+    Seien $a=p_1 \cdots p_r$ und $b=q_1\cdots q_s$ Primfaktorzerlegungen.
+
+    Dann gilt $a\teilt b \Leftrightarrow s\geq r$ und (nach Umordnung) $p_i$ ist assoziiert zu $q_i$ für $i=1,\ldots, r$.
+\end{theorem}
+\begin{proof}
+
+    ``$\implies$"
+    
+    Falls $a\teilt b$, so folgt $p_1\teilt b$.
+    
+    $\implies p_1\teilt q_i$ für ein $i$. OBdA $i=1$.
+
+    $\implies p_1$ und $q_1$ sind assoziiert.
+
+    $\implies$ wir haben $p_1p_2\cdots p_r c = q_1q_2\cdots q_s$ für ein $c\in R$.
+
+    $\implies p_2\cdots p_r c = q_2'\cdots q_s$ für $q_2'$ assoziiert zu $q_2$.
+
+    $\implies p_2\cdots p_r \teilt q_2\cdots q_s$ 
+
+    $\leadsto$ per Induktion $s\geq r$ und $p_i$ ist assoziiert zu $q_i$ für $i=1,\ldots, r$.
+
+    ``$\impliedby$" ist klar.
+\end{proof}
+
+\begin{corollary}
+    Sei $R$ faktoriell und seien $a,b\in R$, nicht beide null. Dann gibt es ein $d\in R$ s.d. 
+    \begin{enumerate}[label=(\roman*)]
+        \item $d\teilt a$ und $d\teilt b$
+        \item $\forall e\in R$, s.d. $e\teilt a$ und $e\teilt b$ $\implies e\teilt d$
+    \end{enumerate}
+    Ein solches $d$ heisst \defn{grösster gemeinsamer Teiler} (ggT) von $a$ und $b$.
+\end{corollary}
+\begin{proof}
+    Übung.
+\end{proof}
+
+\begin{bemerkung}
+    Zwei verschiedene ggT sind assoziiert.
+\end{bemerkung}
+
+\begin{bemerkung}
+    Im Allgemeinen ist ein ggT von $a$ und $b$ nicht von der Form $ar+bs$ für $r,s\in R$.
+\end{bemerkung}
+
+\begin{definition}
+    Ein IB, in dem jedes Ideal ein Hauptideal ist, heisst \defn{Hauptidealring}.
+\end{definition}
+
+\begin{theorem}
+    Seien $R$ ein Hauptidealring und $a,b\in R$, nicht beide null. Dann ist $d\in R$, sodass $(d)=(a)+(b)$ ein ggT von $a$ und $b$ ist.
+    Ausserdem existieren $r, s\in R$ s.d. $d=ar+bs$.
+\end{theorem}
+\begin{proof}
+    Da $a,b \in (d)$, folgt $d\teilt a$ und $d\teilt b.$
+
+    Falls $e\teilt a$ und $e\teilt b$, so ist $a\in(e)$ und $b\in (e)$
+
+    $\implies (d)=(a)+(b)\subseteq (e)$
+
+    $\implies e\teilt d$.
+
+    Da $d\in (a)+(b)$, existieren $r,s\in R$ s.d. $d=ar+bs$.
+\end{proof}
+\begin{corollary}
+    Sei $R$ ein Hauptidealring. Dann 
+    \begin{enumerate}[label=(\alph*)]
+        \item Ein $r\in R$ ist irreduzibel $\Leftrightarrow$ $r$ ist prim
+        \item Die maximalen in R sind genau die Hauptideale, die von einem irreduziblen Element erzeugt werden.
+    \end{enumerate}
+\end{corollary}
+\begin{proof}
+    \quad
+    
+    (a) gesehen: Primelemente sind irreduzibel.
+    Sei $r\in R$ irreduzibel und man nehme an, dass $r\teilt ab$ und $r\nmid a$.
+    
+    \paragraph{z.z:} $r\teilt b$. 
+    
+    Sei $d$ ein ggT von $a$ und $r$.
+
+    $r$ ist irreduzibel $\implies d$ ist Einheit oder $d$ ist assoziiert zu $r$. 
+    Da $r\nmid a$ ist $d$ nicht assoziiert zu $r$, d.h. $d$ ist eine Einheit.
+
+    $\implies (a)+(r)=(d)=(1)$.
+
+    $\implies \exists s,t\in R$ s.d. $1=sr+ta$
+
+    $\implies b= \underbrace{srb+tab}_{\text{durch $r$ teilbar}}$
+
+    $\implies r\teilt b$
+
+    (b) Sei $q\in R$ irreduzibel.
+
+    $\implies$ alle Teiler von $q$ sind assoziiert zu $q$ oder Einheiten.
+
+    Falls $(q)\subseteq (p)$, so ist $(q)=(p)$ oder $(p)=(1)$.
+
+    $\implies (q) $ ist maximal.
+
+    Falls $q\in R$ nicht irreduzibel ist: Sei $a$ ein echter Teiler von $q$.
+
+    $\implies (q) \subsetneq (a) \subsetneq (1)$, d.h. $(q)$ ist nicht maximal.
+\end{proof}
+
+\begin{theorem}
+    Ein Hauptidealring $R$ ist faktoriell.
+\end{theorem}
+\begin{proof}
+    Gesehen: Jedes irreduzible Element in $R$ ist prim.
+
+    \paragraph{z.Z:} Faktorisierung endet in R.
+
+    Man nehme an, es gibt eine unendliche aufsteigende Kette von Hauptidealen 
+
+    $(a_1)\subsetneq (a_2) \subsetneq \cdots $
+
+    \paragraph{Behauptung:} $\bigcup_{i=1}^{\infty}(a_i)=I\subseteq R$ ist ein Ideal. \textit{Beweis:} Seien $a,b \in I, r\in R.$ Dann sind $a,b\in (a_n)$ für ein $n\implies a+b \in (an)\subseteq I$ und $ra\in (a_n)\subseteq I$.
+
+    R ist Hauptidealring, d.h. $I = (1)$ für ein $b \in R$. 
+    Da $b \in I$, folgt, dass $b \in (a_n)$ für ein $n$ $\implies (b) \subseteq (a_n).$
+
+    Aber auch $(a_n)\subsetneq (a_{n+1})$ (Widerspruch).
+\end{proof}
+
+
+\begin{bemerkung}
+Gesehen: $K$ Körper $\implies K[x]$ ist ein Hauptidealring.
+
+Die Einheiten sind genau die Elemente in $K^\ast$.
+    
+Jedes Polynom in $K[x]\backslash\{0\}$ ist assoziiert zu einem eindeutigen normierten Polynom.
+\end{bemerkung}
+
+\begin{theorem}
+    Seien $f,g\in K[x]$. Dann:
+
+    \begin{enumerate}[label=(\alph*)]
+        \item Es existiert ein eindeutiger normierter ggT $d\in K[x]$ und $r,s\in K[x]$ s.d. $rf+sg=d$.
+        \item Falls $f$ und $g$ keinen nicht-konstanten gemeinsamen Faktor haben, so existieren $r,s\in K[x]$ s.d. $rf+sg=1$.
+        \item Jedes irreduzible $p\in K[x]$ ist auch prim.
+        \item Sei $f\in K[x]$ normiert, dann ist 
+        $f=p_1\cdots p_k,\quad p_i\in K[x]$ normiert.
+        Diese Faktorisierung ist eindeutig bis auf eine Permutation der $p_i$.
+    \end{enumerate}
+\end{theorem}
+\begin{proof}
+    Kleine Übung (folgt aus all den Resultaten von heute).
+\end{proof}
+
+\paragraph{Gesehen:} 
+Sei $R$ ein Ring, $\alpha\in R, f\in R[x]$. Dann ist $f(\alpha)=0 \Leftrightarrow (x- \alpha)\teilt f$.
+
+\begin{beispiel}
+    Sei $f\in \C[x], \deg f\geq 2.$ Dann $\exists \alpha\in \C$ s.d. $f(\alpha)=0$.
+    
+    $\implies (x-\alpha)\teilt f$, d.h. $f$ ist nicht irreduzibel.
+
+    Die einzigen irreduziblen Elemente in $\C[x]$ sind also $(x-a), \quad a\in \C$.
+
+    $\implies$ Jedes normierte $f\in \C[x]$ hat eine eindeutige Faktorisierung 
+    $f = (x-\alpha_1)\cdots(x-\alpha_n)\quad \alpha_i\in\C$
+\end{beispiel}
+
+\begin{theorem}
+    Sei $K$ ein Körper. Ein Polynom $f\in K[x]$ mit $\deg(f)=n$ hat höchstens $n$ Nullstellen.
+\end{theorem}
+\begin{proof}
+    Ein $\alpha\in K$ ist eine Nullstelle von $f$ $\Leftrightarrow (x-\alpha) \teilt f$.
+
+    Ist dies der Fall, so ist $f(x)=(x-\alpha)q(x), \quad \deg(q) < \deg(f)$.
+
+    Falls $\beta\in K$ s.d. $f(\beta)=0$, so ist $(\beta-\alpha)q(\beta)=0$ $\implies \alpha=\beta$ oder $\beta$ ist Nullstelle von $q$.
+
+    Gemäss Induktion hat $q$ höchstens $n-1$ Nullstellen.
+\end{proof}
+
+Um zu zeigen, dass $\Z$ und $K[x]$ Hauptidealringe sind, verwenden wir Division mit Rest.
+
+$a=bq+r$
+
+\begin{definition}
+    Sei $R$ ein IB. Eine \defn{Grössenfunktion} ist eine Funktion $\sigma\colon R\backslash\{0\} \to \Z_{\geq 0}$.
+\end{definition}
+\begin{definition}
+    $R$ ist ein \defn{euklidischer Ring}, falls es eine Grössenfunktion $\sigma\colon R\backslash\{0\} \to \Z_{\geq 0}$ gibt, so dass ein Divisionsalgorithmus existiert:
+
+    Für alle $a,b\in R\backslash\{0\}$ gibt es $q,r\in R$ mit $b=aq+r$ sodass entweder $r=0$ ist oder $\sigma(r)<\sigma(a)$.
+\end{definition}
+
 \end{document}
+
+

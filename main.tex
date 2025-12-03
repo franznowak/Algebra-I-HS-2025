@@ -3568,8 +3568,87 @@ $a=bq+r$
 \begin{definition}
     $R$ ist ein \defn{euklidischer Ring}, falls es eine Grössenfunktion $\sigma\colon R\backslash\{0\} \to \Z_{\geq 0}$ gibt, so dass ein Divisionsalgorithmus existiert:
 
-    Für alle $a,b\in R\backslash\{0\}$ gibt es $q,r\in R$ mit $b=aq+r$ sodass entweder $r=0$ ist oder $\sigma(r)<\sigma(a)$.
+    Für alle $a,b\in R, b\neq 0$ gibt es $q,r\in R$ mit $a=bq+r$ sodass entweder $r=0$ ist oder $\sigma(r)<\sigma(b)$.
 \end{definition}
+
+\section*{Vorlesung 22}
+
+Letztes Mal: Euklidische Ringe.
+
+\begin{beispiel}
+    \quad
+    \begin{itemize}
+        \item $\Z$ mit Grössenfunktion $|\cdot|$
+        \item $K[x]$ mit Grössenfunktion $\deg$
+    \end{itemize}
+\end{beispiel}
+\begin{theorem}
+    Der Ring der Gaussschen Zahlen $\Z[i]$ ist euklidisch mit Grössenfunktion $\sigma(x+iy)=x^2+y^2$.
+\end{theorem}
+\begin{proof}
+    Seien $a=m_1+in_1$ und $b=m_2+in_2$, $a,b \in \Z[i]$ und $b\neq 0$.
+    Dann ist 
+    $$\frac{a}{b}=\frac{a\overline{b}}{|b|^2}=\frac{m_1m_2+n_1n_2}{m_2^2+n_2^2}+i\frac{n_1m_2-m_1n_2}{m_2^2+n_2^2}$$
+    $$= \underbrace{q_1 + iq_2}_{=: q \in\Z[i]} + (r_1+ir_2)$$
+    s.d. $r_1,r_2\in \Q\cap\left(-\frac{1}{2},\frac{1}{2}
+\right]$
+$$\implies a = bq + \underbrace{b(r_1+ir_2)}_{=:r}$$
+$$r=a-bq\in\Z[i]$$
+$$|r|^2=|b|^2(r_1^2+r_2^2) \leq |b|^2(\frac{1}{4}+\frac{1}{4})=\frac{1}{2}|b|^2\leq|b|^2$$
+
+$\implies a=bq+r$ s.d. $|r|^2<|b|^2$
+\end{proof}
+\begin{theorem}
+    Ein euklidischer Ring $R$ ist ein Hauptidealring. 
+\end{theorem}
+\begin{proof}
+    $R$ ist IB.
+    
+    Sei $I\subseteq R$ ein Ideal.
+
+    $(0)$ ist Hauptideal. Wir nehmen an, $I\neq (0)$.
+
+    Sei $b\in I$, s.d. $\sigma(b)$ minimal ist ($\sigma$ die Grössenfunktion auf $R$).
+
+    \paragraph{z.Z:} $(b)=I$.
+    
+    Sei $a\in I$. 
+    
+    Teilen mit Rest:
+    $a=bq+r$, s.d. $\sigma(r)<\sigma(b)$ oder $r=0$.
+
+    $r=a-bq\in I$.
+
+    $\sigma(r) < \sigma(b)$ nicht möglich, da $\sigma(b)$ minimial.
+
+    $\implies r=0 \implies a=bq \implies a\in(b) \implies I=(b)$
+\end{proof}
+
+\begin{corollary}
+    Die Ringe $\Z$, $K[x]$ (für $K$ Körper) und $\Z[i]$ sind Hauptidealringe.
+\end{corollary}
+
+\subsubsection*{Übersicht über bisher gesehene Ringe}
+
+euklidische Ringe $\subseteq$ Hauptidealringe $\subseteq$ faktorielle Ringe $\subseteq$ Integritätsbereiche
+
+\subsection*{Das Gausssche Lemma}
+
+Sei $R$ ein faktorieller Ring. 
+
+\paragraph{Ziel:} Studieren der Faktorisierung in $R[x]$.
+
+In diesem Abschnitt: $R=\Z$. Aber der allgemeine Fall ist sehr ähnlich.
+
+Wir verstehen die Faktorisierung in $\Z$ und in $\Q[x]$.
+
+\begin{beispiel}
+    $f(x) = 6x^3 + 9x^2 + 9x + 3$
+
+    $\underbrace{=}_{\text{in }\Z[x]} 3(2x+1)(x^2+x+1)$
+
+    $\underbrace{=}_{\text{in }\Q[x]} \frac{3}{2}(x+\frac{1}{2})(x^2+x+1)$ 
+\end{beispiel}
 
 \end{document}
 

@@ -3650,6 +3650,200 @@ Wir verstehen die Faktorisierung in $\Z$ und in $\Q[x]$.
     $\underbrace{=}_{\text{in }\Q[x]} \frac{3}{2}(x+\frac{1}{2})(x^2+x+1)$ 
 \end{beispiel}
 
+\section*{Vorlesung 23}
+
+\paragraph{Ziel:} Faktorisierung in $\Z[x]$.
+
+$\Z[x]\subseteq \Q[x]$
+
+\begin{definition}
+    Ein Polynom $f(x)\in\Z[x], \quad f(x)=a_nx^n+\cdots +a_0$ ist \defn{primitiv}, falls der ggT aller Koeffizienten 1 ist und $a_n>0$.
+\end{definition}
+
+\begin{lemma}
+    Jedes Polynom $f(x)\in\Q[x]\backslash\{0\}$ lässt sich eindeutig schreiben als $f(x) = cf_0(x)$ für ein $c\in \Q$ und ein $f_0(x)\in\Z[x]$ primitiv.
+\end{lemma}
+\begin{definition}
+    Die Zahl $x\in \Q$ heisst der \defn{Inhalt} von $f$.
+\end{definition}
+\begin{proof}
+    \quad
+    
+    \textbf{Existenz:} Multipliziere $f$ mit $n\in \Z$ sodass $nf\in\Z[x]$.
+
+    Sei $m\in\Z$ der ggT aller Koeffizienten von $f_1$ mit geeignetem Vorzeichen, s.d. $f_1=mf_0, f_0\in\Z[x]$ primitiv.
+
+    $\implies f=\frac{m}{n}f_0$
+    
+    \textbf{Eindeutigkeit:} Seien $cf_0(x)=dg_0(x), \quad c,d\in\Q, f_0,g_0\in\Z[x]$ primitiv.
+    Nach Multiplikation mit ganzer Zahl können wir annehmen, dass $c,d\in\Z$
+    Sei $f_0(x)=a_nx^n+\cdots+a_0, g_0(x)=b_nx^n+\cdots+b_0$
+
+    $\implies ca_i=db_i$
+
+    Da $f_0$ und $g_0$ primitiv sind, ist der ggT von $\{ca_0,\ldots,ca_n\} c$ und der ggT von $\{db_0,\ldots,db_n\}$ ist $d$
+
+    $\implies c=\pm d$ und somit $f_0=\pm g_0$.
+
+    Aber $f_0$ und $g_0$ haben positive Leitkoeffizienten.
+
+    $\implies f_0=g_0$ und $c=d$.
+\end{proof}
+
+\paragraph{Gesehen:}
+Es gibt einen Ringhomomorphismus $\Z[x]\to\F_p[x]$
+
+$f(x)=a_nx^n+\cdots+a_0\mapsto \overline{a_n}x^n+\cdots+\overline{a_0}=\overline{f}(x)$
+
+\begin{bemerkung}
+    Falls $f(x)\in\Z[x]$ primitiv ist, so ist $\overline{f}(x)\in\F_p[x]$ nicht null, da mindestens einer der Koeffizienten von $f(x)$ nicht durch $p$ teilbar ist.
+\end{bemerkung}
+\begin{theorem}[Gauss-Lemma]
+    Seien $f,g\in\Z[x]$ primitiv. Dann ist auch $h:=fg$ primitiv.
+\end{theorem}
+\begin{proof}
+    Die Leitkoeffizienten von $f$ und $g$ sind positiv $\implies$ Leitkoeffizient von $h=fg$ ist positiv.
+
+    \textbf{z.z:} Es gibt keine Primzahl $p$, die alle Koeffizienten von $h$ teilt.
+
+    Sei $p$ eine Primzahl. Man betrachte den Homomorphismus $\Z[x]\to\F_p[x]$
+
+    Da $f$ und $g$ primitiv sind, ist $\overline{f}\neq 0$ und $\overline{g}\neq 0$.
+
+    $\underset{\F_p[x]\text{ ist IB}}{\implies} \overline{h}=\overline{f}\overline{g}\neq 0$
+
+    $\implies p$ teilt nicht alle Koeffizienten von $h$.
+\end{proof}
+
+\begin{theorem}
+    \begin{enumerate}[label=(\alph*)]
+        \item Seien $f,g\in\Q[x]$ und $f_0,g_0\in Z[x]$ primitiv s.d. $f=cf_0, g=dg_0$. Falls $f$ ein Teiler von $g$ in $\Q[x]$ ist, so ist $f_0$ ein Teiler von $g_0$ in $\Z[x]$.
+        \item Sei $f\in\Z[x]$ primitiv und $g\in \Z[x]$ beliebig. Falls $g=fq$ für $q\in\Q[x]$, dann ist $q\in\Z[x]$
+        \item Seien $f,g\in\Z[x]$. Falls $f$ und $g$ einen gemeinsamen nicht konstanten Teiler $h$ in $Q[x]$ haben, so haben sie auch in $\Z[x]$ einen gemeinsamen nicht konstanten Teiler.
+    \end{enumerate}
+\end{theorem}
+\begin{proof}
+    \quad 
+    
+    \textbf{(b)} Wir schreiben $q=cq_0$ mit $c\in \Q, q_0\in\Z[x]$ primitiv. $\underset{\text{Gauss}}{\implies} fq_0$ ist primitiv.
+
+    Wir haben $g=cfq_0$, daher muss gelten, dass $c\in\Z$ und somit $q\in\Z[x]$.
+
+    \textbf{a} Falls $f$ Teiler von $g$ in $\Q[x]$ ist, so ist auch $f_0$ ein Teiler von $g_0$ in $\Q[x]$.
+
+    $\underset{(b)}{\implies} f_0$ ist ein Teiler von $g_0$ in $\Z[x]$.
+
+    \textbf{(c)}: Wir schreiben $h=ch_0, c\in\Q, h_0\in\Z[x]$ primitiv.
+
+    $f=ch_0f_1$ und $g=ch_0g_1$ für $f_1,g_1\in\Q[x]$.
+
+    $\underset{(b)}{\implies}h_0$ teilt $f$ und $h_0$ teilt $g$ in $\Z[x]$.
+\end{proof}
+\begin{corollary}
+    Sei $f \in\Z[x]$ nicht konstant. Falls $f$ in $\Z[x]$ irreduzibel ist, so ist, $f$ auch in $\Q[x]$ irreduzibel. 
+\end{corollary}
+\begin{proof}
+    $f$ hat keine echten Teiler in $\Q[x]$
+
+    $\underset{\text{Satz}}{\implies} f$ hat keine echten Teiler in $\Z[x]$.
+\end{proof}
+
+\begin{theorem}
+    Sei $f(x) \in\Z[x]$ mit positivem Leitkoeffizienten. Das Polynom $f$ ist genau dann irreduzibel in $\Z[x]$, wenn entweder 
+    \begin{enumerate}[label=(\roman*)]
+        \item $f$ ist eine Primzahl.
+        \item $f$ ist primitiv und in $\Q[x]$ irreduzibel.
+    \end{enumerate}
+\end{theorem}
+\begin{proof}
+    ``$\implies$" Sei $f$ irreduzibel. Wir schreiben $f=cf_0$ für $f_0$ primitiv.
+
+    Da $f$ irreduzibel ist, muss $c$ oder $f_0$ eine Einheit sein.
+
+    D.h. entweder $c=1$ oer $f_0=1$.
+
+    Falls $f_0=1$, dann ist $f$ konstant und somit eine Primzahl. 
+
+    Falls $c=1$, so ist $f=f_0$ primitiv und somit irreduzibel in $\Q[x]$ gemäss Korollar.
+
+    ``$\impliedby$" klar.
+\end{proof}
+
+\begin{theorem}
+    Jedes irreduzible Element in $\Z[x]$ ist ein Primelement.
+\end{theorem}
+\begin{proof}
+    Sei $f$ irreduzibel und seien $g,h\in\Z[x]$ sodass $f\teilt gh$.
+
+    \textbf{z.z:} $f\teilt g$ oder $f\teilt h$.
+
+    1. Fall: $f=p$ ist eine Primzahl. Wir schreiben $g=cg_0$ und $h=dh_0$. $g_0,h_0$ primitiv, $c,d\in\Z$.
+
+    $\underset{\text{Gauss}}{\implies} h_0g_0$ primitiv.
+
+    $\implies$ es gibt einen Koeffizienten $a$ von $g_0h_0$, der nicht durch $p$ teilbar ist.
+
+    Da aber $p\teilt gh$ und $gh=cdg_0h_0$
+    
+    $\implies p\teilt cda$
+
+    $\implies p\teilt c$ oder $p\teilt d$
+
+    $\implies p\teilt g$ oder $p\teilt h$.
+
+    2. Fall: $f$ ist primitiv und irreduzibel in $\Q[x]$.
+
+    $\underset{\Q[x] \text{ist faktoriell}}{\implies} f$ ist prim in $\Q[x]$.
+
+    $\implies f$ ist Teiler von $g$ oder von $h$ in $\Q[x]$
+
+    $\underset{\text{Satz}}{\implies} f$ ist Teiler von $g$ oder $h$ in $\Z[x]$.
+\end{proof}
+\begin{theorem}
+    $\Z[x]$ ist faktoriell.  Insbesondere lässt sich jedes $f(x)\in\Z[x]$ eindeutig (bis auf Permutation der Faktoren) schreiben als $f(x)=\pm p_1\cdots p_m q_1(x)\cdots q_n(x)$ wobei $p_i$ positive Primzahlen sind und $q_i$ irreduzible primitive Polynome.
+\end{theorem}
+\begin{proof}
+    Es reicht zu zeigen, dass Faktorisierung in $\Z[x]$ endet, da irreduzible Elemente prim sind.
+
+    Sei $(p_1)\subsetneq(p_2)\subsetneq\cdots$ eine aufsteigende Kette von Hauptidealen, d.h. $p_{i+1}$ ist echter Teiler von $p_i, i=1,2,\cdots$
+
+    $\implies \deg P_{P_{i+1}}\leq\deg p_i$
+
+    $\implies \deg p_n=\deg p_{n+k}$ für $n$ gross genug und für alle $k\geq 0$ schreibe $p_n=c_np_{n,0}$
+
+    $p_{n+k}=c_{n+k}p_{n+k,0}$
+
+    $p_{n,0},p_{n+k,0}$ primitiv.
+
+    Da $p_{n+k}\teilt p_k$ gilt $p_{0,n+k}=p_{0,n}$ und somit $c_{n+k}\teilt c_n$ in $\Z$.
+
+    Da $c_n$ nur endlich viele Teile hat, erhalten wir $(p_{n+k})=(p_{n+k+1})=\cdots$ für $k$ gross genug.
+
+    $\implies$ es gibt keine solchen Ketten.
+\end{proof}
+
+\begin{theorem}
+    Sei $R$ ein faktorieller Ring mit Quotientenkörper $K$. Dann gilt: 
+    \begin{enumerate}[label=(\alph*)]
+        \item Seien $f,g\in R[x]$ nicht konstant. Falls $f$ und $g$ in $K[x]$ einen nicht-konstanten gemeinsamen Teiler haben, so haben sie auch in $R[x]$ einen nicht-konstanten gemeinsamen Teiler.
+        \item Sei $f\in R[x]$ nicht konstant. Falls $f$ in $R[x]$ irreduzibel ist, so ist es auch in $K[x]$ irreduzibel.
+        \item $R[x]$ ist faktoriell.
+    \end{enumerate}
+\end{theorem}
+\begin{proof}
+    Beweise analog zum Fall $R=\Z$. ($\leadsto$ etwas komplizierter wegen Einheiten).
+\end{proof}
+\begin{corollary}
+    Die Polynomringe $\Z[x_1,\ldots,x_n] K[x_1,\ldots,x_n]$, für $K$ Körper, sind faktoriell.
+\end{corollary}
+\begin{proof}
+    Falls $R$ faktoriell ist, so erhalten wir induktiv, dass auch $R[x_1,\ldots,x_n]=R[x_1,\ldots,x_{n-1}][x_n]$ faktoriell ist.
+\end{proof}
+
+\subsection*{Kriterien für Irreduzbilität}
+
+Wie zeigt man, dass $f\in \Q[x]$ irreduzibel ist?
+
 \end{document}
 
 

@@ -3840,9 +3840,144 @@ $f(x)=a_nx^n+\cdots+a_0\mapsto \overline{a_n}x^n+\cdots+\overline{a_0}=\overline
     Falls $R$ faktoriell ist, so erhalten wir induktiv, dass auch $R[x_1,\ldots,x_n]=R[x_1,\ldots,x_{n-1}][x_n]$ faktoriell ist.
 \end{proof}
 
+\section*{Vorlesung 24}
+
 \subsection*{Kriterien für Irreduzbilität}
 
 Wie zeigt man, dass $f\in \Q[x]$ irreduzibel ist?
+
+\begin{theorem}
+    Sei $f(x) =a_nx^n+\cdots+a_1x+a_0\in\Z[x]$.
+    Sei $p$ eine Primzahl, sodass $p\nmid a_n$.
+
+    Ist die Restklasse $\overline{f} \mod p$ irreduzibel in $\F_p[x]$, so ist $f$ irreduzibel in $Q[x]$.
+\end{theorem}
+\begin{proof}
+    Man nehme an $f=gh$, für $g,h\in\Q[x]$ echte Faktoren, d.h. insbesondere $\deg g, \deg h < \deg f$.
+
+    Gemäss Satz von gestern können wir annehmen, dass $g,h\in \Z[x]$.
+
+    Reduktion $\mod p$.
+    
+    $\overline{f} = \overline{g}\overline{h}$ in $\F_p[x]$
+
+    Da $p \nmid a_n$, ist $\deg \overline{f}=n$.
+
+    Ausserdem haben wir $\deg\overline{g}<n, \deg\overline{h}<n$.
+
+    aber $\deg(\overline{g}\overline{h})=n$
+
+    $\implies \deg\overline{g} > 0, \deg \overline{h} >0$
+
+    $\implies \overline{g}$ ist ein echter Teiler von $\overline{f}$.
+
+    $\implies \overline{f}$ ist nicht irreeduzibel.
+\end{proof}
+
+\begin{bemerkung}
+    Man kann so nicht zeigen, dass ein Polynom reduzibel ist. 
+    Es gibt Polynome $f\in\Z[x]$, sodass $f$ irreduzibel ist, aber die Restklasse $\overline{f}\mod p$ ist nicht irreduzibel für alle Primzahlen $p$ (z.B. $f(x)=x^4-10x^2+1$).
+\end{bemerkung}
+
+\subsubsection*{Sieb des Eratosthenes}
+
+Das Sieb des Eratosthenes um Primzahlen zu finden.
+
+$\mathbf{2}\ \mathbf{3} \not 4\ \mathbf{5} \not 6\ \mathbf{7} \not 8 \not 9 \not 10\ \mathbf{11} \not{12}\ \mathbf{13} \not{14} \not{15} \not 16\ \mathbf{17} \not {18}\ \mathbf{19}$
+
+Diese Methode funktioniert auch für $\F_p[x]$.
+
+Wir schreiben alle Polynome Grad für Grad nebeneinander und streichen die Vielfachen weg.
+
+$\F_2[x]$:
+
+Grad 1:
+
+$x, x+1$
+
+Grad 2:
+
+$x^2, x^2 + x, x^2 + x + 1, x^2 + 1$
+
+Grad 3:
+
+$x^3, x^3+x^2, x^3+x^2+x, x^3+x^2+x+1, \ldots$
+
+Nach dem Sieb bleiben $x, x+1, x^2 + x + 1, \ldots$
+
+\begin{beispiel}
+    $x^2+x+1$ ist irreduzibel in $\F_2[x]$
+
+    $\underset{\text{Satz}}{\implies} 3 x^2 + x + 7\in\Z[x]$ ist auch irreduzibel.
+\end{beispiel}
+
+\begin{theorem}[Eisenstein Kriterium]
+    Sei $p$ eine Primzahl.
+    
+    $f(x) = a_nx^n+\cdots+a_0\in\Z[x]$ sodass 
+    \begin{enumerate}[label=(\roman*)]
+        \item $p\nmid a_n$
+        \item $p\teilt a_i$ für $i=0,\ldots,n-1$
+        \item $p^2\nmid a_0$
+    \end{enumerate}
+
+    Dann ist $f$ irreduzibel in $\Q[x]$.
+\end{theorem}
+\begin{beispiel}
+    $x^4+50x^2+30x+20$ ist irreduzibel in $\Q[x]$ (und auch $\Z[x]$, da es primitiv ist.)
+\end{beispiel}
+\begin{proof}
+    Sei $\overline{f}$ die Restklasse von $f \mod p$.
+
+    $\implies \overline{f}=\overline{a_n} x^n, \overline{a_n}\neq0$.
+
+    Wir nehmen an, $f\in\Q[x]$ ist reduzibel, d.h. $f=gh$, mit $g,h$ echten Teilern.
+
+    Wir können annehmen $g, h\in\Z[x]$.
+
+    $\implies \overline{g}$ und $\overline{h}$ teilen $\overline{a_n}x^n$
+
+    $\implies \overline{g}$ und $\overline{h}$ sind Monome.
+
+    $\implies$ alle Koeffizienten von $g$ und $h$ ausser dem Leitkoeffizienten sind durch $p$ teilbar.
+
+    Sei $b_0$ der konstante Koeffizient von $g$ und $c_0$ der konstante Koeffizient von $h$.
+
+    $\implies$ der konstante Koeffizient von $f$ ist $a_0=b_0c_0$.
+
+    Da $p\teilt b_0$ und $p\teilt c_0$, folgt $p^2\teilt a_0$ (widerspruch zu (iii)).
+
+    $\implies f$ ist irreduzibel.
+\end{proof}
+
+\begin{definition}
+    Sei $p$ eine Primzahl. Betrachte $x^p-1=(x-1)\underbrace{(x^{p-1}+x^{p-2}+\cdots+x+1)}_{f(x)}$
+    $f(x)$ heisst \defn{Kreisteilungspolynom}.
+\end{definition}
+\begin{corollary}
+    Sei $p$ eine Primzahl. $f(x)=x^{p-1}+x^{p-2}+\cdots+x+1$ ist irreduzibel in $\Q[x]$.
+\end{corollary}
+\begin{proof}
+    $(x-1)f(x)=x^p-1$.
+    
+    Substituiere $x=y+1$ 
+    
+    $\implies yf(y+1)=(y+1)^p-1 = y^p+\begin{pmatrix}p\\1\end{pmatrix} y^{p-1}+\begin{pmatrix}p\\2\end{pmatrix}y^{p-2}+\cdots+\begin{pmatrix}p\\p-1\end{pmatrix}y$
+
+    Wir haben $\begin{pmatrix}p\\i\end{pmatrix} = \frac{p(p-1)\cdots(p-i+1)}{i!}$
+
+    $i<p \implies p\nmid i!$
+
+    $\implies p\teilt \begin{pmatrix}p\\i\end{pmatrix}$ für $i=1,\ldots,p-1$.
+
+    Aber $\begin{pmatrix}p\\p-1\end{pmatrix}=p$, d.h. $p^2\nmid \begin{pmatrix}p\\p-1\end{pmatrix}$
+
+    $\implies f(y+1)$ erfüllt das Einsenstein-Kriterium.
+
+    $f(y+1)$ ist irreduzibel.
+
+    $f(y)$ ist irreduzibel.
+\end{proof}
 
 \end{document}
 

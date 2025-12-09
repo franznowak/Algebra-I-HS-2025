@@ -3982,6 +3982,212 @@ Nach dem Sieb bleiben $x, x+1, x^2 + x + 1, \ldots$
     $f(y)$ ist irreduzibel.
 \end{proof}
 
+\section*{Vorlesung 25}
+
+\subsection*{Körper}
+\begin{definition}
+    Ein \defn{Körper} ist ein Ring, der nicht der Nullring ist, und in dem jedes Element ausser 0 invertierbar ist.
+\end{definition}
+\begin{bemerkung}
+    Körper sind euklidisch:
+    $\forall a,b\in K^*\ \exists q\in K^*$ sodass $a=qb+0$.
+\end{bemerkung}
+\begin{beispiel}
+    Teilkörper von $\C$ (d.h. Unterringe, die auch Körper sind).
+    Diese heissen \defn{Zahlkörper}.
+\end{beispiel}
+\begin{beispiel}
+    Endliche Körper, z.B. $\F_p=\Z/p\Z,\ p$ prim (es gibt auch andere!)
+\end{beispiel}
+
+\begin{definition}
+    Eine \defn{Körpererweiterung} ist ein Paar von Körpern $L \supseteq K$. Wir schreiben oft $L/K$ (L ist eine Erweiterung von K).
+\end{definition}
+\begin{beispiel}
+    $\C$ ist eine Erweiterung von $\R$.
+\end{beispiel}
+\begin{bemerkung}
+    Wenn $L/K$ eine Körpererweiterung ist, dann ist $L$ ein $K$-Vektorraum.
+\end{bemerkung}
+\begin{definition}
+    Sei $L/K$ eine Körpererweiterung. Ein Element $\alpha\in L$ heisst \defn{algebraisch über $K$}, falls es ein Polynom $f(x)\in K[x]\backslash\{0\}$ gibt, sodass $f(\alpha)=0$.\looseness=-1
+\end{definition}
+\begin{bemerkung}
+    Wir können immer annehmen, dass $f$ normiert ist.
+\end{bemerkung}
+\begin{definition}
+    Ein $\alpha\in L$ heisst \defn{transzendent über $K$}, wenn es nicht algebraisch ist.
+\end{definition}
+\begin{beispiel}
+    $\C/\Q$, dann ist 
+    \begin{itemize}
+        \item $\sqrt{2}$ ist algebraisch über $\Q$.
+        \item $\pi$ ist transzendent über $\Q$.
+        \item $i$ ist algebraisch über $Q$.
+    \end{itemize}
+\end{beispiel}
+
+\begin{beispiel}
+    $\C/\R$, dann ist $\pi$ algebraisch über $R$.
+    
+    $(f(x)=x-\pi\in \R \implies f(\pi)=0)$.
+\end{beispiel}
+
+Sei $L/K$ eine Körpererweiterung. Wir betrachten den Homomorphismus $\phi\colon K[x]\to L \quad f\mapsto f(\alpha)$.
+
+Dann ist $\alpha$ transzendent genau dann, wenn $\ker\phi=0 \Leftrightarrow \phi$ injektiv.
+
+Falls $\alpha$ algebraisch ist, so ist $\ker\phi\subseteq K[x]$ ein Ideal.
+
+$\underset{K[x] \text{ ist HIR}}{\implies} \ker\phi=(f)$, wobei $f$ das normierte Polynom vom kleinsten Grad in $\ker\phi$ ist.
+
+Dieses Polynom heisst das \defn{Minimalpolynom} von $\alpha$.
+
+\begin{bemerkung}
+    Dieses $f$ ist das einzige normierte \emph{irreduzible} Polynom in $\ker\phi$.
+\end{bemerkung}
+\begin{proof}
+\quad
+    \begin{itemize}
+        \item $f$ ist irreduzibel: Falls $f=gh$ in $K[x]$ 
+        
+        $\implies f(\alpha)=g(\alpha)h(\alpha)=0$
+
+        $\implies g(\alpha)=0$ oder $h(\alpha)=0$
+
+        $\implies g$ oder $h$ ist konstant.
+
+        \item Sei $g\in \ker\phi=(f), g\neq f$, dann ist $g=fh$
+        
+        $\implies g$ nicht irreduzibel (falls $\deg g>\deg f$) oder $g$ ist nicht normiert.
+    \end{itemize}
+\end{proof}
+
+\begin{bemerkung}
+    Das Minimalpolynom $f$ hängt sowohl von $\alpha$ als auch von $K$ ab.
+\end{bemerkung}
+\begin{beispiel}
+    Sei $K=\Q[i] \subseteq \C$ und $\alpha=\sqrt{i}=\frac{1}{2}\sqrt{2}(1+i)$.
+    Das Minimalpolynom  von $\alpha$ über $\Q$ ist $x^4+1$. Über $K$ ist aber $x^4+1 = (x^2+i)(x^2-i)$.
+
+    Das Minimalpolynom von $\alpha$ über $\Q[i]$ ist $x^2-i$.
+\end{beispiel}
+\begin{definition}
+    Seien $L/K$ eine Körpererweiterung und $\alpha\in L$. Wir bezeichnen mit $K(\alpha)\subseteq L$ den kleinsten Körper, der $K$ und $\alpha$ enthält.
+
+    Ähnlich für $\alpha_1, \ldots, \alpha_n \in L$ ist $K(\alpha_1,\ldots,\alpha_n)$ der kleinste Körper, der $K$ und $\alpha_1,\ldots,\alpha_n$ enthält.
+\end{definition}
+\begin{bemerkung}
+    Wir hatten $K[\alpha]=\{a_n\alpha^n+\cdots+a_0\mid a_i\in K\} \subseteq L$.
+
+    $K(\alpha)$ ist isomorph zum Quotientenkörper von $K[\alpha]$.
+\end{bemerkung}
+\begin{proof}
+    Kleine Übung.
+\end{proof}
+\begin{bemerkung}
+    Falls $\alpha\in L$ ein transzendentes Element ist, so ist $K[\alpha] \iso K[x]$ und somit $K(\alpha)\iso K(x)$.
+\end{bemerkung}
+\begin{theorem}
+    Seien $L/K$ eine Körpererweiterung und $\alpha\in L$ algebraisch über $K$ mit Minimalpolynom $f\in K[x]$.
+    \begin{enumerate}[label=(\alph*)]
+        \item Der Homomorphismus $\phi\colon K[x]\to K[\alpha]\quad g\mapsto g(\alpha)$ induziert einen Isomorphismus 
+        $$K[x]/(f) \xrightarrow{\sim} K[\alpha]$$ und $K[\alpha]$ ist ein Körper. 
+        Insbesondere ist $K(\alpha)=K[\alpha]$.
+        \item Seien allgemeiner $\alpha_1,\ldots \alpha_n \in L$ algebraisch über $K$. Dann ist $K[\alpha_1,\ldots,\alpha_n] = K(\alpha_1,\ldots,\alpha_n)$.
+    \end{enumerate}
+\end{theorem}
+\begin{proof}
+    \quad
+
+    (a)
+    $\phi$ ist surjektiv $\implies \phi$ induziert den Isomorphismus
+
+    $$K[x]/(f) + K[x]/\ker\phi \xrightarrow{\sim} K[\alpha]$$
+
+    Da $f$ irreduzibel ist, ist $(f)$ maximal 
+
+    $\implies K[\alpha]$ ist ein Körper.
+
+    (b) Das folgt per Induktion:
+
+    \begin{align*}
+        K[\alpha_1,\ldots \alpha_n]&= K[\alpha_1,\ldots \alpha_n][\alpha_n]\\
+        &= K(\alpha_1,\ldots \alpha_n)[\alpha_n]\\
+        &=K(\alpha_1,\ldots \alpha_n)
+    \end{align*}
+\end{proof}
+
+Wir haben gesehen, dass für ein normiertes $f\in R[x]$ so ist
+$$K^n \xrightarrow{\sim} K[\alpha]=K[x]/(f)$$
+$$(r_0, \ldots, r_{n-1})\mapsto r_0+r_1\alpha+\cdots + r_{n-1}\alpha^{n-1}$$
+eine Bijektion. Daraus folgt direkt:
+
+\begin{theorem}\label{thm:star}
+    Sei $\alpha$ algebraisch über $K$ mit Minimalpolynom $f$.
+    Falls $\deg f = n$, so ist $(1, \alpha, \ldots, \alpha^{n-1})$ eine Basis von $K[\alpha]$ als Vektorraum über $K$.
+\end{theorem}
+
+\subsection*{Der Grad von einer Körpererweiterung}
+
+\begin{definition}
+    Sei $L/K$ eine Körpererweiterung. Der \defn{Grad} $[L:K]$ von $L/K$ ist die Dimension von $L$ als $K$-Vektorraum.
+
+    $L/K$ heisst \defn{endlich}, falls $[L:K]$ endlich ist.
+\end{definition}
+
+\begin{beispiel}
+    $(1, i)$ ist eine Basis von $\C$ als $\R$-Vektorraum.
+    $\implies [\C : \R] = 2$.
+\end{beispiel}
+
+\begin{theorem}
+    Ist $\alpha$ algebraisch über $K$, so ist $[K(\alpha) : K]$ der Grad vom Minimalpolynom über $\alpha$.
+\end{theorem}
+\begin{proof}
+    Folgt direkt aus \cref{thm:star}.
+\end{proof}
+
+Sei $f\in K[x]$ das Minimalpolynom von $\alpha$.
+
+$$\deg f=1\Leftrightarrow f(x)=x-a \Leftrightarrow \alpha\in K$$
+
+\begin{bemerkung}
+    Grad $\alpha$ ist $\infty$ $\Leftrightarrow \alpha$ ist transzendent über $K$.
+\end{bemerkung}
+
+\begin{theorem}
+    Seien $K\subseteq L \subseteq M$ Körper. Dann gilt:
+    $$[M:K]=[M:L][L:K]$$
+\end{theorem}
+\begin{proof}
+    Sei $(\alpha_1,\ldots,\alpha_n)$ eine $K$-Basis von $L$ und $\beta_1,\ldots,\beta_m$ eine $L$-Basis von $M$.
+
+    Behauptung: $(\alpha_i\beta_j\mid 1\leq i \leq n, 1\leq j \leq m)$ ist eine $K$-Basis von $M$.
+
+    Bew: Sei $x\in M$
+
+    $\implies x=\sum_{j=1}^m a_i\beta_i,\quad a_i\in L$
+
+    $a_i=\sum_{j = 1}^n a_{ij}\alpha_j, \quad a_{ij}\in K$
+
+    $\implies x=\sum_{i,j}a_{ij}\alpha_j\beta_i$
+
+    $\implies (\alpha_i\beta_j)$ erzeugt $M$ als $K$-Vektorraum.
+
+    Wir nehmen an, dass $\sum a_{ij}\alpha_j\beta_i = \sum_{i=1}^m\left(\sum_{j=1}^n a_{ij}\alpha{j}\right)\beta_i   =0$
+
+    $\underset{(\beta_1,\ldots,\beta_m) \text{ ist Basis}}{\implies} \sum a_{ij}\alpha_j=0\quad\forall i$
+
+    $\underset{(\alpha_1,\ldots,\alpha_n) \text{ ist Basis}}{\implies} a_{ij}=0\quad \forall i,j$
+
+    $\implies (\alpha_i\beta_j)$ ist linear unabhängig.
+
+    $\implies (\alpha_i\beta_j)$ ist Basis.
+
+    Falls $[M:L]$ oder $[L:K]$ unendlioch sind, geht der Beweis ähnlich.
+\end{proof}
+
 \end{document}
 
 

@@ -711,7 +711,7 @@ Wann ist $\pi\colon H\times K \to G \quad \pi(h,k)=hk$ ein Homomorphismus?
         \end{align*}
         Analog: $HK\subseteq KH$.
         $\implies KH=HK$.
-        Z.z: $HK$ ist Untergruppe.
+        \textbf{Z.z:} $HK$ ist Untergruppe.
         \begin{enumerate}[label=(\roman*)]
             \item Seien $hk, h'k'\in HK$. 
             \begin{align*}
@@ -939,7 +939,7 @@ Falls $B\in  \begin{pmatrix}1&0\\0&-1\end{pmatrix} \begin{pmatrix}
     Beweis: Falls $G$=\{1\}, klar.
     Sonst: Sei $\theta$ der kleinste positive Drehwinkel der Elemente in $G$. Sei $d_\theta\in G$ diese Drehung.
     
-    Z.Z: $\zykl{d_\theta}=G$.
+    \textbf{Z.z:} $\zykl{d_\theta}=G$.
 
     Sei $d_\alpha\in G$ eine Drehung um den Winkel $\alpha>0$. 
     Schreibe $\alpha=n\theta+\beta$ mit $0\leq\beta<\theta$ und $n\in\Z$.
@@ -3458,7 +3458,7 @@ Sei $R$ ein Integritätsbereich und seien $a,b\in R$, so dass $a\teilt b$. Falls
     (a) gesehen: Primelemente sind irreduzibel.
     Sei $r\in R$ irreduzibel und man nehme an, dass $r\teilt ab$ und $r\nmid a$.
     
-    \paragraph{z.z:} $r\teilt b$. 
+    \paragraph{Z.z:} $r\teilt b$. 
     
     Sei $d$ ein ggT von $a$ und $r$.
 
@@ -3492,7 +3492,7 @@ Sei $R$ ein Integritätsbereich und seien $a,b\in R$, so dass $a\teilt b$. Falls
 \begin{proof}
     Gesehen: Jedes irreduzible Element in $R$ ist prim.
 
-    \paragraph{z.Z:} Faktorisierung endet in R.
+    \paragraph{Z.z:} Faktorisierung endet in R.
 
     Man nehme an, es gibt eine unendliche aufsteigende Kette von Hauptidealen 
 
@@ -3610,7 +3610,7 @@ $\implies a=bq+r$ s.d. $|r|^2<|b|^2$
 
     Sei $b\in I$, s.d. $\sigma(b)$ minimal ist ($\sigma$ die Grössenfunktion auf $R$).
 
-    \paragraph{z.Z:} $(b)=I$.
+    \paragraph{Z.z:} $(b)=I$.
     
     Sei $a\in I$. 
     
@@ -3704,7 +3704,7 @@ $f(x)=a_nx^n+\cdots+a_0\mapsto \overline{a_n}x^n+\cdots+\overline{a_0}=\overline
 \begin{proof}
     Die Leitkoeffizienten von $f$ und $g$ sind positiv $\implies$ Leitkoeffizient von $h=fg$ ist positiv.
 
-    \textbf{z.z:} Es gibt keine Primzahl $p$, die alle Koeffizienten von $h$ teilt.
+    \textbf{Z.z:} Es gibt keine Primzahl $p$, die alle Koeffizienten von $h$ teilt.
 
     Sei $p$ eine Primzahl. Man betrachte den Homomorphismus $\Z[x]\to\F_p[x]$
 
@@ -3775,7 +3775,7 @@ $f(x)=a_nx^n+\cdots+a_0\mapsto \overline{a_n}x^n+\cdots+\overline{a_0}=\overline
 \begin{proof}
     Sei $f$ irreduzibel und seien $g,h\in\Z[x]$ sodass $f\teilt gh$.
 
-    \textbf{z.z:} $f\teilt g$ oder $f\teilt h$.
+    \textbf{Z.z:} $f\teilt g$ oder $f\teilt h$.
 
     1. Fall: $f=p$ ist eine Primzahl. Wir schreiben $g=cg_0$ und $h=dh_0$. $g_0,h_0$ primitiv, $c,d\in\Z$.
 
@@ -4185,7 +4185,122 @@ $$\deg f=1\Leftrightarrow f(x)=x-a \Leftrightarrow \alpha\in K$$
 
     $\implies (\alpha_i\beta_j)$ ist Basis.
 
-    Falls $[M:L]$ oder $[L:K]$ unendlioch sind, geht der Beweis ähnlich.
+    Falls $[M:L]$ oder $[L:K]$ unendlich ist, geht der Beweis ähnlich.
+\end{proof}
+
+\section*{Vorlesung 26}
+
+\begin{corollary}
+    Sei $L/K$ eine Körpererweiterung von endlichem Grad $n$ (d.h. eine \defn{endliche} Körpererweiterung).
+
+    Sei $\alpha\in L$. Dann ist $\alpha$ algebraisch über $K$ und der Grad von $\alpha$ teilt $n$.
+\end{corollary}
+\begin{proof}
+    Betrachte $K\subseteq K(\alpha) \subseteq L$
+
+    $\implies \underbrace{[L:K]}_{=n}=[K(\alpha):K][L:K(\alpha)]$
+
+    $\implies [K(\alpha):K]$ ist endlich und ein Teiler von n.
+\end{proof}
+
+\begin{corollary}
+    Jedes irreduzible Polynom $g\in\R[x]$ hat Grad 1 oder 2.
+\end{corollary}
+\begin{proof}
+    OBdA ist $g$ normiert.
+    Sei $\alpha\in\C$ eine Nullstelle von $g$. Da $g$ irreduzibel ist, ist $g$ das Minimalpolynom von $\alpha$
+
+    $\implies$ Grad $\alpha$ ist $\deg g$.
+
+    Da $[\C:\R]=2 \implies \deg g \in \{1, 2\}$.
+\end{proof}
+\begin{beispiel}
+    Sei $\alpha \sqrt[3]{2}, \beta=\sqrt[4]{5}$ und $L=\Q(\alpha, \beta)$.
+
+    Behauptung: $[L:\Q]=12$
+
+    Beweis: Grad $\alpha$ über $\Q$ ist 3 und Grad $\beta$ über $\Q$ ist 4, da $x^3-2$ und $x^4-5$ irreduzibel sind über $\Q$ (Eisenstein).
+
+    $\implies 3 \teilt [L:\Q]$ und $4 \teilt [L:\Q]$
+
+    $\implies [L:\Q] \geq 12$.
+
+    Der Grad von $\beta$ über $\Q(\alpha)$ ist höchstens $4$, da $\beta$ eine Nullstelle von $x^4-5 \in \Q(\alpha)[x]$ ist.
+
+    $\implies [L:\Q(\alpha)]\leq 4$
+
+    $[\Q(\alpha):\Q] =3$
+
+    $\implies [L:\Q] \leq 12$
+
+    $\implies [L:\Q] = 12$
+\end{beispiel}
+
+\begin{theorem}
+    Sei $L/K$ eine Körpererweiterung. Die Menge aller Elemente in $L$, die über $K$ algebraisch sind, bilden einen Teilkörper von $L$.
+\end{theorem}
+\begin{proof}
+    Seien $\alpha\in L$ und $\beta\in L$ algebraisch über $K$.
+
+    \textbf{Z.z:} $\alpha + \beta,  \alpha\beta, -\alpha, \alpha^{-1}$ falls $\alpha\neq 0$ sind algebraisch.
+
+    Wir haben $[K(\alpha):K]<\infty]$, $\beta$ ist algebraisch über $K(\alpha)$.
+
+    $\implies [K(\alpha,\beta):K(\alpha)]<\infty$
+
+    $\implies [K(\alpha,\beta)]<\infty$
+
+    $\implies $ alle Elemente in $K(\alpha,\beta)$ sind algebraisch. Insbesondere also $\alpha+\beta, \alpha\beta, -\alpha$ und $\alpha^{-1}$.
+\end{proof}
+
+\begin{beispiel}
+    Sei $\alpha=\sqrt{2}$ und $\beta=\sqrt{3}$ und $\gamma=\alpha+\beta$.
+
+    Finde das Polynom $g\in\Q[x]$ sodass $g(\gamma)=0$
+
+    Wir wissen, dass $1,\gamma, \gamma^2, \ldots, \gamma^n$ linear abhängig sind über $\Q$ für $n$ gross genug.
+
+    Wir rechnen:
+
+    $\gamma=\sqrt{2}+\sqrt{3}$
+
+    $\gamma^2 = 5 + 2\sqrt{6}$
+
+    $\gamma^4 = 49 + 20\sqrt{6}$
+
+    $\gamma^4 - 10\gamma^2 + 1 = 0$
+
+    $\implies \gamma$ ist Nullstelle von $g(x)=x^4-10x^2+1$.
+
+    $g(x)$ ist irreduzibel (Übung ;-))
+\end{beispiel}
+
+\begin{definition}
+    Eine Köpererweiterung $L/K$ heisst \defn{algebraisch}, wenn alle Elemente von $L/K$ algebraisch sind.
+\end{definition}
+
+\begin{theorem}
+    Seien $K\subseteq L \subseteq M$ Körper. Ist $M$ algebraisch über $L$ und $L$ algebraisch über $K$, so ist $M$ algebraisch über $K$.
+\end{theorem}
+\begin{proof}
+    Sei $\alpha\in M$.
+
+    \textbf{Z.z:} $\alpha$ ist algebraisch über $K$.
+
+    Wir wissen, dass $\alpha$ algebraisch ist über $L$.
+
+    Das heisst, $\exists a_0,a_1,\ldots, a_{n-1}\in L$ s.d. $\alpha^n+a_{n-1}\alpha^{n-1}+\cdots+a_0=0$.
+    
+    $\implies \alpha$ ist algebraisch über dem Körper $K(a_0,\ldots, a_n).$ 
+    Jedes der $a_i$ ist algebraisch über $K$.
+
+    Betrachte $$K\subseteq K(a_0) \subseteq K(a_0,a_1) \subseteq \cdots \subseteq K(a_0, a_1,\ldots, a_{n-1}) \subseteq K(a_0, a_1,\ldots, a_{n-1}, \alpha)$$
+
+    Jede Erweiterung in dieser Kette ist Endlich
+
+    $\implies K(a_0, a_1,\ldots, a_{n-1}, \alpha)$ ist endlich.
+
+    $\implies \alpha$ ist algebraisch über $K$.
 \end{proof}
 
 \end{document}

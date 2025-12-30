@@ -378,14 +378,14 @@ $$\forall a\in N, \forall b \in G: bab^{-1}\in N $$.
 Clicker-Frage zu Normalteilern $\normal$:
 \begin{enumerate}
     \item $B_n(K) \ug GL_n(K)$ ist kein Normalteiler.
-    \item $Z^+ \normal R^+$ ist Normalteiler (weil $R^+$ abelsch)
+    \item $\Z^+ \normal \R^+$ ist Normalteiler (weil $\R^+$ abelsch)
     \item $SL_n(K) \normal GL_n(K)$, weil $\det(ABA^{-1}) = \det(A)\det(B)\det(A)^{-1}=\det(B)$, oder bemerke, dass $SL_n(K)=\ker \det$
     \item $A_n\normal S_n$ weil $A_n=\ker\sgn$.
 \end{enumerate}
 
 \subsection*{Partitionen}
 
-Sei $\phi\colon G\to G'$ ein Homomorphismus. Für jedes Element $h\in H$ betrachte die \defn{Faser} $\phi^{-1}(h)=\{g\in G\mid\phi(g)=h\}$ (Urbild von G in H).
+Sei $\phi\colon G\to H$ ein Homomorphismus. Für jedes Element $h\in H$ betrachte die \defn{Faser} $\phi^{-1}(h)=\{g\in G\mid\phi(g)=h\}$ (Urbild von G in H).
 Die Fasern bilden eine Partition von G.
 
 \begin{beispiel} Sei $\phi\colon \C^*\to\R^*_{>0},\qquad \phi(z)\mapsto |z|$.\qquad
@@ -644,7 +644,7 @@ Begründung:
 Allgemein: Falls $H_i\ug G, i\in I$ eine Familie von Untergruppen ist, so ist $\bigcap\limits_{i\in I}H_i\ug G$ eine Untergruppe (selber Beweis).
 
 \begin{definition}
-    Sei $S\subseteq G$ eine Teilmenge. Dann ist $\zykl{s}\defeq \bigcap\limits_{\substack{H\ug G \\s.d. S\subseteq H}}H$ die \defn{von $S$ erzeugte Untergruppe}.
+    Sei $S\subseteq G$ eine Teilmenge. Dann ist $\zykl{S}\defeq \bigcap\limits_{\substack{H\ug G \\s.d. S\subseteq H}}H$ die \defn{von $S$ erzeugte Untergruppe}.
 \end{definition}
 \paragraph{Erinnerung:} $G,G'$ Gruppen $\leadsto$ $G\times G'$ ist Gruppe mit Verknüpfung $(a,a')(b,b')=(ab,a'b')$.
 \paragraph{Bsp:} Kleinsche Vierergruppe (die "Matratzengruppe").
@@ -720,14 +720,14 @@ Wann ist $\pi\colon H\times K \to G \quad \pi(h,k)=hk$ ein Homomorphismus?
                 &=(hh'')(k''k')\in HK
             \end{align*}
             \item $1\in HK$
-            \item $hk\in HK\implies (hk)=k^{-1}h^{-1}\in kh=HK$
+            \item $hk\in HK\implies (hk)^{-1}=k^{-1}h^{-1}\in KH=HK$
         \end{enumerate}
         \item Seien $h\in H, k\in K$
         \begin{align*}
         &\implies \underbrace{\underbrace{(hkh^{-1})}_{\in k}k^{-1}}_{\in K} = \underbrace{h\underbrace{(kh^{-1}k^{-1})}_{\in H}}_{\in H}\\
-        &\implies hkh^-1k^-1 = 1\\
+        &\implies hkh^{-1}k^{-1} = 1\\
         &\implies hk=kh\\
-        &\implies \pi(h_1,k_1)\pi(h_2,k_2) = h_1k_1h_2k_2=h)1h_2k_1k_2=\pi((h_1,k_1)(h_2,k_2))
+        &\implies \pi(h_1,k_1)\pi(h_2,k_2) = h_1k_1h_2k_2=h_1h_2k_1k_2=\pi((h_1,k_1),(h_2,k_2))
         \end{align*}
         $\implies \pi$ ist Homomorphismus.
         Gemäss (a) ist $\pi$ injetiv. Da $HK=G$ ist $\pi$ surjektiv $\implies \pi$ ist Isomorphismus.
@@ -805,14 +805,14 @@ Wann ist $\pi\colon H\times K \to G \quad \pi(h,k)=hk$ ein Homomorphismus?
 \subsection*{Symmetrie}
 Isometrien von $\R^n$
 \begin{definition}
-    Eine \defn{Isometrie} von $\R^n$ ist eine Abbildung $f\colon\R^n\to R^n$ von der Form $f(X)=BX+a$ wobei $B\in O(n), b\in R^n$. Wir bezeichnen mit $\isom(\R^n)$ die Gruppe der Isometrien von $\R^n$.
+    Eine \defn{Isometrie} von $\R^n$ ist eine Abbildung $f\colon\R^n\to \R^n$ von der Form $f(X)=BX+a$ wobei $B\in O(n), b\in \R^n$. Wir bezeichnen mit $\isom(\R^n)$ die Gruppe der Isometrien von $\R^n$.
 \end{definition}
 \begin{bemerkung}
-    Man kann zeigen, dass Isometrien genau die Abbildungen $\R^n\to R^n$ sind, welche die Distanzen erhalten.
+    Man kann zeigen, dass Isometrien genau die Abbildungen $\R^n\to \R^n$ sind, welche die Distanzen erhalten.
 \end{bemerkung}
 Zwei wichtige Untergruppen: 
 \begin{enumerate}[label=(\arabic*)]
-    \item $\trans_n\ug\isom(\R^n)$: Die Untergruppe der \defn{Translationen}, d.h. Abbildung on der Form $t_a\colon X\mapsto X + a$ für $a\in R^n$. Es gilt $t_at_{a'}=t_{a+a'}$.
+    \item $\trans_n\ug\isom(\R^n)$: Die Untergruppe der \defn{Translationen}, d.h. Abbildung von der Form $t_a\colon X\mapsto X + a$ für $a\in \R^n$. Es gilt $t_at_{a'}=t_{a+a'}$.
     \item $O \ug \isom(\R^n)$: Die Untergruppe der Isometrien von der Form $d_B\colon X\mapsto BX$ für $B\in O(n)$. Es gilt $d_Bd_{B'}=d_{BB'}$.
 \end{enumerate}
 Jedes $f\in \isom(\R^n)$ lässt sich eindeutig schreiben als $t_ad_B$ für $B\in O(n), a\in \R^n$.
@@ -966,7 +966,7 @@ Falls $B\in  \begin{pmatrix}1&0\\0&-1\end{pmatrix} \begin{pmatrix}
 $|D_3|=6$ und $D_3$ ist nicht zyklisch $\implies 
 D_3\iso S_3$ 
 
-Die Diedergruppe $D_n$ von Ordnung $2n$ enthält die Symmetrien vom n-gon.
+Die Diedergruppe $D_n$ von Ordnung $2n$ enthält die Symmetrien des n-Gons.
 
 $D_n\subseteq\isom(\R^2)$ bestehend aus allen $g\in \isom(R^2)$ s.d. $gP=P$.
 
@@ -1000,7 +1000,7 @@ Gruppe der Gruppenautomorphismen.
     so dass 
     \begin{enumerate}[label=(\alph*)]
         \item $1x=x\quad \forall x\in X$
-        \item $(gg')x=g(g(g'x)\quad \forall g\in G, x\in X$
+        \item $(gg')x=g(g'x)\quad \forall g\in G, x\in X$
     \end{enumerate}
     $X$ heisst \defn{G-Menge}. Wir schreiben $G \operateson X$ für "$G$ operiert auf $X$.
 \end{definition}
@@ -1031,7 +1031,7 @@ $m_g$ heisst \defn{Linksmultiplikation} mit $g$.
         \item $\isom(\R^2)$ operiert auf $R^2$. (Hat nur einen Orbit)
         \item Sei $D=\{\text{Dreiecke in }\R^2\}$
         $\isom(\R^2)$ operiert auf $D$.
-        \item Zwei Dreiecke $\Delta, \Delta'$ sind \defn{kongruent}, falls es ein $g\in\isom(\R^2)$ gibt, so dass $g\Delta = \Delta'$. Die Bahn $B_\Delta$ ist die Menge aller zu $\Delta$ kongruenten Dreiecke.
+        \item Zwei Dreiecke $\Delta, \Delta'$ sind \defn{kongruent}, falls es ein $g\in\isom(\R^2)$ gibt, sodass $g\Delta = \Delta'$. Die Bahn $B_\Delta$ ist die Menge aller zu $\Delta$ kongruenten Dreiecke.
     \end{itemize}
 \end{beispiel}
 \begin{definition}
@@ -1095,7 +1095,7 @@ Das heisst, falls $K=aH$, so ist $gK=gaH$.
     $\leadsto$ Wir erhalten einen Isomorphismus $G\xrightarrow{\sim} \sym(G/H)\quad g\mapsto m_g$
 \end{beispiel}
 \begin{theorem}\label{stz:bahn}
-    Sei $X$ eine $G-Menge$ und $x\in X$. Sei $H=G_x \ug G$. Dann ist die Abbildung
+    Sei $X$ eine $G-Menge$ und $x\in X$. Sei $H=G_x \ug G$ der Stabilisator von $x$. Dann ist die Abbildung
     $$\phi\colon G/H \to B_x \quad aH\mapsto ax$$
     eine Bijektion und $\forall K\in G/H$ und $\forall g\in G$ gilt $\phi(gK)=g\phi(K)$.
 \end{theorem}
